@@ -1,0 +1,21 @@
+MaterialCount:4
+Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000
+MaterialPower: 100.000000
+DiffuseMapName: Keli_diffuse_0.jpg
+NormalMapName: <none>
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000
+MaterialPower: 100.000000
+DiffuseMapName: Keli_diffuse_1.jpg
+NormalMapName: <none>
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000
+MaterialPower: 100.000000
+DiffuseMapName: Keli_diffuse_2.jpg
+NormalMapName: <none>
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000
+MaterialPower: 100.000000
+DiffuseMapName: Keli_diffuse_3.png
+NormalMapName: <none>
+SpecularMapName: <none>

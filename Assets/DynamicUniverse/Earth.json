@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Name": "earth",
+      "Path": "../../Assets/Images/SolarTextures/2k_earth_daymap.jpg",
+      "Speed": 0.3,
+      "SelfSpeed": 0.3,
+      "Scale": 0.5,
+      "DistanceFromParent":  10
+    }
+  }
+}

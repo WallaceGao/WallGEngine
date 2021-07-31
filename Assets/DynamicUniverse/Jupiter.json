@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Name": "jupiter",
+      "Path": "../../Assets/Images/SolarTextures/2k_jupiter.jpg",
+      "Speed": 0.1,
+      "SelfSpeed": 0.3,
+      "Scale": 0.7,
+      "DistanceFromParent": 5
+    }
+  }
+}

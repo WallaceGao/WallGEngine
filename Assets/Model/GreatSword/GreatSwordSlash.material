@@ -1,0 +1,9 @@
+MaterialCount:1
+DiffuseMapName: GreatSwordSlash_diffuse_0.png
+DiffuseMap: 1.000000 1.000000 1.000000
+NormalMapName: GreatSwordSlash_normal_0.png
+NormalMap: 1.000000 1.000000 1.000000
+SpecularMapName: <none>
+
+SpecularMap: 1.000000 1.000000 1.000000
+MaterialPower: 20.000000

@@ -1,0 +1,15 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Name": "sun",
+      "Path": "../../Assets/Images/SolarTextures/2k_sun.jpg",
+      "Speed": 0.1,
+      "SelfSpeed": 0.3,
+      "Scale": 1.0,
+      "DistanceFromParent": 0
+    }
+  }
+}
+

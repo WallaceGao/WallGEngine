@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Name": "moon",
+      "Path": "../../Assets/Images/SolarTextures/2k_moon.jpg",
+      "Speed": 0.3,
+      "SelfSpeed": 0.3,
+      "Scale": 0.2,
+      "DistanceFromParent": 1
+    }
+  }
+}

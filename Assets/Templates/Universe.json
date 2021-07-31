@@ -1,0 +1,38 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Position": [ 0, 0, 0 ]
+    },
+    "ColliderComponent": {
+      "Center": [ 0, 1, 1 ],
+      "Extend": [ 2, 1, 0.5 ]
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/Monster/MutantPunch.model"
+    },
+    "AnimatorComponent": {
+      "IsLoop": true
+    }
+  }
+}
+
+//mMercurySpeed = 0.1f;
+//mSelfMercurySpeed = 0.1f;
+//mVenusSpeed = 0.25f;
+//mSelfVenusSpeed = 1.0f;
+//mEarthSpeed = 0.3f;
+//mSelfEarthSpeed = 1.0f;
+//mMarsSpeed = 0.6f;
+//mSelfMarsSpeed = 1.0f;
+//mJupiterSpeed = 0.1f;
+//mSelfJupiterSpeed = 1.0f;
+
+//mMoonTexture.Initialize("../../Assets/Images/SolarTextures/2k_moon.jpg");
+//mJupiterTexture.Initialize("../../Assets/Images/SolarTextures/2k_jupiter.jpg");
+//mMarsTexture.Initialize("../../Assets/Images/SolarTextures/2k_mars.jpg");
+//mVenusTexture.Initialize("../../Assets/Images/SolarTextures/2k_venus_surface.jpg");
+//mEarthTexture.Initialize("../../Assets/Images/SolarTextures/2k_earth_daymap.jpg");
+//mMercuryTexture.Initialize("../../Assets/Images/SolarTextures/2k_mercury.jpg");
+//mSunTexture.Initialize("../../Assets/Images/SolarTextures/2k_sun.jpg");
+//mSkyboxTexture.Initialize("../../Assets/Images/cubemap.png");
+//mShipTexture.Initialize("../../Assets/Images/interceptor_01.png");
