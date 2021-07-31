@@ -121,5 +121,26 @@ Math::Matrix4 Camera::GetProjectionMatrix() const
     };
 }
 
+Math::Ray Camera::ScreenPointToWorldRay(int screenX, int screenY) const
+{
+    const float screenWidth = (float)GraphicsSystem::Get()->GetBackBufferWidth();
+    const float screenHeight = (float)GraphicsSystem::Get()->GetBackBufferHeight();
+    const float aspect = screenWidth / screenHeight;
+    const float halfWidth = screenWidth * 0.5f;
+    const float halfHeight = screenHeight * 0.5f;
+    const float tanFOV = tanf(mFov * 0.5f);
+    const float dx = tanFOV * ((float)screenX / halfWidth - 1.0f) * aspect;
+    const float dy = tanFOV * (1.0f - (float)screenY / halfHeight);
+
+    Math::Ray ray;
+    ray.origin = Math::Vector3::Zero;
+    ray.direction = Math::Normalize(Math::Vector3(dx, dy, 1.0f));
+
+    Math::Matrix4 invMatView = Math::Inverse(GetViewMatrix());
+    ray.origin = Math::TransformCoord(ray.origin, invMatView);
+    ray.direction = Math::TransformNormal(ray.direction, invMatView);
+    return ray;
+}
+
 
 

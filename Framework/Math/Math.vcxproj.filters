@@ -48,6 +48,9 @@
     <ClInclude Include="Inc\Sphere.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Ray.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">

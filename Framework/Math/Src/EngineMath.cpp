@@ -1,6 +1,7 @@
 #include "Precompiled.h"
 #include "EngineMath.h"
 
+using namespace WallG;
 using namespace WallG::Math;
 
 namespace
@@ -195,4 +196,119 @@ Quaternion WallG::Math::Slerp(Quaternion q0, Quaternion q1, float t)
 		(q0.y * scale0) + (q1.y * scale1),
 		(q0.z * scale0) + (q1.z * scale1)
 	);
+}
+
+bool WallG::Math::IntersectSphere(const Ray& ray, const Sphere& sphere, float& distance)
+{
+	Vector3 originToCenter = sphere.center - ray.origin;
+	float originToCenterDist = Magnitude(originToCenter);
+	// Check if sphere is behind the origin
+	const float d = Dot(originToCenter, ray.direction);
+	if (d < 0.0f)
+	{
+		// Check if origin is inside sphere
+		if (originToCenterDist > sphere.radius)
+		{
+			// No intersection
+			return false;
+		}
+		else
+		{
+			Vector3 centerOnRay = ray.origin + ray.direction * d;
+			float side = sqrt(Sqr(sphere.radius) - MagnitudeSquared(sphere.center - centerOnRay));
+			distance = side - Magnitude(centerOnRay - ray.origin);
+			return true;
+		}
+	}
+	// Center of sphere projects on the ray
+	Vector3 centerOnRay = ray.origin + ray.direction * d;
+	// Check if projected center is inside sphere
+	float centerToRayDist = Magnitude(sphere.center - centerOnRay);
+	if (centerToRayDist > sphere.radius)
+	{
+		// No intersection
+		return false;
+	}
+	float side = sqrt(Sqr(sphere.radius) - Sqr(centerToRayDist));
+	if (originToCenterDist > sphere.radius)
+	{
+		// Origin is outside sphere
+		distance = Magnitude(centerOnRay - ray.origin) - side;
+	}
+	else
+	{
+		// Origin is inside sphere
+		distance = Magnitude(centerOnRay - ray.origin) + side;
+	}
+	return true;
+}
+
+bool WallG::Math::IntersectAABB(const Ray& ray, const AABB& aabb, float& distEntry, float& distExit)
+{
+	// https://truesculpt.googlecode.com/hg-history/Release%25200.8/Doc/ray_box_intersect.pdf
+// Returns true if ray intersects bounding box
+// Sets d1 to entry distance, d2 to exit distance (along ray.direction)
+	Vector3 boxMin = aabb.center - aabb.extend;
+	Vector3 boxMax = aabb.center + aabb.extend;
+	float tmin, tmax, tymin, tymax, tzmin, tzmax;
+	float divx = 1.0f / ray.direction.x;
+	float divy = 1.0f / ray.direction.y;
+	float divz = 1.0f / ray.direction.z;
+	if (divx >= 0.0f)
+	{
+		tmin = (boxMin.x - ray.origin.x) * divx;
+		tmax = (boxMax.x - ray.origin.x) * divx;
+	}
+	else
+	{
+		tmin = (boxMax.x - ray.origin.x) * divx;
+		tmax = (boxMin.x - ray.origin.x) * divx;
+	}
+	if (divy >= 0.0f)
+	{
+		tymin = (boxMin.y - ray.origin.y) * divy;
+		tymax = (boxMax.y - ray.origin.y) * divy;
+	}
+	else
+	{
+		tymin = (boxMax.y - ray.origin.y) * divy;
+		tymax = (boxMin.y - ray.origin.y) * divy;
+	}
+	if ((tmin > tymax) || (tymin > tmax))
+	{
+		return false;
+	}
+	if (tymin > tmin)
+	{
+		tmin = tymin;
+	}
+	if (tymax < tmax)
+	{
+		tmax = tymax;
+	}
+	if (divz >= 0.0f)
+	{
+		tzmin = (boxMin.z - ray.origin.z) * divz;
+		tzmax = (boxMax.z - ray.origin.z) * divz;
+	}
+	else
+	{
+		tzmin = (boxMax.z - ray.origin.z) * divz;
+		tzmax = (boxMin.z - ray.origin.z) * divz;
+	}
+	if ((tmin > tzmax) || (tzmin > tmax))
+	{
+		return false;
+	}
+	if (tzmin > tmin)
+	{
+		tmin = tzmin;
+	}
+	if (tzmax < tmax)
+	{
+		tmax = tzmax;
+	}
+	distEntry = tmin;
+	distExit = tmax;
+	return true;
 }

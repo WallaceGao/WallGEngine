@@ -11,6 +11,7 @@
 #include "Matrix4.h"
 #include "Quaternion.h"
 #include "Geometry.h"
+#include "Ray.h"
 
 #include "AABB.h"
 #include "Sphere.h"
@@ -226,5 +227,11 @@ namespace WallG::Math
     }
 
     Quaternion Slerp(Quaternion q0, Quaternion q1, float t);
+
+    //Ray 
+    bool IntersectSphere(const Ray& ray, const Sphere& sphere, float& distance);
+    
+    bool IntersectAABB(const Ray& ray, const AABB& aabb, float& distEntry, float& distExit);
+
 }
 

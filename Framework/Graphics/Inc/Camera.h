@@ -33,6 +33,7 @@ namespace WallG::Graphics
         Math::Matrix4 GetViewMatrix() const;
         Math::Matrix4 GetProjectionMatrix() const;
 
+        Math::Ray ScreenPointToWorldRay(int screenX, int screenY) const;
     private:
         Math::Vector3 mPosition = Math::Vector3::Zero;
         Math::Vector3 mDirection = Math::Vector3::ZAxis;
