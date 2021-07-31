@@ -1,9 +1,12 @@
 #pragma once
 #include "ModelComponent.h"
-
+#include "GameObjectHandle.h"
 
 namespace WallG
 {
+	class GameObjectHandle;
+	class TransformComponent;
+
 	class PlanetComponent final : public ModelComponent
 	{
 	public:
@@ -17,6 +20,8 @@ namespace WallG
 		void Update(float deltaTime) override;
 		void DebugUI() override;
 
+		void SetParentPlanet(GameObjectHandle parentHandle) { mParentPlanet = parentHandle; }
+
 		void SetTextureFilePath(const char* fileName) { mTextureFilePath = fileName; }
 		
 		void SetSelfRotation(const Math::Vector3& rotation) { mSelfRotation = rotation; }
@@ -25,14 +30,25 @@ namespace WallG
 		const float GetSpeed() const { return mSpeed; }
 		void SetSelfSpeed(float selfSpeed) { mSelfSpeed = selfSpeed; }
 		const float GetSelfSpeed() const { return mSelfSpeed;}
+		void SetPlanetScale(float planetScale) { mPlanetScale = planetScale; }
+		void SetDistanceFromParent(float distance) { mDistanceFromParent = distance; }
+		void SetName(std::string name) { mName = name; }
+		const std::string GetName() const { return mName; }
 
 		void Rota(float speed) { mSelfRotation -= speed; }
 
 	protected:
-		WallG::Math::Vector3 mSelfRotation;
+		TransformComponent* mTransformComponent;
+		GameObjectHandle mParentPlanet;
+		Math::Vector3 mSelfRotation;
+		Math::Vector3 mRotation;
 		std::string mTextureFilePath;
+		std::string mName;
 		float mSpeed = 0.0f;
 		float mSelfSpeed = 0.0f;
+		float mPlanetScale = 1.0f;
+		float mDistanceFromParent = 0.0f;
+		bool mIsWorldCenter = false;
 	};
 };
 

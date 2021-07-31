@@ -77,6 +77,29 @@ void GameWorld::DebugUI()
 	{
 		service->DebugUI();
 	}
+
+	ImGui::SetNextWindowSize(ImVec2{ 0, 600 });
+	ImGui::Begin("Game Object List");
+	{
+		ImGui::BeginChild("GameObject", ImVec2(400, 200), true);
+		for (int i = 0; i < mUpdateList.size(); i++)
+		{
+			GameObject* object = mUpdateList[i];
+			char label[128];
+			sprintf_s(label, 128, "GameObject %d - %s", i, object->GetName().c_str());
+			if (ImGui::Selectable(label, object == mSelectedObject))
+				mSelectedObject = object;
+		}
+		ImGui::EndChild();
+	}
+
+	if (mSelectedObject != nullptr)
+	{
+		ImGui::BeginChild("Inspector", ImVec2(0, 0), true);
+		mSelectedObject->DebugUI();
+		ImGui::EndChild();
+	}
+	ImGui::End();
 }
 
 GameObject* WallG::GameWorld::CreatGameObject(const std::filesystem::path& filePath, std::string name)
@@ -178,6 +201,9 @@ void WallG::GameWorld::ProcessDestroyList()
 		auto& slot = mGameObjects[index];
 
 		GameObject* gameObject = slot.gameobject.get();
+		if (gameObject == mSelectedObject)
+			mSelectedObject = nullptr;
+
 		ASSERT(!IsValid(gameObject->GetHandle()), "GameObject is still valid");
 		// Remove Game object to update list
 		//Erase-Remove Idiom

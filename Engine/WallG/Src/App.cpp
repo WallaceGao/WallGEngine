@@ -36,7 +36,7 @@ void WallG::App::Run(const AppConfig& appConfig)
 	GraphicsSystem::StaticInitialize(handle, false);
 	ModelManager::StaticInitialize();
 	SimpleDraw::StaticInitialize();
-	DebugUI::StaticInitialize(handle, false, false);
+	DebugUI::StaticInitialize(handle, false, true);
 
 	mCurrentState->Initialize();
 

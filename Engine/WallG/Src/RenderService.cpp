@@ -106,12 +106,12 @@ void WallG::RenderService::Render()
     for (auto& entry : mRenderEntries)
     {
         Vector3 position = entry.transformComponent->GetPosition();
-        Vector3 rotation = entry.transformComponent->GetRotation();
+        Quaternion rotation = entry.transformComponent->GetRotation();
+        Vector3 scale = entry.transformComponent->GetScale();
 
         Matrix4 matWorld =
-            Matrix4::RotationX(rotation.x) *
-            Matrix4::RotationY(rotation.y) *
-            Matrix4::RotationZ(rotation.z) *
+            Matrix4::Scaling(scale) *
+            Matrix4::RotationQuaternion(rotation) *
             Matrix4::Translation(position);
         transformData.wvp = Transpose(matWorld * matView * matProj);
         mConstantBuffer.Update(transformData);

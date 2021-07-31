@@ -64,6 +64,7 @@ namespace WallG
 		std::vector<uint32_t> mToBeDestroyed;
 
 		GameObjectList mUpdateList;
+		GameObject* mSelectedObject = nullptr;
 
 		bool mInitialized;
 		bool mUpdating;

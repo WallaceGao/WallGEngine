@@ -24,6 +24,6 @@ namespace WallG
 
 	protected:
 		std::string mFileName;
-		Graphics::ModelId mModelId = 0;
+
 	};
 }

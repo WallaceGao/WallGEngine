@@ -11,7 +11,6 @@
 #include <rapidjson/filereadstream.h>
 #include <rapidjson/filewritestream.h>
 
-
 using namespace WallG;
 using namespace rapidjson;
 
@@ -42,7 +41,7 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 	for (auto& component: components)
 	{ 
 		const char* componentName = component.name.GetString();
-		if (readOverride( componentName, component, gameObject))
+		if (readOverride && readOverride( componentName, component, gameObject))
 		{
 			continue;
 		}
