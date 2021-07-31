@@ -13,7 +13,6 @@ private:
 	float mFPS = 0.0f;
 
 	WallG::GameWorld mGameWorld;
-	WallG::GameObjectHandle mGameObjectHandle;
 
 	int mNextId = 0;
 	float mNextPositionX = 0.0f;
