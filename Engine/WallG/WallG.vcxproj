@@ -153,9 +153,7 @@
     <ClInclude Include="Inc\ColliderComponent.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Component.h" />
-    <ClInclude Include="Inc\PlanetModelComponet.h" />
     <ClInclude Include="Inc\RenderService.h" />
-    <ClInclude Include="Inc\ShipComponent.h" />
     <ClInclude Include="Inc\TypeIds.h" />
     <ClInclude Include="Inc\GameObject.h" />
     <ClInclude Include="Inc\GameObjectHandle.h" />
@@ -164,7 +162,6 @@
     <ClInclude Include="Inc\ModelComponent.h" />
     <ClInclude Include="Inc\Service.h" />
     <ClInclude Include="Inc\TransformComponent.h" />
-    <ClInclude Include="Inc\UniverseService.h" />
     <ClInclude Include="Inc\WallG.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
@@ -175,7 +172,6 @@
     <ClCompile Include="Src\GameObject.cpp" />
     <ClCompile Include="Src\GameWorld.cpp" />
     <ClCompile Include="Src\ModelComponent.cpp" />
-    <ClCompile Include="Src\PlanetModelComponet.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -184,9 +180,7 @@
     </ClCompile>
     <ClCompile Include="Src\GameObjectIO.cpp" />
     <ClCompile Include="Src\RenderService.cpp" />
-    <ClCompile Include="Src\ShipComponent.cpp" />
     <ClCompile Include="Src\TransformComponent.cpp" />
-    <ClCompile Include="Src\UniverseService.cpp" />
     <ClCompile Include="Src\WallG.cpp" />
   </ItemGroup>
   <ItemGroup>

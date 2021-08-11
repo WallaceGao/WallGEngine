@@ -1,6 +1,6 @@
 #pragma once
-#include "ModelComponent.h"
-#include "GameObjectHandle.h"
+#include "WallG/Inc/ModelComponent.h"
+#include "WallG/Inc/GameObjectHandle.h"
 
 namespace WallG
 {
@@ -49,6 +49,7 @@ namespace WallG
 		float mPlanetScale = 1.0f;
 		float mDistanceFromParent = 0.0f;
 		bool mIsWorldCenter = false;
+
 	};
 };
 

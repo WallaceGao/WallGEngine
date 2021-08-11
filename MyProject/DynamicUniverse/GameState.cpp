@@ -1,5 +1,10 @@
 #include "GameState.h"
 
+#include "DynamicUniverseTypes.h"
+#include "PlanetModelComponet.h"
+#include "ShipComponent.h"
+#include "UniverseService.h"
+
 using namespace WallG;
 using namespace WallG::Graphics;
 using namespace WallG::Input;

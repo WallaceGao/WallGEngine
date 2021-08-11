@@ -87,15 +87,6 @@
     <ClInclude Include="Inc\RenderService.h">
       <Filter>Inc\Service</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\UniverseService.h">
-      <Filter>Inc\Service</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\PlanetModelComponet.h">
-      <Filter>Inc\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\ShipComponent.h">
-      <Filter>Inc\Components</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\WallG.cpp">
@@ -109,9 +100,6 @@
     </ClCompile>
     <ClCompile Include="Src\GameObject.cpp">
       <Filter>Src\World</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\TransformComponent.cpp">
-      <Filter>Src\Components</Filter>
     </ClCompile>
     <ClCompile Include="Src\GameObjectIO.cpp">
       <Filter>Src\World</Filter>
@@ -131,8 +119,8 @@
     <ClCompile Include="Src\RenderService.cpp">
       <Filter>Src\Service</Filter>
     </ClCompile>
-    <ClCompile Include="Src\UniverseService.cpp">
-      <Filter>Src\Service</Filter>
+    <ClCompile Include="Src\TransformComponent.cpp">
+      <Filter>Src\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

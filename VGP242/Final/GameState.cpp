@@ -175,7 +175,7 @@ void GameState::Render()
 
     //// Sun
     mSunTexture.BindPS(0);
-    matWorld = Matrix4::RotationX(mSumRotation.x) * Matrix4::RotationY(mSumRotation.y) * Matrix4::Translation({ 0.0f,0.0f,0.0f });
+    matWorld = Matrix4::RotationY(mSumRotation.y) * Matrix4::RotationY(mSumRotation.y) * Matrix4::Translation({ 0.0f,0.0f,0.0f });
     auto scale = Matrix4::Scaling(mPlanetScale[0]);
     transformData.wvp = Transpose(scale* matWorld * matView * matProj);
     mConstantBuffer.Update(transformData);

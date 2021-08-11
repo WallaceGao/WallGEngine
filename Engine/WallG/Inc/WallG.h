@@ -17,10 +17,7 @@
 #include "GameObjectHandle.h"
 #include "GameObjectIO.h"
 #include "GameWorld.h"
-#include "PlanetModelComponet.h"
 #include "Service.h"
-#include "ShipComponent.h"
-#include "UniverseService.h"
 
 namespace WallG
 {

@@ -1,9 +1,8 @@
-#include "Precompiled.h"
 #include "PlanetModelComponet.h"
 
-#include "GameObject.h"
-#include "GameWorld.h"
-#include "TransformComponent.h"
+#include "WallG/Inc/GameObject.h"
+#include "WallG/Inc/GameWorld.h"
+#include "WallG/Inc/TransformComponent.h"
 
 using namespace WallG;
 using namespace WallG::Math;
@@ -80,3 +79,4 @@ void WallG::PlanetComponent::DebugUI()
 	ImGui::DragFloat(" Rota Speed", (float*)&mSpeed, 0.01f);
 	ImGui::DragFloat("Self Rota Speed", (float*)&mSelfSpeed, 0.01f);
 }
+
