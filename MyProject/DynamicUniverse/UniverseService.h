@@ -1,49 +1,31 @@
 #pragma once
-#include "WallG/Inc/Service.h"
 
-namespace WallG
+#include "DynamicUniverseTypes.h"
+#include <WallG/Inc/WallG.h>
+
+class PlanetComponent;
+
+class UniverseService final : public WallG::Service
 {
-	class TransformComponent;
-	class PlanetComponent;
+public:
+	SET_TYPE_ID(DUServiceId::Universe)
 
-	class UniverseService final : public Service
+	void Initialize() override;
+	void Terminate() override;
+	void Update(float deltaTime) override;
+	void DebugUI() override;
+
+	void Register(const PlanetComponent* planet );
+	void Unregister(const PlanetComponent* planet);
+
+	WallG::GameObject* GetNearestPlanetWithResourceType(WallG::Math::Vector3 position, MineralType desiredResource) const;
+	WallG::GameObject* GetNearestPlanetHaveFactory(WallG::Math::Vector3 position) const;
+
+private:
+	struct Entry
 	{
-	public:
-		SET_TYPE_ID(ServiceId::Universe)
-
-		void Initialize() override;
-		void Terminate() override;
-		void Update(float deltaTime) override;
-		void DebugUI() override;
-
-		//void Register(const ModelComponent* modelComponent);
-		//void Unregister(const ModelComponent* modelComponent);
-
-	private:
-		struct Entry
-		{
-			PlanetComponent* planetModelComponent = nullptr;
-			TransformComponent* transformComponent = nullptr;
-		};
-
-		struct TransformData
-		{
-			WallG::Math::Matrix4 wvp;
-		};
-
-
-		float mFPS = 0.0f;
-
-		std::vector<float> mPlanetScale;
-
-		// ship
-		//WallG::Graphics::MeshPX mShipMesh;
-		//WallG::Graphics::Texture mShipTexture;
-		//WallG::Graphics::MeshBuffer mShipMeshBuffer;
-		//
-		//std::vector<WallG::Math::Vector3> mPlantPosition;
-		//std::vector<WallG::Math::Vector3> mShipLocation;
-		//WallG::Graphics::Sampler mSampler;
-		//int targetPlanet = 3;
+		const PlanetComponent* planetComponent;
+		const WallG::TransformComponent* transformComponent;
 	};
-}
+	
+};

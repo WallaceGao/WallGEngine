@@ -3,47 +3,47 @@
   <ItemGroup>
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="PlanetModelComponet.cpp">
-      <Filter>Component\Src</Filter>
+    <ClCompile Include="FactoryComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ShipComponent.cpp">
-      <Filter>Component\Src</Filter>
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryService.cpp">
+      <Filter>Servivces</Filter>
     </ClCompile>
     <ClCompile Include="UniverseService.cpp">
-      <Filter>Servivce\Src</Filter>
+      <Filter>Servivces</Filter>
+    </ClCompile>
+    <ClCompile Include="PlanetComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h" />
     <ClInclude Include="DynamicUniverseTypes.h" />
-    <ClInclude Include="PlanetModelComponet.h">
-      <Filter>Component\Inc</Filter>
+    <ClInclude Include="FactoryComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ShipComponent.h">
-      <Filter>Component\Inc</Filter>
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryService.h">
+      <Filter>Servivces</Filter>
     </ClInclude>
     <ClInclude Include="UniverseService.h">
-      <Filter>Servivce\Inc</Filter>
+      <Filter>Servivces</Filter>
+    </ClInclude>
+    <ClInclude Include="PlanetComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Component">
+    <Filter Include="Components">
       <UniqueIdentifier>{d2bd4475-3dfc-4440-97a5-ea5fd7f8d377}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\Inc">
-      <UniqueIdentifier>{2abaa175-96be-4780-a7eb-7b98027a1203}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Src">
-      <UniqueIdentifier>{4c7eb483-4051-47e1-b836-5d7871269f5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Servivce">
+    <Filter Include="Servivces">
       <UniqueIdentifier>{9c56bf7d-6100-4385-ba56-7160b6a2b1e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Servivce\Inc">
-      <UniqueIdentifier>{0bd2259d-aae8-4329-9bac-3a643e86f75d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Servivce\Src">
-      <UniqueIdentifier>{1a127f49-66f9-4af9-aae8-c3da10d9256a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

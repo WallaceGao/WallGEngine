@@ -1,7 +1,7 @@
 #include "GameState.h"
 
 #include "DynamicUniverseTypes.h"
-#include "PlanetModelComponet.h"
+#include "PlanetComponent.h"
 #include "ShipComponent.h"
 #include "UniverseService.h"
 

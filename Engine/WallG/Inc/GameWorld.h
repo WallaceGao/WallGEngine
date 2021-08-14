@@ -15,8 +15,6 @@ namespace WallG
 		void Render();
 		void DebugUI();
 
-		
-		//TODO Add template class
 		template<class ServiceType>
 		ServiceType* AddService()
 		{
@@ -28,6 +26,13 @@ namespace WallG
 
 		template<class ServiceType>
 		ServiceType* GetService()
+		{
+			auto constMe = static_cast<const GameWorld*>(this);
+			return const_cast<ServiceType*>(constMe->GetService<ServiceType>());
+		}
+
+		template<class ServiceType>
+		const ServiceType* GetService() const
 		{
 			for (auto& service : mServices)
 			{

@@ -21,6 +21,7 @@ namespace WallG
 		virtual void Render() override;
 		virtual void DebugUI()override;
 
+		// Assign what Service need in to the function
 		void Register(const ModelComponent* modelComponent);
 		void Unregister(const ModelComponent* modelComponent);
 

@@ -52,14 +52,11 @@ void MeshIO::Write(FILE* file, const SkinnedMesh& mesh)
 
 void MeshIO::Read(FILE* file, SkinnedMesh& mesh)
 {
-	char buffer[255];
-	
-
 	uint32_t verticesCount = 0;
 	fscanf_s(file, "VertexCount: %d\n", &verticesCount);
 	mesh.vertices.reserve(verticesCount);
 
-	for (int i = 0; i < verticesCount; ++i)
+	for (uint32_t i = 0; i < verticesCount; ++i)
 	{
 		auto& vertices = mesh.vertices.emplace_back();
 		fscanf_s(file, "Position : %f %f %f\n",

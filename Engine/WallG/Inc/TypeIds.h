@@ -3,23 +3,22 @@
 
 namespace WallG
 {
-	enum  ComponentId
+	enum class ComponentId
 	{
 		Collider,
 		Transform,
 		Model,
 		Animator,
-		PlanetModel,
-		Ship,
+		Count
 	};
 
-	enum ServiceId
+	enum class ServiceId
 	{
 		Render,
-		Universe
+		Count
 	};
 }
 
 #define SET_TYPE_ID(id)\
-	static uint32_t StaticGetTypeId() {return id;}\
-	uint32_t GetTypeId() const override {return id;}
+	static uint32_t StaticGetTypeId() {return static_cast<uint32_t>(id);}\
+	uint32_t GetTypeId() const override {return static_cast<uint32_t>(id);}

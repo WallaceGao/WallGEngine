@@ -87,6 +87,9 @@
     <ClInclude Include="Inc\RenderService.h">
       <Filter>Inc\Service</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\SkyBoxComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\WallG.cpp">
@@ -120,6 +123,9 @@
       <Filter>Src\Service</Filter>
     </ClCompile>
     <ClCompile Include="Src\TransformComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SkyBoxComponent.cpp">
       <Filter>Src\Components</Filter>
     </ClCompile>
   </ItemGroup>
