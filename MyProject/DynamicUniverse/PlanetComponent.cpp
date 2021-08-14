@@ -1,15 +1,12 @@
-#include "PlanetModelComponet.h"
+#include "PlanetComponent.h"
 
-#include "WallG/Inc/GameObject.h"
-#include "WallG/Inc/GameWorld.h"
-#include "WallG/Inc/TransformComponent.h"
 
 using namespace WallG;
 using namespace WallG::Math;
 
 MEMPOOL_DEFINE(PlanetComponent, 1000);
 
-void WallG::PlanetComponent::Initialize()
+void PlanetComponent::Initialize()
 {
 	ModelComponent::Initialize();
 	
@@ -32,14 +29,14 @@ void WallG::PlanetComponent::Initialize()
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 }
 
-void WallG::PlanetComponent::Terminate()
+void PlanetComponent::Terminate()
 {
 	ModelComponent::Terminate();
 	mSpeed = 0.0f;
 	mSelfSpeed = 0.0f;
 }
 
-void WallG::PlanetComponent::Update(float deltaTime)
+void PlanetComponent::Update(float deltaTime)
 {
 	Math::Matrix4 parentMatrix = Math::Matrix4::Indentity;
 	
@@ -73,7 +70,7 @@ void WallG::PlanetComponent::Update(float deltaTime)
 	mTransformComponent->SetScale(Vector3(mPlanetScale));
 }
 
-void WallG::PlanetComponent::DebugUI()
+void PlanetComponent::DebugUI()
 {
 	ImGui::CollapsingHeader( mName.c_str(), ImGuiTreeNodeFlags_DefaultOpen);
 	ImGui::DragFloat(" Rota Speed", (float*)&mSpeed, 0.01f);
