@@ -56,6 +56,14 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 				float z = position[2].GetFloat();
 				transform->SetPosition({x,y,z});
 			};
+			if (component.value.HasMember("Scale"))
+			{
+				const auto& scale = component.value["Scale"].GetArray();
+				float x = scale[0].GetFloat();
+				float y = scale[1].GetFloat();
+				float z = scale[2].GetFloat();
+				transform->SetScale({ x,y,z });
+			};
 		}
 		else if(strcmp(componentName, "ColliderComponent") == 0)
 		{
@@ -84,6 +92,14 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 			{
 				const auto& path = component.value["Path"].GetString();
 				collider->SetFilePath(path);
+			}
+			if (component.value.HasMember("Rotation"))
+			{
+				const auto& eulerAngles = component.value["Rotation"].GetArray();
+				float x = eulerAngles[0].GetFloat();
+				float y = eulerAngles[1].GetFloat();
+				float z = eulerAngles[2].GetFloat();
+				collider->SetRotation(Math::Quaternion::RotationEuler({ x, y, z }));
 			}
 		}
 		else if (strcmp(componentName, "AnimatorComponent") == 0)

@@ -4,21 +4,27 @@
 #include "FactoryService.h"
 #include "PlanetComponent.h"
 #include "UniverseService.h"
+#include "ShipService.h"
 
 using namespace WallG;
 using namespace WallG::Math;
 
+MEMPOOL_DEFINE(ShipComponent, 1000)
+
 void ShipComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
-	
 	//mStateMachine = std::make_unique<AI::StateMachine<ShipAgent>>(mShipAgent);
+	
+	auto shipService = GetOwner().GetWorld().GetService<ShipService>();
+	shipService->Register(this);
 }
 
 void ShipComponent::Terminate()
 {
+	auto shipService = GetOwner().GetWorld().GetService<ShipService>();
+	shipService->Unregister(this);
 	mTransformComponent = nullptr;
-	mSpeed = 0;
 }
 
 void ShipComponent::Update(float deltaTime)
@@ -76,14 +82,24 @@ void ShipComponent::Idle(float deltaTime)
 		//find factory
 		const auto universeService = world.GetService<UniverseService>();
 		mTargetPlanet = universeService->GetNearestPlanetHaveFactory(mTransformComponent->GetPosition())->GetHandle();
+
 	}
 }
 
 void ShipComponent::Mine(float deltaTime)
 {
-	ASSERT(mCargo > mCargoSize, "Cargo size should always smaller than max cargo size!");
 	// Task - Do I have enough yet?
-
+	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
+	ASSERT(planet != nullptr, "planet shouldn't be empty");
+	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
+	auto shipToPlanet = targetTaransform->GetPosition() - mTransformComponent->GetPosition();
+	auto distToPlanet = Magnitude(shipToPlanet);
+	
+	if (distToPlanet > 5.0f)
+	{
+		auto direction = shipToPlanet / distToPlanet;
+		mTransformComponent->SetPosition(mTransformComponent->GetPosition() + direction * deltaTime * 50.0f); 
+	}
 	// mining
 	mCargo += mMineSpeed * deltaTime;
 
@@ -100,15 +116,18 @@ void ShipComponent::Fly(float deltaTime)
 	if (planet != nullptr)
 	{
 		TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
-		auto direction = targetTaransform->GetPosition() - mTransformComponent->GetPosition();
+		auto direction = Normalize(targetTaransform->GetPosition() - mTransformComponent->GetPosition());
 		if (Magnitude(direction) < 5.0f)
 		{
 			//fly finish
 			mState = State::Mine;
 		}
-
-		// keep flying
-		mTransformComponent->SetPosition(mTransformComponent->GetPosition() + Normalize(direction) * deltaTime * 50.0f);
+		else
+		{
+			// keep flying
+			mTransformComponent->SetPosition(mTransformComponent->GetPosition() + direction * deltaTime * mSpeed);
+			mTransformComponent->SetRotation(Quaternion::RotationFromTo(Math::Vector3::ZAxis, direction));
+		}
 	}
 	else
 	{

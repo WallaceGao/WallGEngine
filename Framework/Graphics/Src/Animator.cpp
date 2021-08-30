@@ -9,6 +9,7 @@ using namespace WallG::Math;
  void WallG::Graphics::Animator::Initialize(const Model* model)
 {
 	mModel = model;
+	mToLocalTransforms.resize(model->skeleton->bones.size(), Matrix4::Indentity);
 }
 
 void WallG::Graphics::Animator::Terminate()

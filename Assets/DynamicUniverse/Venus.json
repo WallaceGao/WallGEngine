@@ -1,14 +1,16 @@
 {
   "Components": {
     "TransformComponent": {
+      "Scale": [ 1, 1, 1 ]
     },
     "PlanetComponent": {
-      "Name": "venus",
-      "Path": "../../Assets/Images/SolarTextures/2k_venus_surface.jpg",
       "Speed": 0.1,
       "SelfSpeed": 0.3,
-      "Scale": 0.3,
-      "DistanceFromParent": 20
+      "DistanceFromParent": 2000,
+      "ResourceType": 2
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"
     }
   }
 }

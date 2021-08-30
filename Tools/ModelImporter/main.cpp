@@ -369,6 +369,9 @@ void SaveSkeleton(const Arguments& args, const Model& model)
 
 void SaveAnimation(const Arguments& args, const Model& model)
 {
+    if (model.animSet.empty())
+        return;
+
     std::filesystem::path path = args.outputFileName;
     path.replace_extension("animset");
 

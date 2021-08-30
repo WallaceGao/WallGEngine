@@ -1,14 +1,16 @@
 {
   "Components": {
     "TransformComponent": {
+      "Scale": [ 1, 1, 1 ]
     },
     "PlanetComponent": {
-      "Name": "mercury",
-      "Path": "../../Assets/Images/SolarTextures/2k_mercury.jpg",
       "Speed": 0.1,
       "SelfSpeed": 0.3,
-      "Scale": 0.4,
-      "DistanceFromParent": 15
+      "DistanceFromParent": 500,
+      "ResourceType": 2
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"
     }
   }
 }

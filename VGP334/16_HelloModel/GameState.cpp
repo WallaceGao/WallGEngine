@@ -19,12 +19,12 @@ void GameState::Initialize()
     mDirctionalLight.specular = { 0.5 };
     mDirctionalLight.direction = { 0.0f, 0 , 1 };
 
-
     // character
     //mGreatSwordStrafe.Initialize("../../Assets/Model/GreatSword/GreatSwordSlash.model");
-    mGreatSwordStrafe.Initialize("../../Assets/Model/Monster/MutantPunch.model");
+    //mGreatSwordStrafe.Initialize("../../Assets/Model/Monster/MutantPunch.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Keli/Keli.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Youyouzi/YouyouziStand.model");
+    mGreatSwordStrafe.Initialize("../../Assets/Model/SpaceShip/SciFi_Fighter_AK5.model");
     //Set material
     mVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", BoneVertex::Format);
     mPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");
@@ -37,7 +37,7 @@ void GameState::Initialize()
     mBoneTransformBuffer.Initialize();
     mSettingsBuffer.Initialize();
     mCamera.SetPosition({ 0.0f, 0.0f, -3.0f });
-    mAnimator.Initialize( &mGreatSwordStrafe);
+    //mAnimator.Initialize( &mGreatSwordStrafe);
 
 }
 
@@ -132,19 +132,21 @@ void GameState::Render()
 
     mVertexShader.Bind();
     mPixelShader.Bind();
+
+    mSettings.useSkinning = mShowAnimation ? 1 : 0;
     mSettingsBuffer.Update(mSettings);
     mSettingsBuffer.BindVS(3);
     mSettingsBuffer.BindPS(3);
 
     if (mShowSkelton)
     {
-        mAnimator.Rander(mShowAnimation,mShowSkelton);
+        //mAnimator.Re(mShowAnimation,mShowSkelton);
         auto toLocal = mAnimator.GetToLocalTransforms();
         DrawSkeleton(*(mGreatSwordStrafe.skeleton), toLocal);
     }
-    else
+    else if (mShowAnimation)
     {
-        mAnimator.Rander(mShowAnimation,mShowSkelton);
+        //mAnimator.Render(mShowAnimation,mShowSkelton);
         auto toLocal = mAnimator.GetToLocalTransforms();
         StandardBoneTransformData boneData;
         for (auto& bone : mGreatSwordStrafe.skeleton->bones)
@@ -153,6 +155,10 @@ void GameState::Render()
         }
         mBoneTransformBuffer.Update(boneData);
         mBoneTransformBuffer.BindVS(4);
+        mGreatSwordStrafe.Render();
+    }
+    else
+    {
         mGreatSwordStrafe.Render();
     }
 

@@ -93,15 +93,31 @@ const Quaternion Quaternion::Identity{ 1.0f, 0.0f, 0.0f, 0.0f};
 
 Quaternion Quaternion::RotationAxis(const Vector3& axis, float rad)
 {
-    Quaternion value;
-    const Vector3 a = Normalize(axis);
-    value.w = cosf(rad/2.0f);
-    value.x = a.x * sinf(rad / 2.0f);
-    value.y = a.y * sinf(rad / 2.0f);
-    value.z = a.z * sinf(rad / 2.0f);
-    return value;
+	Quaternion value;
+	const Vector3 a = Normalize(axis);
+	value.w = cosf(rad / 2.0f);
+	value.x = a.x * sinf(rad / 2.0f);
+	value.y = a.y * sinf(rad / 2.0f);
+	value.z = a.z * sinf(rad / 2.0f);
+	return value;
 }
 
+Quaternion Quaternion::RotationEuler(const Vector3& eulerAngles)
+{
+	const float cr = cos(eulerAngles.x * 0.5f);
+	const float sr = sin(eulerAngles.x * 0.5f);
+	const float cy = cos(eulerAngles.z * 0.5f);
+	const float sy = sin(eulerAngles.z * 0.5f);
+	const float cp = cos(eulerAngles.y * 0.5f);
+	const float sp = sin(eulerAngles.y * 0.5f);
+
+	return {
+		cr * cp * cy + sr * sp * sy,
+		sr * cp * cy - cr * sp * sy,
+		cr * sp * cy + sr * cp * sy,
+		cr * cp * sy - sr * sp * cy
+	};
+}
 
 Quaternion Quaternion::RotationMatrix(const Matrix4& m)
 {

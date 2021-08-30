@@ -18,6 +18,9 @@
     <ClCompile Include="PlanetComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="ShipService.cpp">
+      <Filter>Servivces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h" />
@@ -36,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="PlanetComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipService.h">
+      <Filter>Servivces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

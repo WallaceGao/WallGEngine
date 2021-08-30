@@ -31,7 +31,6 @@ public:
 	float GetCargo() const { return mCargo; }
 	bool GetIsMining() const { return mState == State::Mine; }
 
-
 protected:
 	//class ShipAgent : public AI::Agent
 	//{

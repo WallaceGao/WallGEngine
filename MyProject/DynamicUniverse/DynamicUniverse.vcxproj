@@ -148,6 +148,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="PlanetComponent.cpp" />
     <ClCompile Include="ShipComponent.cpp" />
+    <ClCompile Include="ShipService.cpp" />
     <ClCompile Include="UniverseService.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="PlanetComponent.h" />
     <ClInclude Include="ShipComponent.h" />
+    <ClInclude Include="ShipService.h" />
     <ClInclude Include="UniverseService.h" />
   </ItemGroup>
   <ItemGroup>

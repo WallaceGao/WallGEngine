@@ -36,7 +36,7 @@ void RenderService::Initialize()
     mConstantBuffer.Initialize();
     mBoneTransformBuffer.Initialize();
     mSettingsBuffer.Initialize();
-    mCamera.SetPosition({ 0.0f, 0.0f, -3.0f });
+    mCamera.SetPosition({ 0.0f, 0.0f, -300.0f });
 }
 
 void RenderService::Terminate()
@@ -53,25 +53,36 @@ void RenderService::Terminate()
     mSampler.Terminate();
 }
 
+
+
 void RenderService::Update(float deltaTime)
 {
-    const float moveSpeed = 10.0f;
-    const float turnSpeed = 10.0f * Constants::DegToRad;
+    //if (mFocusTarget)
+    //{
+    //    if (key presed)
+    //        mFocusTarget = Invalid
+    //}
+    //else
+    //{
+    //}
+        auto inputSystem = InputSystem::Get();
 
-    auto inputSystem = InputSystem::Get();
-    if (inputSystem->IsKeyDown(KeyCode::W))
-        mCamera.Walk(moveSpeed * deltaTime);
-    if (inputSystem->IsKeyDown(KeyCode::S))
-        mCamera.Walk(-moveSpeed * deltaTime);
-    if (inputSystem->IsKeyDown(KeyCode::D))
-        mCamera.Strafe(moveSpeed * deltaTime);
-    if (inputSystem->IsKeyDown(KeyCode::A))
-        mCamera.Strafe(-moveSpeed * deltaTime);
-    if (inputSystem->IsMouseDown(MouseButton::RBUTTON))
-    {
-        mCamera.Yaw(inputSystem->GetMouseMoveX() * turnSpeed * deltaTime);
-        mCamera.Pitch(inputSystem->GetMouseMoveY() * turnSpeed * deltaTime);
-    }
+        const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 10000.0f : 1000.0f;
+        const float turnSpeed = 10.0f * Constants::DegToRad;
+
+        if (inputSystem->IsKeyDown(KeyCode::W))
+            mCamera.Walk(moveSpeed * deltaTime);
+        if (inputSystem->IsKeyDown(KeyCode::S))
+            mCamera.Walk(-moveSpeed * deltaTime);
+        if (inputSystem->IsKeyDown(KeyCode::D))
+            mCamera.Strafe(moveSpeed * deltaTime);
+        if (inputSystem->IsKeyDown(KeyCode::A))
+            mCamera.Strafe(-moveSpeed * deltaTime);
+        if (inputSystem->IsMouseDown(MouseButton::RBUTTON))
+        {
+            mCamera.Yaw(inputSystem->GetMouseMoveX() * turnSpeed * deltaTime);
+            mCamera.Pitch(inputSystem->GetMouseMoveY() * turnSpeed * deltaTime);
+        }
 }
 
 void WallG::RenderService::Render()
@@ -105,13 +116,15 @@ void WallG::RenderService::Render()
 
     for (auto& entry : mRenderEntries)
     {
+        Quaternion localRotation = entry.modelComponent->GetRotation();
+
         Vector3 position = entry.transformComponent->GetPosition();
         Quaternion rotation = entry.transformComponent->GetRotation();
         Vector3 scale = entry.transformComponent->GetScale();
 
         Matrix4 matWorld =
             Matrix4::Scaling(scale) *
-            Matrix4::RotationQuaternion(rotation) *
+            Matrix4::RotationQuaternion(localRotation * rotation) *
             Matrix4::Translation(position);
         transformData.wvp = Transpose(matWorld * matView * matProj);
         mConstantBuffer.Update(transformData);

@@ -14,6 +14,7 @@ namespace WallG::Math
         const static Quaternion Identity;
 
         static Quaternion RotationAxis(const Vector3& axis, float rad);
+        static Quaternion RotationEuler(const Vector3& eulerAngles);
         static Quaternion RotationMatrix(const Matrix4& m);
         static Quaternion RotationLook(Vector3 direction, Vector3 up = Vector3::YAxis);
         static Quaternion RotationFromTo(Vector3 from, Vector3 to);
@@ -22,10 +23,11 @@ namespace WallG::Math
         constexpr Quaternion operator+(const Quaternion& q) const { return Quaternion(w + q.w, x + q.x, y + q.y, z + q.z); }
         constexpr Quaternion operator-(const Quaternion& q) const { return Quaternion(w - q.w, x - q.x, y - q.y, z - q.z); }
         constexpr Quaternion operator*(const Quaternion& q) const { return Quaternion(
-            w * q.w - x * q.x - y * q.y - z * q.z,
-            x * q.w + w * q.x - z * q.y + y * q.z,
-            y * q.w + z * q.x + w * q.y - x * q.z,
-            z * q.w - y * q.x + x * q.y + w * q.z );
+            (w * q.w) - (x * q.x) - (y * q.y) - (z * q.z),
+            (w * q.x) + (x * q.w) - (y * q.z) + (z * q.y),
+            (w * q.y) + (x * q.z) + (y * q.w) - (z * q.x),
+            (w * q.z) - (x * q.y) + (y * q.x) + (z * q.w)
+            );
         }
         constexpr Quaternion operator*(float s) const { return Quaternion(w * s, x * s, y * s, z * s); }
         constexpr Quaternion operator/(float s) const { return Quaternion(w / s, x / s, y / s, z / s); }

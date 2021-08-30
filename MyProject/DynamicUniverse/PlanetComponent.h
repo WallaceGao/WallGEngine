@@ -5,7 +5,7 @@
 
 class GameObjectHandle;
 
-class PlanetComponent final : public WallG::ModelComponent
+class PlanetComponent final : public WallG::Component
 {
 public:
 	SET_TYPE_ID(DUComponentId::Planet);
@@ -23,15 +23,16 @@ public:
 	void SetTextureFilePath(const char* fileName) { mTextureFilePath = fileName; }
 	
 	void SetSelfRotation(const WallG::Math::Vector3& rotation) { mSelfRotation = rotation; }
-	const WallG::Math::Vector3& GetSelfRotation() const { return mSelfRotation; }
 	void SetSpeed(float speed) { mSpeed = speed; }
-	const float GetSpeed() const { return mSpeed; }
 	void SetSelfSpeed(float selfSpeed) { mSelfSpeed = selfSpeed; }
-	const float GetSelfSpeed() const { return mSelfSpeed;}
-	void SetPlanetScale(float planetScale) { mPlanetScale = planetScale; }
 	void SetDistanceFromParent(float distance) { mDistanceFromParent = distance; }
 	void SetName(std::string name) { mName = name; }
+	void SetResourceType(int resourceType) { mResourceType = MineralType(resourceType); };
+	const WallG::Math::Vector3& GetSelfRotation() const { return mSelfRotation; }
+	const float GetSpeed() const { return mSpeed; }
 	const std::string GetName() const { return mName; }
+	const float GetSelfSpeed() const { return mSelfSpeed;}
+	const MineralType GetResourceType() const { return mResourceType; }
 
 	void Rota(float speed) { mSelfRotation -= speed; }
 
@@ -44,10 +45,10 @@ protected:
 	std::string mName;
 	float mSpeed = 0.0f;
 	float mSelfSpeed = 0.0f;
-	float mPlanetScale = 1.0f;
 	float mDistanceFromParent = 0.0f;
-	bool mIsWorldCenter = false;
+	
 
+	MineralType mResourceType = MineralType::None;
 };
 
 

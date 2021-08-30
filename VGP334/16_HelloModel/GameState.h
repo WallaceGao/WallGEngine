@@ -25,7 +25,7 @@ private:
 		float bumpMapWeight = 0.2f;
 		float normalMapWeight = 1.0f;
 		int useShadow = 0;
-		int useSkinning = 1;
+		int useSkinning = 0;
 		float padding[3];
 	};
 	struct StandardBoneTransformData

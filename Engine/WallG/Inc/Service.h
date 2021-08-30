@@ -19,8 +19,8 @@ namespace WallG
 		virtual void Render() {};
 		virtual void DebugUI() {};
 
-		GameWorld& GetOwner() { return *mWorld; }
-		const GameWorld& GetOwner() const { return *mWorld; }
+		GameWorld& GetWorld() { return *mWorld; }
+		const GameWorld& GetWorld() const { return *mWorld; }
 
 	private:
 		friend class GameWorld;

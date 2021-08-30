@@ -137,9 +137,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicUniverse", "DynamicU
 		Assets\DynamicUniverse\Jupiter.json = Assets\DynamicUniverse\Jupiter.json
 		Assets\DynamicUniverse\Mercury.json = Assets\DynamicUniverse\Mercury.json
 		Assets\DynamicUniverse\Moon.json = Assets\DynamicUniverse\Moon.json
+		Assets\DynamicUniverse\SmallShip.json = Assets\DynamicUniverse\SmallShip.json
 		Assets\DynamicUniverse\Sun.json = Assets\DynamicUniverse\Sun.json
 		Assets\DynamicUniverse\Venus.json = Assets\DynamicUniverse\Venus.json
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "Framework\Physics\Physics.vcxproj", "{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -461,6 +464,14 @@ Global
 		{A76C9261-EF6D-4206-83D7-9B9F4037FC5D}.Release|x64.Build.0 = Release|x64
 		{A76C9261-EF6D-4206-83D7-9B9F4037FC5D}.Release|x86.ActiveCfg = Release|Win32
 		{A76C9261-EF6D-4206-83D7-9B9F4037FC5D}.Release|x86.Build.0 = Release|Win32
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Debug|x64.ActiveCfg = Debug|x64
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Debug|x64.Build.0 = Debug|x64
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Debug|x86.ActiveCfg = Debug|Win32
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Debug|x86.Build.0 = Debug|Win32
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Release|x64.ActiveCfg = Release|x64
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Release|x64.Build.0 = Release|x64
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Release|x86.ActiveCfg = Release|Win32
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -508,6 +519,7 @@ Global
 		{A76C9261-EF6D-4206-83D7-9B9F4037FC5D} = {F41E7FB9-D649-4B10-97F9-8BDC8BB8B90B}
 		{9E18F4FE-3964-42E5-8595-BEBE20FA9987} = {711663E9-F6E4-43D7-B637-49674B9108ED}
 		{1CF45B0B-BE6F-4BE6-ADA1-7DD7F5F1A4FC} = {711663E9-F6E4-43D7-B637-49674B9108ED}
+		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3} = {15072573-F0D8-4DA8-860F-FAA44FCC4618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C487D4D-9DCE-497A-8E20-8C19BA0297C4}

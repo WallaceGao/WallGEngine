@@ -47,22 +47,26 @@ void Model::Initialize(const std::filesystem::path& fileName)
 			material.specularMap->Initialize(texturePath);
 		}
 	}
-	// Load Skeleton 
-	for (auto& bone : skeleton->bones)
-	{
-		
-		if (bone->parentIndex != -1)
-		{
-			bone->parent = skeleton->bones[bone->parentIndex].get();
-		}
-		else
-		{
-			skeleton->root = bone.get();
-		}
 
-		for (size_t j = 0; j < bone->childIndices.size(); ++j)
+	if (skeleton)
+	{
+		// Re-link skeleton bones
+		for (auto& bone : skeleton->bones)
 		{
-			bone->children.push_back((skeleton->bones[bone->childIndices[j]].get()));
+
+			if (bone->parentIndex != -1)
+			{
+				bone->parent = skeleton->bones[bone->parentIndex].get();
+			}
+			else
+			{
+				skeleton->root = bone.get();
+			}
+
+			for (size_t j = 0; j < bone->childIndices.size(); ++j)
+			{
+				bone->children.push_back((skeleton->bones[bone->childIndices[j]].get()));
+			}
 		}
 	}
 }

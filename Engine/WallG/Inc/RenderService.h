@@ -9,6 +9,18 @@ namespace WallG
 	class ModelComponent;
 	class TransformComponent;
 
+	//class CameraService final : public Service
+	//{
+	//public:
+	//	virtual void Update(float)override;
+	//	void SetCameraFocus(GameObjectHandle, float distance);
+	//
+	//	const Camera& GetCamera() const;
+	//
+	//private:
+	//	
+	//};
+
 	class RenderService final : public Service
 	{
 	public:
