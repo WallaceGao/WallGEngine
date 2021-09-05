@@ -64,14 +64,14 @@ void GameState::Initialize()
     mSkyboxMeshBuffer.Initialize(mSkyboxMesh);
 
     //Speed
-    mMercurySpeed = 1.4f;
-    mSelfMercurySpeed = 1.0f;
-    mVenusSpeed = 1.6f;
-    mSelfVenusSpeed = 1.0f;
-    mEarthSpeed = 1.8f;
-    mSelfEarthSpeed = 1.0f;
-    mMarsSpeed = 1.2f;
-    mSelfMarsSpeed = 1.0f;
+    mMercurySpeed = 0.0f;
+    mSelfMercurySpeed = 0.0f;
+    mVenusSpeed = 0.0f;
+    mSelfVenusSpeed = 0.0f;
+    mEarthSpeed = 0.0f;
+    mSelfEarthSpeed = 0.0f;
+    mMarsSpeed = 0.0f;
+    mSelfMarsSpeed = 0.0f;
     mJupiterSpeed = 1.5f;
     mSelfJupiterSpeed = 1.0f;
 

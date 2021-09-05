@@ -1,12 +1,13 @@
 #pragma once
 #include <WallG/Inc/WallG.h>
 
-// skybox
-// camera
-// planet model
-// different ship type
+// skybox : not really down
+// camera : not really down
+// planet model : down
+// different ship type : down
+// add 经济系统
 
-// 2d game
+// 2d game : down
 
 // wirte down what I want to talk 
 
@@ -23,6 +24,13 @@ enum class ItemType
 	Engine,
 	Cargo,
 	MineTool,
+};
+
+enum class ShipType
+{
+	UnKnow,
+	SmallShip,
+	lagerShip
 };
 
 enum class DUComponentId

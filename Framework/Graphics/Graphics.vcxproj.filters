@@ -171,6 +171,9 @@
     <ClInclude Include="Inc\ModelManager.h">
       <Filter>Inc\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\DepthStencilState.h">
+      <Filter>Inc\RenderState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -250,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="Src\ModelManager.cpp">
       <Filter>Src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DepthStencilState.cpp">
+      <Filter>Src\RenderState</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

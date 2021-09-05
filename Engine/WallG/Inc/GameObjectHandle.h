@@ -7,7 +7,6 @@ namespace WallG
 	class GameObjectHandle
 	{
 	public:
-
 		GameObjectHandle() = default;
 
 	private:

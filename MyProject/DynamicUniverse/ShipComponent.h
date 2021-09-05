@@ -13,7 +13,9 @@ public:
 	{
 		Idle,
 		Mine,
-		Fly
+		Fly,
+		Sell,
+		Upgrade
 	};
 
 	ShipComponent() = default;
@@ -24,12 +26,17 @@ public:
 	void DebugUI() override;
 
 	void SetSpeed(float speed) { mSpeed = speed; }
-	float GetSpeed() const { return mSpeed; }
+	const float GetSpeed() const { return mSpeed; }
 	void SetMineSpeed(float mineSpeed) { mMineSpeed= mineSpeed; }
-	float GetMineSpeed() const { return mMineSpeed; }
+	const float GetMineSpeed() const { return mMineSpeed; }
 	void SetCargoSize(float cargoSize) { mCargoSize = cargoSize; }
-	float GetCargo() const { return mCargo; }
+	const float GetCargo() const { return mCargo; }
+	void SetMoney(float money) { mMoney = money; }
+	const float GetMoney() const { return mMoney; }
+	void SetShipType(int shipType) { mShipType = ShipType(shipType); }
+	const ShipType GetShipType() { return mShipType; }
 	bool GetIsMining() const { return mState == State::Mine; }
+	
 
 protected:
 	//class ShipAgent : public AI::Agent
@@ -54,4 +61,13 @@ protected:
 	MineralType mShipCargoType = MineralType::None;
 	float mCargo = 0;
 	float mCargoSize = 0;
+	float mMoney = 0;
+	ShipType mShipType = ShipType::UnKnow;
+
+	// Mining params
+	WallG::Math::Vector3 mDockOffset;
+	float mMineTimer = 0.0f;
+
+	std::vector<WallG::Math::Vector3> mTailPositions;
+	float mNextTailTime = 0.0f;
 };

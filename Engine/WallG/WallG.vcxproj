@@ -150,11 +150,12 @@
     <ClInclude Include="Inc\AnimatorComponent.h" />
     <ClInclude Include="Inc\App.h" />
     <ClInclude Include="Inc\AppState.h" />
+    <ClInclude Include="Inc\CameraService.h" />
     <ClInclude Include="Inc\ColliderComponent.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Component.h" />
     <ClInclude Include="Inc\RenderService.h" />
-    <ClInclude Include="Inc\SkyBoxComponent.h" />
+    <ClInclude Include="Inc\SkyBoxService.h" />
     <ClInclude Include="Inc\TypeIds.h" />
     <ClInclude Include="Inc\GameObject.h" />
     <ClInclude Include="Inc\GameObjectHandle.h" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="Src\AnimatorConponent.cpp" />
     <ClCompile Include="Src\App.cpp" />
+    <ClCompile Include="Src\CameraService.cpp" />
     <ClCompile Include="Src\ColliderComponent.cpp" />
     <ClCompile Include="Src\GameObject.cpp" />
     <ClCompile Include="Src\GameWorld.cpp" />
@@ -181,7 +183,7 @@
     </ClCompile>
     <ClCompile Include="Src\GameObjectIO.cpp" />
     <ClCompile Include="Src\RenderService.cpp" />
-    <ClCompile Include="Src\SkyBoxComponent.cpp" />
+    <ClCompile Include="Src\SkyBoxService.cpp" />
     <ClCompile Include="Src\TransformComponent.cpp" />
     <ClCompile Include="Src\WallG.cpp" />
   </ItemGroup>

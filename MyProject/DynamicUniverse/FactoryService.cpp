@@ -14,22 +14,12 @@ const MineralType FactoryService::GetMostDesiredResource() const
 	float totalCopperAmount = 0.0f;
 	float totalCopperCapacity = 0.0f;
 
-	MineralType needResource;
 	for (auto factory: mFactoryEntries)
 	{
 		totalIronAmount += factory.factoryComponent->GetIronAmount();
 		totalIronCapacity += factory.factoryComponent->GetIronCapacity();
 		totalCopperAmount += factory.factoryComponent->GetCopperAmount();
 		totalCopperCapacity += factory.factoryComponent->GetCopperCapacity();
-
-		//if (factory.factoryComponent->GetIronAmount() >= factory.factoryComponent->GetCopperAmount())
-		//{
-		//	needResource = MineralType::Copper;
-		//}
-		//else
-		//{
-		//	needResource = MineralType::Iron;
-		//}
 	}
 
 	float totalIronPercent = totalIronAmount / totalIronCapacity;

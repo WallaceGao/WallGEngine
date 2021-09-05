@@ -2,7 +2,9 @@
 #include "RenderService.h"
 
 #include "AnimatorComponent.h"
+#include "CameraService.h"
 #include "GameObject.h"
+#include "GameWorld.h"
 #include "modelComponent.h"
 #include "TransformComponent.h"
 
@@ -15,14 +17,14 @@ void RenderService::Initialize()
 {
     GraphicsSystem::Get()->SetClearColor(Colors::DimGray);
 
-    mMaterial.ambient = { 1 };
-    mMaterial.specular = { 0.5 };
-    mMaterial.diffuse = { 0.5 };
-    mMaterial.Power = { 10.0f };
+    mMaterial.ambient = { 0.35f };
+    mMaterial.specular = { 0.5f };
+    mMaterial.diffuse = { 0.5f };
+    mMaterial.Power = { 5.0f };
 
-    mDirctionalLight.ambient = { 1 };
-    mDirctionalLight.diffuse = { 0.5 };
-    mDirctionalLight.specular = { 0.5 };
+    mDirctionalLight.ambient = { 1.0f };
+    mDirctionalLight.diffuse = { 0.5f };
+    mDirctionalLight.specular = { 0.5f };
     mDirctionalLight.direction = { 0.0f, 0 , 1 };
 
     //Set material
@@ -36,64 +38,30 @@ void RenderService::Initialize()
     mConstantBuffer.Initialize();
     mBoneTransformBuffer.Initialize();
     mSettingsBuffer.Initialize();
-    mCamera.SetPosition({ 0.0f, 0.0f, -300.0f });
 }
 
 void RenderService::Terminate()
 {
-    //mAnimator.Terminate();
     mSettingsBuffer.Terminate();
     mBoneTransformBuffer.Terminate();
     mConstantBuffer.Terminate();
     mMaterialBuffer.Terminate();
     mLightBuffer.Terminate();
-    //mGreatSwordStrafe.Terminate();
     mVertexShader.Terminate();
     mPixelShader.Terminate();
     mSampler.Terminate();
 }
 
-
-
-void RenderService::Update(float deltaTime)
-{
-    //if (mFocusTarget)
-    //{
-    //    if (key presed)
-    //        mFocusTarget = Invalid
-    //}
-    //else
-    //{
-    //}
-        auto inputSystem = InputSystem::Get();
-
-        const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 10000.0f : 1000.0f;
-        const float turnSpeed = 10.0f * Constants::DegToRad;
-
-        if (inputSystem->IsKeyDown(KeyCode::W))
-            mCamera.Walk(moveSpeed * deltaTime);
-        if (inputSystem->IsKeyDown(KeyCode::S))
-            mCamera.Walk(-moveSpeed * deltaTime);
-        if (inputSystem->IsKeyDown(KeyCode::D))
-            mCamera.Strafe(moveSpeed * deltaTime);
-        if (inputSystem->IsKeyDown(KeyCode::A))
-            mCamera.Strafe(-moveSpeed * deltaTime);
-        if (inputSystem->IsMouseDown(MouseButton::RBUTTON))
-        {
-            mCamera.Yaw(inputSystem->GetMouseMoveX() * turnSpeed * deltaTime);
-            mCamera.Pitch(inputSystem->GetMouseMoveY() * turnSpeed * deltaTime);
-        }
-}
-
-void WallG::RenderService::Render()
+void RenderService::Render()
 {
     // Attach buffer to graphics pipeline
-    Matrix4 matView = mCamera.GetViewMatrix();
-    Matrix4 matProj = mCamera.GetProjectionMatrix();
+    auto cameraService = GetWorld().GetService<CameraService>();
+    Matrix4 matView = cameraService->GetCamera().GetViewMatrix();
+    Matrix4 matProj = cameraService->GetCamera().GetProjectionMatrix();
 
     // viewPosition is camera's postion 
     TransformData transformData;
-    transformData.viewPostion = mCamera.GetPosition();
+    transformData.viewPostion = cameraService->GetCamera().GetPosition();
     mConstantBuffer.BindVS(0);
     mConstantBuffer.BindPS(0);
 
@@ -173,20 +141,7 @@ void WallG::RenderService::Render()
         }
     }
 
-    SimpleDraw::Render(mCamera);
-}
-
-void RenderService::DebugUI()
-{
-    ImGui::ColorEdit4("Material Ambinet", &mMaterial.ambient.x);
-    ImGui::ColorEdit4("Material diffuse", &mMaterial.diffuse.x);
-    ImGui::ColorEdit4("Material specular", &mMaterial.specular.x);
-    ImGui::DragFloat("Material Power", &mMaterial.Power, 1.0f, 1.0f, 1000.0f);
-
-    ImGui::ColorEdit4("DirctionalLight Ambinet", &mDirctionalLight.ambient.x);
-    ImGui::ColorEdit4("DirctionalLight diffuse", &mDirctionalLight.diffuse.x);
-    ImGui::ColorEdit4("DirctionalLight specular", &mDirctionalLight.specular.x);
-    ImGui::DragFloat3("DirctionalLight direction", &mDirctionalLight.direction.x, 0.1f);
+    SimpleDraw::Render(cameraService->GetCamera());
 }
 
 void RenderService::Register(const ModelComponent* modelComponent)

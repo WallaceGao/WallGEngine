@@ -3,13 +3,13 @@
     "TransformComponent": {
     },
     "PlanetComponent": {
-      "Speed": 0.3,
-      "SelfSpeed": 0.3,
-      "DistanceFromParent": 100,
+      "Speed": 0.03,
+      "SelfSpeed": 0.03,
+      "DistanceFromParent": [ 100, 0, 0 ],
       "ResourceType": 1
     },
     "ModelComponent": {
-      "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"
+      "Path": "../../Assets/Model/DU/Planet/Moon/Moon_2K.model"
     }
   }
 }

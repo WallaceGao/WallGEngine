@@ -4,13 +4,12 @@
       "Scale": [ 1, 1, 1 ]
     },
     "PlanetComponent": {
-      "Speed": 0.3,
-      "SelfSpeed": 0.3,
-      "Scale": 0.5,
-      "DistanceFromParent": 1000
+      "Speed": 0.03,
+      "SelfSpeed": 0.05,
+      "DistanceFromParent": [ 1500, 0 , 1000 ]    
     },
     "ModelComponent": {
-      "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"
+      "Path": "../../Assets/Model/DU/Planet/Earth/Earth_2K.model"
     },
     "FactoryComponent": {
       "MaxIronCapacity": 5000.0,

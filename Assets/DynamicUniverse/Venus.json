@@ -4,13 +4,13 @@
       "Scale": [ 1, 1, 1 ]
     },
     "PlanetComponent": {
-      "Speed": 0.1,
-      "SelfSpeed": 0.3,
-      "DistanceFromParent": 2000,
+      "Speed": 0.01,
+      "SelfSpeed": 0.03,
+      "DistanceFromParent": [ 2500, 0, 0 ],
       "ResourceType": 2
     },
     "ModelComponent": {
-      "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"
+      "Path": "../../Assets/Model/DU/Planet/Venus/Venus_1K.model"
     }
   }
 }

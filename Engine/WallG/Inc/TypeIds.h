@@ -9,12 +9,15 @@ namespace WallG
 		Transform,
 		Model,
 		Animator,
+		SkyBox,
 		Count
 	};
 
 	enum class ServiceId
 	{
 		Render,
+		Camera,
+		SkyBox,
 		Count
 	};
 }

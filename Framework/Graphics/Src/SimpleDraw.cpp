@@ -176,6 +176,32 @@ void WallG::Graphics::SimpleDraw::AddSphere(const Math::Vector3& center, float r
 	}
 }
 
+void WallG::Graphics::SimpleDraw::AddRing(const Math::Vector3& center, float radius, const Color& color, uint32_t slices)
+{
+	const float x = center.x;
+	const float y = center.y;
+	const float z = center.z;
+
+	const uint32_t kSlices = Math::Max(3u, slices);
+	const float kPhi = Math::Constants::TwoPi / (float)kSlices;
+
+	for (uint32_t j = 0; j < kSlices; ++j)
+	{
+		const float theta = j * kPhi;
+		const float phi = theta + kPhi;
+
+		const float x0 = x + (radius * sin(theta));
+		const float y0 = y;
+		const float z0 = z + (radius * cos(theta));
+
+		const float x1 = x + (radius * sin(phi));
+		const float y1 = y;
+		const float z1 = z + (radius * cos(phi));
+
+		sInstance->AddLine({ x0,y0,z0 }, { x1,y1,z1 }, color);
+	}
+}
+
 void SimpleDraw::Render(const Camera& camera)
 {
 	sInstance->Render(camera);

@@ -5,8 +5,8 @@
     },
     "PlanetComponent": {
       "Speed": 0.1,
-      "SelfSpeed": 0.3,
-      "DistanceFromParent": 0
+      "SelfSpeed": 0.03,
+      "DistanceFromParent": [ 0, 0, 0 ]
     },
     "ModelComponent": {
       "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"

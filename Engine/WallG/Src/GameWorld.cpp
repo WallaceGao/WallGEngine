@@ -88,7 +88,11 @@ void GameWorld::DebugUI()
 			char label[128];
 			sprintf_s(label, 128, "GameObject %d - %s", i, object->GetName().c_str());
 			if (ImGui::Selectable(label, object == mSelectedObject))
+			{
 				mSelectedObject = object;
+				for (auto& handler : mSelectedHandlers)
+					handler(mSelectedObject);
+			}
 		}
 		ImGui::EndChild();
 	}
@@ -182,6 +186,11 @@ void GameWorld::Destroy(GameObjectHandle handle)
 	//This invalidates all existing handles to the slot
 	slot.generation++;
 	mToBeDestroyed.push_back(handle.mID);
+}
+
+void WallG::GameWorld::AddSelectedHandler(SelectedHandler handler)
+{
+	mSelectedHandlers.emplace_back(handler);
 }
 
 bool WallG::GameWorld::IsValid(GameObjectHandle handle) const

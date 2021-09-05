@@ -25,9 +25,9 @@ public:
 	void SetSelfRotation(const WallG::Math::Vector3& rotation) { mSelfRotation = rotation; }
 	void SetSpeed(float speed) { mSpeed = speed; }
 	void SetSelfSpeed(float selfSpeed) { mSelfSpeed = selfSpeed; }
-	void SetDistanceFromParent(float distance) { mDistanceFromParent = distance; }
+	void SetDistanceFromParent(const WallG::Math::Vector3& distance) { mDistanceFromParent = distance; }
 	void SetName(std::string name) { mName = name; }
-	void SetResourceType(int resourceType) { mResourceType = MineralType(resourceType); };
+	void SetResourceType(int resourceType) { mResourceType = MineralType(resourceType); }
 	const WallG::Math::Vector3& GetSelfRotation() const { return mSelfRotation; }
 	const float GetSpeed() const { return mSpeed; }
 	const std::string GetName() const { return mName; }
@@ -45,8 +45,7 @@ protected:
 	std::string mName;
 	float mSpeed = 0.0f;
 	float mSelfSpeed = 0.0f;
-	float mDistanceFromParent = 0.0f;
-	
+	WallG::Math::Vector3 mDistanceFromParent = WallG::Math::Vector3::Zero;
 
 	MineralType mResourceType = MineralType::None;
 };

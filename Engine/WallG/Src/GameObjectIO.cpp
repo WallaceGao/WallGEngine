@@ -3,10 +3,10 @@
 
 #include "GameObject.h"
 
-#include "TransformComponent.h"
+#include "AnimatorComponent.h"
 #include "ColliderComponent.h"
 #include "ModelComponent.h"
-#include "AnimatorComponent.h"
+#include "TransformComponent.h"
 
 #include <rapidjson/filereadstream.h>
 #include <rapidjson/filewritestream.h>
@@ -87,11 +87,11 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 		}
 		else if (strcmp(componentName, "ModelComponent") == 0)
 		{
-			auto collider = gameObject.AddComponent<ModelComponent>();
+			auto Model = gameObject.AddComponent<ModelComponent>();
 			if (component.value.HasMember("Path"))
 			{
 				const auto& path = component.value["Path"].GetString();
-				collider->SetFilePath(path);
+				Model->SetFilePath(path);
 			}
 			if (component.value.HasMember("Rotation"))
 			{
@@ -99,12 +99,12 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 				float x = eulerAngles[0].GetFloat();
 				float y = eulerAngles[1].GetFloat();
 				float z = eulerAngles[2].GetFloat();
-				collider->SetRotation(Math::Quaternion::RotationEuler({ x, y, z }));
+				Model->SetRotation(Math::Quaternion::RotationEuler({ x, y, z }));
 			}
 		}
 		else if (strcmp(componentName, "AnimatorComponent") == 0)
 		{
-			auto collider = gameObject.AddComponent<AnimatorComponent>();
+			auto Animator = gameObject.AddComponent<AnimatorComponent>();
 			//if (component.value.HasMember("ShowAnimation"))
 			//{
 			//	const auto& showAnimation = component.value["ShowAnimation"].GetBool();
@@ -118,7 +118,7 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 			if (component.value.HasMember("IsLoop"))
 			{
 				const auto& IsLoop = component.value["IsLoop"].GetBool();
-				collider->SetLoop(IsLoop);
+				Animator->SetLoop(IsLoop);
 			}
 		}
 	}

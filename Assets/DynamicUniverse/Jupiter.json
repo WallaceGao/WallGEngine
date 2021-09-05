@@ -4,13 +4,13 @@
       "Scale": [ 1, 1, 1 ]
     },
     "PlanetComponent": {
-      "Speed": 0.1,
-      "SelfSpeed": 0.3,
-      "DistanceFromParent": 5000,
+      "Speed": 0.01,
+      "SelfSpeed": 0.03,
+      "DistanceFromParent": [2000, 0, 3000 ],
       "ResourceType": 1
     },
     "ModelComponent": {
-      "Path": "../../Assets/Model/DU/Planet/Earth/Earth_2K.model"
+      "Path": "../../Assets/Model/DU/Planet/Jupiter/Jupiter.model"
     }
   }
 }

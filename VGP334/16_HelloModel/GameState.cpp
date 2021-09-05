@@ -24,7 +24,7 @@ void GameState::Initialize()
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Monster/MutantPunch.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Keli/Keli.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Youyouzi/YouyouziStand.model");
-    mGreatSwordStrafe.Initialize("../../Assets/Model/SpaceShip/SciFi_Fighter_AK5.model");
+    mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model");
     //Set material
     mVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", BoneVertex::Format);
     mPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");

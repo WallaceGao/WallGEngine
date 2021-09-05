@@ -97,11 +97,6 @@ namespace WallG::Math
         return Vector3((a.y * b.z) - (b.y * a.z), (a.z * b.x) - (b.z * a.x), (a.x * b.y) - (b.x * a.y));
     }
 
-    inline Vector3 LerpPosition(Vector3 a, Vector3 b, float t)
-    {
-        return a + (b - a) * t; 
-    };
-
     inline Vector3 TransformNormal(Vector3 v, Matrix4 m) // assume w = 0 
     {
         return Vector3(v.x * m._11 + v.y * m._21 + v.z * m._31,

@@ -2,24 +2,11 @@
 
 #include "Service.h"
 
-
 namespace WallG
 {
 	class AnimatorComponent;
 	class ModelComponent;
 	class TransformComponent;
-
-	//class CameraService final : public Service
-	//{
-	//public:
-	//	virtual void Update(float)override;
-	//	void SetCameraFocus(GameObjectHandle, float distance);
-	//
-	//	const Camera& GetCamera() const;
-	//
-	//private:
-	//	
-	//};
 
 	class RenderService final : public Service
 	{
@@ -29,9 +16,7 @@ namespace WallG
 
 		virtual void Initialize() override;
 		virtual void Terminate()override;
-		virtual void Update(float)override;
 		virtual void Render() override;
-		virtual void DebugUI()override;
 
 		// Assign what Service need in to the function
 		void Register(const ModelComponent* modelComponent);
@@ -69,8 +54,6 @@ namespace WallG
 		};
 
 		std::vector<Entry> mRenderEntries;
-
-		WallG::Graphics::Camera mCamera;
 
 		WallG::Graphics::TypedConstantBuffer<TransformData> mConstantBuffer;
 		WallG::Graphics::TypedConstantBuffer<StandardBoneTransformData> mBoneTransformBuffer;

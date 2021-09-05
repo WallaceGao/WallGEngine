@@ -87,8 +87,11 @@
     <ClInclude Include="Inc\RenderService.h">
       <Filter>Inc\Service</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\SkyBoxComponent.h">
-      <Filter>Inc\Components</Filter>
+    <ClInclude Include="Inc\CameraService.h">
+      <Filter>Inc\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SkyBoxService.h">
+      <Filter>Inc\Service</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,8 +128,11 @@
     <ClCompile Include="Src\TransformComponent.cpp">
       <Filter>Src\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Src\SkyBoxComponent.cpp">
-      <Filter>Src\Components</Filter>
+    <ClCompile Include="Src\CameraService.cpp">
+      <Filter>Src\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SkyBoxService.cpp">
+      <Filter>Src\Service</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

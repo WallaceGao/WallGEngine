@@ -32,8 +32,11 @@ namespace
 			}
 			if (member.value.HasMember("DistanceFromParent"))
 			{
-				const auto& distance = member.value["DistanceFromParent"].GetFloat();
-				planet->SetDistanceFromParent(distance);
+				const auto& distance = member.value["DistanceFromParent"].GetArray();
+				float x = distance[0].GetFloat();
+				float y = distance[1].GetFloat();
+				float z = distance[2].GetFloat();
+				planet->SetDistanceFromParent({x,y,z});
 			}
 			if (member.value.HasMember("ResourceType"))
 			{
@@ -112,12 +115,22 @@ namespace
 			if (member.value.HasMember("MineSpeed"))
 			{
 				const auto& mineSpeed = member.value["MineSpeed"].GetFloat();
-				ship->SetSpeed(mineSpeed);
+				ship->SetMineSpeed(mineSpeed);
 			}
 			if (member.value.HasMember("CarGoSize"))
 			{
 				const auto& carGoSize = member.value["CarGoSize"].GetFloat();
 				ship->SetCargoSize(carGoSize);
+			}
+			if (member.value.HasMember("ShipType"))
+			{
+				const auto& shipType = member.value["ShipType"].GetInt();
+				ship->SetShipType(shipType);
+			}
+			if (member.value.HasMember("Money"))
+			{
+				const auto& money = member.value["Money"].GetFloat();
+				ship->SetMoney(money);
 			}
 		}
 		return false;
@@ -126,7 +139,9 @@ namespace
 
 void GameState::Initialize()
 {
+	auto cameraService = mGameWorld.AddService<CameraService>();
 	mGameWorld.AddService<UniverseService>();
+	mGameWorld.AddService<SkyBoxService>();
 	mGameWorld.AddService<RenderService>();
 	mGameWorld.AddService<ShipService>();
 	mGameWorld.AddService<FactoryService>();
@@ -136,17 +151,34 @@ void GameState::Initialize()
 	// we can guarantee that planets will update their transforms first
 	// so the moon and transform around them.
 	GameObjectIO::SetReadOverride(ReadOverride);
+	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Skybox.json", "Skybox");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Sun.json", "Sun");
 	auto earth = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Earth.json", "Earth");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Jupiter.json", "Jupiter");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Mercury.json", "Mercury");
 	auto moon = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Moon.json", "Moon");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Venus.json", "Venus");
-	
-	
+	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Mars.json", "Mars");
 	
 	// Set the moon to follow the earth's transform
 	moon->GetComponent<PlanetComponent>()->SetParentPlanet(earth->GetHandle());
+
+	mGameWorld.AddSelectedHandler([cameraService](GameObject* selectedObject)
+	{
+		float distance = 100.0f;
+		if (auto planetComponent = selectedObject->GetComponent<PlanetComponent>(); planetComponent != nullptr)
+		{
+			// distance = planetComponent->GetRadius() * 2.0f;
+			distance = 100.0f;
+		}
+		else if (auto shipComponent = selectedObject->GetComponent<ShipComponent>(); shipComponent != nullptr)
+		{
+			// distance = planetComponent->GetRadius() * 2.0f;
+			distance = 30.0f;
+		}
+
+		cameraService->SetCameraFocus(selectedObject->GetHandle(), distance);
+	});
 }
 
 void GameState::Terminate()

@@ -1,0 +1,18 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Scale":  [2, 2, 2]
+    },
+    "ShipComponent": {
+      "Speed": 100, 
+      "MineSpeed" : 3,
+      "CarGoSize": 300,
+      "ShipType": 2,
+      "Money": 0
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Ship/Corvette-F3/Corvette-F3.model",
+      "Rotation": [ 0, 3.14, 0 ]
+    }
+  }
+}

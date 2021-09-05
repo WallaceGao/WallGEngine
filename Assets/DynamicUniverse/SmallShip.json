@@ -1,0 +1,18 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Scale":  [1, 1, 1]
+    },
+    "ShipComponent": {
+      "Speed": 200,
+      "MineSpeed": 1,
+      "CarGoSize": 50,
+      "ShipType": 1,
+      "Money": 0
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model",
+      "Rotation": [ 0, 3.14, 0 ]
+    }
+  }
+}

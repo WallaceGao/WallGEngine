@@ -47,13 +47,16 @@ namespace WallG
 		GameObject* CreatGameObject(const std::filesystem::path& filePath, std::string name);
 		GameObject* GetGameObject(GameObjectHandle handle);
 		GameObject* FindGameObject(const std::string& name);
-		void Destroy(GameObjectHandle handle); 
+		void Destroy(GameObjectHandle handle);
+
+		using SelectedHandler = std::function<void(GameObject*)>;
+		void AddSelectedHandler(SelectedHandler handler);
 
 	private:
 		bool IsValid(GameObjectHandle handle) const;
 		void ProcessDestroyList();
 
-		struct  Slot
+		struct Slot
 		{
 			std::unique_ptr<GameObject> gameobject;
 			uint32_t generation = 0;
@@ -70,6 +73,8 @@ namespace WallG
 
 		GameObjectList mUpdateList;
 		GameObject* mSelectedObject = nullptr;
+
+		std::vector<SelectedHandler> mSelectedHandlers;
 
 		bool mInitialized;
 		bool mUpdating;
