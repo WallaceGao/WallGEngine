@@ -22,6 +22,8 @@ namespace WallG::Math
     //Float
     float RandomFloat();
     float RandomFloat(float min, float max);
+    //float RandomInt();
+    //float RandomInt(int min, int max);
 
     //Vector2 Math
     constexpr float Dot(const Vector2& a, const Vector2& b)

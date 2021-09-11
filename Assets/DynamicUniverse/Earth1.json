@@ -1,0 +1,28 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Speed": 0.03,
+      "SelfSpeed": 0.05,
+      "DistanceFromParent": [ 2700, 0, 0 ],
+      "Scale": [ 150, 150, 150 ]
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Planet/Planet/Earth1.model"
+    },
+    "FactoryComponent": {
+      "MaxIronCapacity": 5000.0,
+      "MaxCopperCapacity": 5000.0,
+      "EngineBuildTime": 250.0,
+      "CargoBuildTime": 300.0,
+      "MineToolBuildTime": 400.0,
+      "IronPrice": 10.0,
+      "MinIronPrice": 5.0,
+      "MaxIronPrice": 15.0,
+      "CopperPrice": 7.0,
+      "MinCopperPrice": 2.0,
+      "MaxCopperPrice": 12.0
+    }
+  }
+}

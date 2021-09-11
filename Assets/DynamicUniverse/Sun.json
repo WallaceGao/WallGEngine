@@ -1,12 +1,12 @@
 {
   "Components": {
     "TransformComponent": {
-      "Scale": [ 1, 1, 1 ]
     },
     "PlanetComponent": {
       "Speed": 0.1,
       "SelfSpeed": 0.03,
-      "DistanceFromParent": [ 0, 0, 0 ]
+      "DistanceFromParent": [ 0, 0, 0 ],
+      "Scale": [ 200, 200, 200 ]
     },
     "ModelComponent": {
       "Path": "../../Assets/Model/DU/Planet/Sun/Sun.model"

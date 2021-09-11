@@ -3,11 +3,20 @@ ship
 -s 0.001 ../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.FBX  ../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model
 -s 0.001 ../../Assets/Model/DU/Ship/Corvette-F3/Corvette-F3.FBX  ../../Assets/Model/DU/Ship/Corvette-F3/Corvette-F3.model
 
-planent
--s 0.01 ../../Assets/Model/DU/Planet/Mercury/Mercury_1K.fbx  ../../Assets/Model/DU/Planet/Mercury/Mercury_1K.model
--s 0.01 ../../Assets/Model/DU/Planet/Sun/Sun.fbx  ../../Assets/Model/DU/Planet/Sun/Sun.model
--s 0.01 ../../Assets/Model/DU/Planet/Mars/Mars_2K.fbx  ../../Assets/Model/DU/Planet/Mars/Mars_2K.model
--s 0.01 ../../Assets/Model/DU/Planet/Earth/Earth_2K.fbx  ../../Assets/Model/DU/Planet/Earth/Earth_2K.model
--s 0.01 ../../Assets/Model/DU/Planet/Moon/Moon_2K.fbx  ../../Assets/Model/DU/Planet/Moon/Moon_2K.model
--s 0.01 ../../Assets/Model/DU/Planet/Venus/Venus_1K.fbx  ../../Assets/Model/DU/Planet/Venus/Venus_1K.model
--s 0.01 ../../Assets/Model/DU/Planet/Jupiter/Jupiter.fbx  ../../Assets/Model/DU/Planet/Jupiter/Jupiter.model
+Sun
+-s 0.001 ../../Assets/Model/DU/Planet/Sun/Sun.fbx  ../../Assets/Model/DU/Planet/Sun/Sun.model
+
+Moon
+-s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon1.fbx  ../../Assets/Model/DU/Planet/Moon/Moon1.model
+-s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon2.fbx  ../../Assets/Model/DU/Planet/Moon/Moon2.model
+-s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon3.fbx  ../../Assets/Model/DU/Planet/Moon/Moon3.model
+
+Planets
+-s 0.001 ../../Assets/Model/DU/Planet/Planet/Earth1.fbx  ../../Assets/Model/DU/Planet/Planet/Earth1.model
+-s 0.001 ../../Assets/Model/DU/Planet/Planet/Earth2.fbx  ../../Assets/Model/DU/Planet/Planet/Earth2.model
+-s 0.001 ../../Assets/Model/DU/Planet/Planet/Hot.fbx  ../../Assets/Model/DU/Planet/Planet/Hot.model
+-s 0.001 ../../Assets/Model/DU/Planet/Planet/Ice.fbx  ../../Assets/Model/DU/Planet/Planet/Ice.model
+-s 0.001 ../../Assets/Model/DU/Planet/Planet/Lava.fbx  ../../Assets/Model/DU/Planet/Planet/Lava.model
+-s 0.001 ../../Assets/Model/DU/Planet/Planet/Metal.fbx  ../../Assets/Model/DU/Planet/Planet/Metal.model
+
+

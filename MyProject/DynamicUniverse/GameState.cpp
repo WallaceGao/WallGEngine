@@ -43,6 +43,14 @@ namespace
 				const auto& resourceType = member.value["ResourceType"].GetInt();
 				planet->SetResourceType(resourceType);
 			}
+			if (member.value.HasMember("Scale"))
+			{
+				const auto& planetScale = member.value["Scale"].GetArray();
+				float x = planetScale[0].GetFloat();
+				float y = planetScale[1].GetFloat();
+				float z = planetScale[2].GetFloat();
+				planet->SetPlanetScale({x,y,z});
+			}
 			return true;
 		}
 		else if (strcmp(componentName, "FactoryComponent") == 0)
@@ -153,27 +161,33 @@ void GameState::Initialize()
 	GameObjectIO::SetReadOverride(ReadOverride);
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Skybox.json", "Skybox");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Sun.json", "Sun");
-	auto earth = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Earth.json", "Earth");
-	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Jupiter.json", "Jupiter");
-	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Mercury.json", "Mercury");
-	auto moon = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Moon.json", "Moon");
-	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Venus.json", "Venus");
-	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Mars.json", "Mars");
+	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Hot.json", "Lepus");
+	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Ice.json", "Hydrus");
+	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Lava.json", "Gemini");
+	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Metal.json", "Draco");
+	// 
+	auto Perseus = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Earth2.json", "Perseus");
+	auto Microscopium = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Earth1.json", "Microscopium");
+	// 
+	auto Andromeda = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Moon1.json", "Andromeda");
+	auto Antlia = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Moon2.json", "Antlia");
+	auto Aquila = mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Moon3.json", "Aquila");
 	
 	// Set the moon to follow the earth's transform
-	moon->GetComponent<PlanetComponent>()->SetParentPlanet(earth->GetHandle());
+	Andromeda->GetComponent<PlanetComponent>()->SetParentPlanet(Perseus->GetHandle());
+	Antlia->GetComponent<PlanetComponent>()->SetParentPlanet(Perseus->GetHandle());
+	Aquila->GetComponent<PlanetComponent>()->SetParentPlanet(Microscopium->GetHandle());
 
 	mGameWorld.AddSelectedHandler([cameraService](GameObject* selectedObject)
 	{
 		float distance = 100.0f;
 		if (auto planetComponent = selectedObject->GetComponent<PlanetComponent>(); planetComponent != nullptr)
 		{
-			// distance = planetComponent->GetRadius() * 2.0f;
-			distance = 100.0f;
+			distance = planetComponent->GetPlanetScale().x * 3.0f;
 		}
 		else if (auto shipComponent = selectedObject->GetComponent<ShipComponent>(); shipComponent != nullptr)
 		{
-			// distance = planetComponent->GetRadius() * 2.0f;
+			//distance = planetComponent->GetRadius() * 2.0f;
 			distance = 30.0f;
 		}
 
@@ -188,7 +202,6 @@ void GameState::Terminate()
 
 void GameState::Update(float deltaTime)
 {
-    mFPS = 1.0f / deltaTime;
     mGameWorld.Update( deltaTime);
 }
 
@@ -199,9 +212,5 @@ void GameState::Render()
 
 void GameState::DebugUI()
 {
-    ImGui::Begin("Debug Info", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("fps: %f", mFPS);
-    ImGui::End();
-
 	mGameWorld.DebugUI();
 }

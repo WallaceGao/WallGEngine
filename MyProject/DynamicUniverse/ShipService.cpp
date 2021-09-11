@@ -33,10 +33,10 @@ void ShipService::Update(float deltaTime)
         //%03d is keep the number as 000 
         sprintf_s(shipName, "Ship%03d", ++mNextId);
 
-        const GameObject* earth = mUniverseService->GetPlanet("Earth");
+        const GameObject* earth = mUniverseService->GetPlanet("Perseus");
         
         WallG::GameObject* newObject;
-
+       
         int ramShip = rand()%2 + 0;
         Math::RandomFloat();
         switch (ramShip)

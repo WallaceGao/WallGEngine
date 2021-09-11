@@ -1,15 +1,7 @@
 #pragma once
 #include <WallG/Inc/WallG.h>
 
-// skybox : not really down
-// camera : not really down
-// planet model : down
-// different ship type : down
 // add 经济系统
-
-// 2d game : down
-
-// wirte down what I want to talk 
 
 enum class MineralType
 {

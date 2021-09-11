@@ -1,0 +1,16 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Speed": 0.04,
+      "SelfSpeed": 0.04,
+      "DistanceFromParent": [ 350, 0, 0 ],
+      "Scale": [ 30, 30, 30 ],
+      "ResourceType": 1
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Planet/Moon/Moon1.model"
+    }
+  }
+}

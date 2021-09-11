@@ -10,7 +10,7 @@ MEMPOOL_DEFINE(PlanetComponent, 1000);
 void PlanetComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
-	//mTransformComponent->SetScale(planetRadius)
+	mTransformComponent->SetScale(mPlanetScale);
 
 	UniverseService* universeService = GetOwner().GetWorld().GetService<UniverseService>();
 	universeService->Register(this);
@@ -37,7 +37,6 @@ void PlanetComponent::Update(float deltaTime)
 			Math::Matrix4::RotationZ(parentTransform->GetRotation().z) *
 			Math::Matrix4::Translation(parentTransform->GetPosition());
 	}
-	
 	mRotation -= deltaTime * mSpeed;
 	mSelfRotation -= deltaTime * mSelfSpeed;
 
@@ -46,20 +45,22 @@ void PlanetComponent::Update(float deltaTime)
 		Matrix4::RotationY(mSelfRotation.y) *
 		Matrix4::Translation(mDistanceFromParent) *
 		Matrix4::RotationY(mRotation.y);
-	
+
 	Math::Matrix4 finalMatrix = myMatrix * parentMatrix;
-	
+
 	Math::Vector3 position = Math::GetTranslation(finalMatrix);
 	Math::Quaternion rotation = Math::Quaternion::RotationMatrix(finalMatrix);
 	mTransformComponent->SetPosition(position);
 	mTransformComponent->SetRotation(rotation);
 	mTransformComponent->SetScale(Vector3(mTransformComponent->GetScale()));
+
 }
 
 void PlanetComponent::DebugUI()
 {
 	if (ImGui::CollapsingHeader("Planet", ImGuiTreeNodeFlags_DefaultOpen))
 	{
+		ImGui::Text(" TransForm: %f, %f, %f ", mTransformComponent->GetPosition().x , mTransformComponent->GetPosition().y, mTransformComponent->GetPosition().z);
 		ImGui::DragFloat(" Rota Speed", (float*)&mSpeed, 0.01f);
 		ImGui::DragFloat("Self Rota Speed", (float*)&mSelfSpeed, 0.01f);
 		if (mResourceType == MineralType::Iron)
@@ -76,4 +77,6 @@ void PlanetComponent::DebugUI()
 		}
 	}
 }
+
+
 

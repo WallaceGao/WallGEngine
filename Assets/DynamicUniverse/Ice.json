@@ -1,0 +1,16 @@
+{
+  "Components": {
+    "TransformComponent": {
+    },
+    "PlanetComponent": {
+      "Speed": 0.01,
+      "SelfSpeed": 0.03,
+      "DistanceFromParent": [ 4000, -500, 0],
+      "ResourceType": 0,
+      "Scale": [ 100, 100, 100 ]
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/DU/Planet/Planet/Ice.model"
+    }
+  }
+}
