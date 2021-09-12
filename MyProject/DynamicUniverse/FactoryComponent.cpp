@@ -1,5 +1,6 @@
 #include "FactoryComponent.h"
 
+#include "EconomicService.h"
 #include "FactoryService.h"
 
 MEMPOOL_DEFINE(FactoryComponent, 1000)
@@ -24,6 +25,7 @@ void FactoryComponent::Update(float deltaTime)
 	}
 	else
 	{
+		auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
 		mProductionTime -= deltaTime;
 		if (mProductionTime <= 0.0f)
 		{
@@ -37,6 +39,7 @@ void FactoryComponent::Update(float deltaTime)
 					mEngineBuildTime -= 1.0f;
 					mEngineProduced = 0;
 				}
+				economicService->ItemPriceChange(mCurrentProductionType, true);
 				mCurrentProductionType = ItemType::None;
 				break;
 			case ItemType::Cargo:
@@ -47,6 +50,7 @@ void FactoryComponent::Update(float deltaTime)
 					mCargoBuildTime -= 1.0f;
 					mCargoProduced = 0;
 				}
+				economicService->ItemPriceChange(mCurrentProductionType, true);
 				mCurrentProductionType = ItemType::None;
 				break;
 			case ItemType::MineTool:
@@ -57,6 +61,7 @@ void FactoryComponent::Update(float deltaTime)
 					mMineToolBuildTime -= 1.0f;
 					mMineToolProduced = 0;
 				}
+				economicService->ItemPriceChange(mCurrentProductionType, true);
 				mCurrentProductionType = ItemType::None;
 				break;
 			}
@@ -66,14 +71,13 @@ void FactoryComponent::Update(float deltaTime)
 
 void FactoryComponent::DebugUI()
 {
+	auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
 	if (ImGui::CollapsingHeader("Factory", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		if (ImGui::CollapsingHeader("Resource", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Text("Iron: %f", mIronAmount);
-			ImGui::Text("Price: %f", mIronPrice);
 			ImGui::Text("Copper: %f", mCopperAmount);
-			ImGui::Text("Price: %f", mCopperPrice);
 		}
 		if (ImGui::CollapsingHeader("Item", ImGuiTreeNodeFlags_DefaultOpen))
 		{
@@ -84,35 +88,35 @@ void FactoryComponent::DebugUI()
 		if (ImGui::Button("Add Iron"))
 		{
 			mIronAmount += 500;
-			PriceChange(MineralType::Iron,500,true);
+			economicService->ResourcePriceChange(MineralType::Iron,500,true);
 		}
 		if (ImGui::Button("Add Copper"))
 		{
 			mCopperAmount += 500;
-			PriceChange(MineralType::Copper, 500, true);
+			economicService->ResourcePriceChange(MineralType::Copper, 500, true);
 		}
 	}
 }
 
-void FactoryComponent::SellItem(ItemType itemType)
+float FactoryComponent::SellItem(ItemType itemType)
 {
-
+	auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
+	return economicService->ItemPriceChange(itemType, false);
 }
 
 float FactoryComponent::BuyMinral(MineralType minraType, float cargoSize)
 {
+	auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
 	float wage = 0.0f;
 	if (MineralType::Copper == minraType)
 	{
 		mCopperAmount += cargoSize;
-		wage = cargoSize * mCopperPrice;
-		PriceChange(MineralType::Iron, cargoSize, true);
+		wage = economicService->ResourcePriceChange(MineralType::Iron, cargoSize, true);
 	}
 	else if (MineralType::Iron == minraType)
 	{
 		mIronAmount += cargoSize;
-		wage = cargoSize * mIronPrice;
-		PriceChange(MineralType::Iron, cargoSize, true);
+		wage = cargoSize * economicService->ResourcePriceChange(MineralType::Iron, cargoSize, true);
 	}
 	return wage;
 }
@@ -132,7 +136,7 @@ void FactoryComponent::SelectBestItemToProduce()
 		mCopperAmount -= 300;
 		mCurrentProductionType = ItemType::Cargo;
 	}
-	else if ( mIronAmount >= 200)
+	else if ( mIronAmount >= 300)
 	{
 		mProductionTime = mMineToolBuildTime;
 		mIronAmount -= 200;
@@ -140,51 +144,7 @@ void FactoryComponent::SelectBestItemToProduce()
 	}
 }
 
-void FactoryComponent::PriceChange(MineralType minraType, float itemAmount, bool increase)
-{
-	if (minraType == MineralType::Iron)
-	{
-		//increase
-		if (increase && mIronPrice < mMaxIronPrice)
-		{
-			mIronPrice += (itemAmount * 0.01f);
-			if (mIronPrice > mMaxIronPrice)
-			{
-				mIronPrice = mMaxIronPrice;
-			}
-		}
-		//decrease
-		else if (!increase && mIronPrice > mMinIronPrice)
-		{
-			mIronPrice -= (itemAmount * 0.01f);
-			if (mIronPrice < mMinIronPrice)
-			{
-				mIronPrice = mMinIronPrice;
-			}
-		}
-	}
-	else if (minraType == MineralType::Copper)
-	{
-		//increase
-		if (increase && mCopperPrice < mMaxCopperPrice)
-		{
-			mCopperPrice += (itemAmount * 0.01f);
-			if (mCopperPrice > mMaxCopperPrice)
-			{
-				mCopperPrice = mMaxCopperPrice;
-			}
-		}
-		//decrease
-		else if (!increase && mCopperPrice > mMinCopperPrice)
-		{
-			mCopperPrice -= (itemAmount * 0.01f);
-			if (mCopperPrice < mMinCopperPrice)
-			{
-				mCopperPrice = mMinCopperPrice;
-			}
-		}
-	}
-}
+
 
 
 

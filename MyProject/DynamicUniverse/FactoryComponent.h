@@ -26,21 +26,15 @@ public:
 	void SetEngineBuildTime(float engineBuildTime) { mEngineBuildTime = engineBuildTime; }
 	void SetCargoBuildTime(float cargoBuildTime) { mCargoBuildTime = cargoBuildTime; }
 	void SetMineToolBuildTime(float mineToolBuildTime) { mMineToolBuildTime = mineToolBuildTime; }
-	void SetIronPrice(float IronPrice) { mIronPrice = IronPrice; }
-	void SetMinIronPrice(float MinIronPrice) { mMinIronPrice = MinIronPrice; }
-	void SetMaxIronPrice(float MaxIronPrice) { mMaxIronPrice = MaxIronPrice; }
-	void SetCopperPrice(float CopperPrice) { mCopperPrice = CopperPrice; }
-	void SetMinCopperPrice(float MinCopperPrice) { mMinCopperPrice = MinCopperPrice; }
-	void SetMaxCopperPrice(float MaxCopperPrice) { mMaxCopperPrice = MaxCopperPrice; }
+
 	
 	// Need functions to sell items
-	void SellItem(ItemType itemType);
+	float SellItem(ItemType itemType);
 	// Need functions to buy mineral
 	float BuyMinral(MineralType minraType, float cargoSize);
 
 protected:
 	void SelectBestItemToProduce();
-	void PriceChange(MineralType minraType, float itemAmount, bool increase);
 
 	int mEngineCount = 0;
 	int mCargoCount = 0;
@@ -52,14 +46,8 @@ protected:
 	float mCargoBuildTime = 0.0f;
 	float mMineToolBuildTime = 0.0f;
 	
-	float mMinIronPrice = 0.0f;
-	float mIronPrice = 0.0f;
-	float mMaxIronPrice = 0.0f;
 	float mIronAmount = 0.0f;
 	float mMaxIronCapacity = 0.0f;
-	float mMinCopperPrice = 0.0f;
-	float mCopperPrice = 0.0f;
-	float mMaxCopperPrice = 0.0f;
 	float mCopperAmount = 0.0f;
 	float mMaxCopperCapacity = 0.0f;
 

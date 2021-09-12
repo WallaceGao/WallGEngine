@@ -154,6 +154,7 @@
     <ClInclude Include="Inc\ColliderComponent.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\Component.h" />
+    <ClInclude Include="Inc\MaterialComponent.h" />
     <ClInclude Include="Inc\RenderService.h" />
     <ClInclude Include="Inc\SkyBoxService.h" />
     <ClInclude Include="Inc\TypeIds.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Src\ColliderComponent.cpp" />
     <ClCompile Include="Src\GameObject.cpp" />
     <ClCompile Include="Src\GameWorld.cpp" />
+    <ClCompile Include="Src\MaterialComponent.cpp" />
     <ClCompile Include="Src\ModelComponent.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

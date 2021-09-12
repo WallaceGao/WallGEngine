@@ -1,10 +1,12 @@
 #include "ShipComponent.h"
 
 #include "DynamicUniverseTypes.h"
+#include "FactoryComponent.h"
 #include "FactoryService.h"
 #include "PlanetComponent.h"
 #include "UniverseService.h"
 #include "ShipService.h"
+#include <ImGui/Inc/ImPlot.h>
 
 using namespace WallG;
 using namespace WallG::Math;
@@ -15,7 +17,9 @@ void ShipComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	//mStateMachine = std::make_unique<AI::StateMachine<ShipAgent>>(mShipAgent);
-	
+	//int mMineSpeedLevel = 1;
+	//int mCargoLevel = 1;
+	//int mSpeedLevel = 1;
 	auto shipService = GetOwner().GetWorld().GetService<ShipService>();
 	shipService->Register(this);
 }
@@ -50,6 +54,12 @@ void ShipComponent::Update(float deltaTime)
 	case State::Fly:
 		Fly(deltaTime);
 		break;
+	case State::Sell:
+		Sell(deltaTime);
+		break;
+	case State::Upgrade:
+		Upgrade(deltaTime);
+		break;
 	}
 
 	for (size_t i = 0; i + 1 < mTailPositions.size(); ++i)
@@ -63,6 +73,20 @@ void ShipComponent::Update(float deltaTime)
 			SimpleDraw::AddLine(mTailPositions[i], mTailPositions[i + 1], Colors::Green);
 		}
 	}
+
+	static float waitTime = 0.0f;
+	waitTime -= deltaTime;
+	if (waitTime <= 0.0f)
+	{
+		waitTime += 0.5f;
+		float time = Core::TimeUtil::GetTime();
+		mMoneyPoints.push_back({ time, mMoney });
+		mCargoPoints.push_back({time, mCargo});
+	}
+	if (mMoneyPoints.size() > 20000)
+	{
+		mMoneyPoints.erase(mMoneyPoints.begin());
+	}
 }
 
 void ShipComponent::DebugUI()
@@ -70,8 +94,6 @@ void ShipComponent::DebugUI()
 	if (ImGui::CollapsingHeader("Ship", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		ImGui::Text("Position: %f, %f, %f", mTransformComponent->GetPosition().x, mTransformComponent->GetPosition().y, mTransformComponent->GetPosition().z);
-		ImGui::Text("Money: %f", mMoney);
-		ImGui::Text("Cargo: %f", mCargo);
 
 		if (mState == State::Idle)
 		{
@@ -113,7 +135,12 @@ void ShipComponent::DebugUI()
 			ImGui::Text("ShipType: lager Ship");
 		}
 
-
+		if (ImPlot::BeginPlot("MoneyInCome", "X", "Y"))
+		{
+			ImPlot::PlotLine("Ship Money", &mMoneyPoints[0].x, &mMoneyPoints[0].y, static_cast<int>(mMoneyPoints.size()),0, sizeof(Vector2));
+			ImPlot::PlotLine("Ship Cargo", &mCargoPoints[0].x, &mCargoPoints[0].y, static_cast<int>(mCargoPoints.size()), 0, sizeof(Vector2));
+			ImPlot::EndPlot();
+		}
 	}
 }
 
@@ -124,8 +151,31 @@ void ShipComponent::Idle(float deltaTime)
 	// Task - What should I do next?
 	// What is the best mineral to mine
 	const auto& world = GetOwner().GetWorld();
+
+	if (mMoney > 2000.0f)
+	{
+		int randomUpGrade = rand()%3 + 0;
+		switch (randomUpGrade)
+		{
+		case 0:
+			mUpGradeType = ItemType::Engine;
+			break;
+		case 1:
+			mUpGradeType = ItemType::MineTool;
+			break;
+		case 2:
+			mUpGradeType = ItemType::Cargo;
+			break;
+		default:
+			break;
+		}
+		const auto universeService = world.GetService<UniverseService>();
+		mTargetPlanet = universeService->GetNearestPlanetHaveFactory(mTransformComponent->GetPosition())->GetHandle();
+		mState = State::Fly;
+		mFState = FlySate::FlyToUpgrade;
+	}
 	//mining
-	if (mCargo == 0)
+	else if (mCargo == 0)
 	{
 		const auto factoryService = world.GetService<FactoryService>();
 		MineralType desiredResource = factoryService->GetMostDesiredResource();
@@ -134,6 +184,7 @@ void ShipComponent::Idle(float deltaTime)
 		mShipCargoType = desiredResource;
 		// Transition - which state to go top
 		mState = State::Fly;
+		mFState = FlySate::FlyToMine;
 	}
 	//Selling
 	else
@@ -141,35 +192,8 @@ void ShipComponent::Idle(float deltaTime)
 		//find factory
 		const auto universeService = world.GetService<UniverseService>();
 		mTargetPlanet = universeService->GetNearestPlanetHaveFactory(mTransformComponent->GetPosition())->GetHandle();
-
-	}
-}
-
-void ShipComponent::Mine(float deltaTime)
-{
-	// Task - Do I have enough yet?
-	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
-	ASSERT(planet != nullptr, "planet shouldn't be empty");
-	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
-	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
-
-	// mining
-	mCargo += mMineSpeed * deltaTime;
-
-	if (mCargo >= mCargoSize)
-	{
-		mCargo = mCargoSize;
-		mState = State::Idle;
-	}
-
-	mMineTimer += deltaTime * 10.0f;
-	if (mShipType == ShipType::SmallShip)
-	{
-		SimpleDraw::AddRing(mTransformComponent->GetPosition(), 5.0f + sin(mMineTimer), Colors::Magenta);
-	}
-	else if (mShipType == ShipType::lagerShip)
-	{
-		SimpleDraw::AddRing(mTransformComponent->GetPosition(), 5.0f + sin(mMineTimer), Colors::Green);
+		mState = State::Fly;
+		mFState = FlySate::FlyToSell;
 	}
 }
 
@@ -181,11 +205,22 @@ void ShipComponent::Fly(float deltaTime)
 		TransformComponent* targetTransform = planet->GetComponent<TransformComponent>();
 		auto posToPlanet = targetTransform->GetPosition() - mTransformComponent->GetPosition();
 		auto direction = Normalize(posToPlanet);
-		//if (Magnitude(posToPlanet) < planet->GetComponent<PlanetComponent>()->GetRadius())
-		if (Magnitude(posToPlanet) < 15.0f)
+		if (Magnitude(posToPlanet) < planet->GetComponent<PlanetComponent>()->GetPlanetScale().x * 1.5f)
 		{
 			// fly finish
-			mState = State::Mine;
+			if (mFState == FlySate::FlyToMine)
+			{
+				
+				mState = State::Mine;
+			}
+			else if(mFState == FlySate::FlyToSell)
+			{
+				mState = State::Sell;
+			}
+			else if (mFState == FlySate::FlyToUpgrade)
+			{
+				mState = State::Upgrade;
+			}
 			mDockOffset = mTransformComponent->GetPosition() - targetTransform->GetPosition();
 			mTailPositions.clear();
 		}
@@ -199,6 +234,7 @@ void ShipComponent::Fly(float deltaTime)
 	}
 	else
 	{
+		mFState = FlySate::Idle;
 		mState = State::Idle;
 		mTailPositions.clear();
 	}
@@ -211,6 +247,92 @@ void ShipComponent::Fly(float deltaTime)
 		if (mTailPositions.size() > 20)
 			mTailPositions.erase(mTailPositions.begin());
 	}
+}
+
+void ShipComponent::Mine(float deltaTime)
+{
+	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
+	ASSERT(planet != nullptr, "planet shouldn't be empty");
+	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
+	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
+
+	// mining
+	mCargo += mMineSpeed * deltaTime;
+
+	// Task - Do I have enough yet?
+	if (mCargo >= mCargoSize)
+	{
+		mCargo = mCargoSize;
+		mState = State::Idle;
+	}
+
+	mMineTimer += deltaTime * mMineSpeed;
+
+	SimpleDraw::AddRing(mTransformComponent->GetPosition(), 5.0f + sin(mMineTimer), Colors::Magenta);
+
+}
+
+void ShipComponent::Sell(float deltaTime)
+{
+	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
+	ASSERT(planet != nullptr, "planet shouldn't be empty");
+	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
+	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
+
+	// Selling
+
+	if (mWaitTime > 30.0f)
+	{
+		mMoney += planet->GetComponent<FactoryComponent>()->BuyMinral(mShipCargoType, mCargo);
+		mShipCargoType = MineralType::None;
+		mState = State::Idle;
+		mCargo = 0.0f;
+		mWaitTime = 0.0f;
+	}
+
+	mWaitTime += deltaTime * mSellSpeed;
+
+}
+
+void ShipComponent::Upgrade(float deltaTime)
+{
+	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
+	ASSERT(planet != nullptr, "planet shouldn't be empty");
+	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
+	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
+
+	//UpGrade
+	// every update make level +1
+	if (mUpGradeType == ItemType::MineTool && mWaitTime > 30.0f)
+	{
+		mUpGradeType = ItemType::None;
+		mState = State::Idle;
+		mMineSpeed += 1;
+		mWaitTime = 0.0f;
+		//mMineSpeedLevel += 1;
+		mMoney -= planet->GetComponent<FactoryComponent>()->SellItem(mUpGradeType);
+	}
+	else if (mUpGradeType == ItemType::Engine && mWaitTime > 30.0f)
+	{
+		mUpGradeType = ItemType::None;
+		mState = State::Idle;
+		mSpeed += 50;
+		mWaitTime = 0.0f;
+		//mMineSpeedLevel += 1;
+		mMoney -= planet->GetComponent<FactoryComponent>()->SellItem(mUpGradeType);
+	}
+	else if (mUpGradeType == ItemType::Cargo && mWaitTime > 30.0f)
+	{
+		mUpGradeType = ItemType::None;
+		mState = State::Idle;
+		mCargoSize += 10;
+		mWaitTime = 0.0f;
+		//mMineSpeedLevel += 1;
+		mMoney -= planet->GetComponent<FactoryComponent>()->SellItem(mUpGradeType);
+	}
+
+	mWaitTime += deltaTime * mUpGradeSpeed;
+	//std::sort(mItemsLevel, mItemsLevel);
 }
 
 

@@ -27,28 +27,25 @@ public:
 	const float GetSpeed() const { return mSpeed; }
 	void SetSelfSpeed(float selfSpeed) { mSelfSpeed = selfSpeed; }
 	const float GetSelfSpeed() const { return mSelfSpeed;}
-	void SetDistanceFromParent(const WallG::Math::Vector3& distance) { mDistanceFromParent = distance; }
+	void SetDistanceFromParent(float distance) { mDistanceFromParent = distance; }
 	const MineralType GetResourceType() const { return mResourceType; }
 	void SetResourceType(int resourceType) { mResourceType = MineralType(resourceType); }
 	const WallG::Math::Vector3 GetPlanetScale() const { return mPlanetScale; }
 	void SetPlanetScale(const WallG::Math::Vector3& planetScale) { mPlanetScale = planetScale; }
-	void SetStarRotation(const float startRotation) { mStartRotation = startRotation; }
-
-
-	void Rota(float speed) { mSelfRotation -= speed; }
+	void SetStartRota(const float rota) { mStartRota = rota; }
 
 protected:
 
-	float mStartRotation= 0.0f;
 	WallG::TransformComponent* mTransformComponent;
 	WallG::GameObjectHandle mParentPlanet;
 	WallG::Math::Vector3 mPlanetScale = WallG::Math::Vector3::Zero;
 	WallG::Math::Vector3 mSelfRotation = WallG::Math::Vector3::Zero;
 	WallG::Math::Vector3 mRotation = WallG::Math::Vector3::Zero;
-	WallG::Math::Vector3 mDistanceFromParent = WallG::Math::Vector3::Zero;
 	std::string mTextureFilePath;
 	float mSpeed = 0.0f;
 	float mSelfSpeed = 0.0f;
+	float mStartRota = 0.0f;
+	float mDistanceFromParent = 0.0f;
 
 	MineralType mResourceType = MineralType::None;
 };

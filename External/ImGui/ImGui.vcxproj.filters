@@ -42,11 +42,14 @@
     <ClInclude Include="Src\imgui_internal.h">
       <Filter>Src</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\ImPlot.h">
-      <Filter>Inc\ImPlot</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\AppLog.h">
       <Filter>Inc\AppLog</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\implot.h">
+      <Filter>Inc\ImPlot</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\implot_internal.h">
+      <Filter>Src\ImPlot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,8 +71,17 @@
     <ClCompile Include="Src\imgui_impl_win32.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\ImPlot.cpp">
+    <ClCompile Include="Src\implot.cpp">
       <Filter>Src\ImPlot</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\implot_demo.cpp">
+      <Filter>Src\ImPlot</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\implot_items.cpp">
+      <Filter>Src\ImPlot</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\imgui_tables.cpp">
+      <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

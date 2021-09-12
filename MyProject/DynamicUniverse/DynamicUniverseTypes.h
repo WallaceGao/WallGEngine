@@ -1,8 +1,6 @@
 #pragma once
 #include <WallG/Inc/WallG.h>
 
-// add 经济系统
-
 enum class MineralType
 {
 	None,
@@ -36,5 +34,6 @@ enum class DUServiceId
 {
 	Universe = static_cast<uint32_t>(WallG::ServiceId::Count),
 	Factory,
-	Ship
+	Ship,
+	Economic
 };

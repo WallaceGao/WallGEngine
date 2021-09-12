@@ -11,6 +11,7 @@ void PlanetComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	mTransformComponent->SetScale(mPlanetScale);
+	mRotation.y = mStartRota * Constants::DegToRad;
 
 	UniverseService* universeService = GetOwner().GetWorld().GetService<UniverseService>();
 	universeService->Register(this);
@@ -37,13 +38,13 @@ void PlanetComponent::Update(float deltaTime)
 			Math::Matrix4::RotationZ(parentTransform->GetRotation().z) *
 			Math::Matrix4::Translation(parentTransform->GetPosition());
 	}
-	mRotation -= deltaTime * mSpeed;
-	mSelfRotation -= deltaTime * mSelfSpeed;
+	mRotation.y -= deltaTime * mSpeed;
+	mSelfRotation.y -= deltaTime * mSelfSpeed;
 
 	Math::Matrix4 myMatrix =
 		Matrix4::Scaling(mTransformComponent->GetScale()) *
 		Matrix4::RotationY(mSelfRotation.y) *
-		Matrix4::Translation(mDistanceFromParent) *
+		Matrix4::Translation({ mDistanceFromParent, 0.0f, 0.0f }) *
 		Matrix4::RotationY(mRotation.y);
 
 	Math::Matrix4 finalMatrix = myMatrix * parentMatrix;

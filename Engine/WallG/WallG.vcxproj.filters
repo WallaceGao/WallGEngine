@@ -93,6 +93,9 @@
     <ClInclude Include="Inc\SkyBoxService.h">
       <Filter>Inc\Service</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\MaterialComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\WallG.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="Src\SkyBoxService.cpp">
       <Filter>Src\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MaterialComponent.cpp">
+      <Filter>Src\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

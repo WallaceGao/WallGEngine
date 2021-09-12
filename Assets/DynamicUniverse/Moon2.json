@@ -5,9 +5,10 @@
     "PlanetComponent": {
       "Speed": 0.02,
       "SelfSpeed": 0.02,
-      "DistanceFromParent": [ 450, 0, 0 ],
+      "DistanceFromParent": 450,
       "Scale": [ 25, 25, 25 ],
-      "ResourceType": 1
+      "ResourceType": 1,
+      "StartRota": 90
     },
     "ModelComponent": {
       "Path": "../../Assets/Model/DU/Planet/Moon/Moon2.model"

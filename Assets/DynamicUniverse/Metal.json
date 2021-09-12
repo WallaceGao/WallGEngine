@@ -5,7 +5,7 @@
     "PlanetComponent": {
       "Speed": 0.01,
       "SelfSpeed": 0.03,
-      "DistanceFromParent": [ 3500, 250, 0 ],
+      "DistanceFromParent": 3500,
       "Scale": [ 100, 100, 100 ],
       "ResourceType": 2
     },

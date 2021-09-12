@@ -152,8 +152,9 @@
     <ClInclude Include="Inc\imgui.h" />
     <ClInclude Include="Inc\imgui_impl_dx11.h" />
     <ClInclude Include="Inc\imgui_impl_win32.h" />
-    <ClInclude Include="Inc\ImPlot.h" />
+    <ClInclude Include="Inc\implot.h" />
     <ClInclude Include="Src\imgui_internal.h" />
+    <ClInclude Include="Src\implot_internal.h" />
     <ClInclude Include="Src\imstb_rectpack.h" />
     <ClInclude Include="Src\imstb_textedit.h" />
     <ClInclude Include="Src\imstb_truetype.h" />
@@ -164,8 +165,11 @@
     <ClCompile Include="Src\imgui_draw.cpp" />
     <ClCompile Include="Src\imgui_impl_dx11.cpp" />
     <ClCompile Include="Src\imgui_impl_win32.cpp" />
+    <ClCompile Include="Src\imgui_tables.cpp" />
     <ClCompile Include="Src\imgui_widgets.cpp" />
-    <ClCompile Include="Src\ImPlot.cpp" />
+    <ClCompile Include="Src\implot.cpp" />
+    <ClCompile Include="Src\implot_demo.cpp" />
+    <ClCompile Include="Src\implot_items.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

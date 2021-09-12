@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EconomicService.cpp" />
     <ClCompile Include="FactoryComponent.cpp" />
     <ClCompile Include="FactoryService.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -154,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicUniverseTypes.h" />
+    <ClInclude Include="EconomicService.h" />
     <ClInclude Include="FactoryComponent.h" />
     <ClInclude Include="FactoryService.h" />
     <ClInclude Include="GameState.h" />

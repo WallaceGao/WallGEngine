@@ -1,6 +1,7 @@
 #include "GameState.h"
 
 #include "DynamicUniverseTypes.h"
+#include "EconomicService.h"
 #include "FactoryComponent.h"
 #include "FactoryService.h"
 #include "PlanetComponent.h"
@@ -32,11 +33,8 @@ namespace
 			}
 			if (member.value.HasMember("DistanceFromParent"))
 			{
-				const auto& distance = member.value["DistanceFromParent"].GetArray();
-				float x = distance[0].GetFloat();
-				float y = distance[1].GetFloat();
-				float z = distance[2].GetFloat();
-				planet->SetDistanceFromParent({x,y,z});
+				const auto& distance = member.value["DistanceFromParent"].GetFloat();
+				planet->SetDistanceFromParent(distance);
 			}
 			if (member.value.HasMember("ResourceType"))
 			{
@@ -50,6 +48,11 @@ namespace
 				float y = planetScale[1].GetFloat();
 				float z = planetScale[2].GetFloat();
 				planet->SetPlanetScale({x,y,z});
+			}
+			if (member.value.HasMember("StartRota"))
+			{
+				const auto& startRota = member.value["StartRota"].GetFloat();
+				planet->SetStartRota(startRota);
 			}
 			return true;
 		}
@@ -80,36 +83,6 @@ namespace
 			{
 				const auto& mineToolBuildTime = member.value["MineToolBuildTime"].GetFloat();
 				factory->SetMineToolBuildTime(mineToolBuildTime);
-			}
-			if (member.value.HasMember("IronPrice"))
-			{
-				const auto& ironPrice = member.value["IronPrice"].GetFloat();
-				factory->SetIronPrice(ironPrice);
-			}
-			if (member.value.HasMember("MinIronPrice"))
-			{
-				const auto& minIronPrice = member.value["MinIronPrice"].GetFloat();
-				factory->SetMinIronPrice(minIronPrice);
-			}
-			if (member.value.HasMember("MaxIronPrice"))
-			{
-				const auto& maxIronPrice = member.value["MaxIronPrice"].GetFloat();
-				factory->SetMaxIronPrice(maxIronPrice);
-			}
-			if (member.value.HasMember("CopperPrice"))
-			{
-				const auto& copperPrice = member.value["CopperPrice"].GetFloat();
-				factory->SetCopperPrice(copperPrice);
-			}
-			if (member.value.HasMember("MinCopperPrice"))
-			{
-				const auto& minCopperPrice = member.value["MinCopperPrice"].GetFloat();
-				factory->SetMinCopperPrice(minCopperPrice);
-			}
-			if (member.value.HasMember("MaxCopperPrice"))
-			{
-				const auto& maxCopperPrice = member.value["MaxCopperPrice"].GetFloat();
-				factory->SetMaxCopperPrice(maxCopperPrice);
 			}
 		}
 		else if (strcmp(componentName, "ShipComponent") == 0)
@@ -152,6 +125,7 @@ void GameState::Initialize()
 	mGameWorld.AddService<SkyBoxService>();
 	mGameWorld.AddService<RenderService>();
 	mGameWorld.AddService<ShipService>();
+	mGameWorld.AddService<EconomicService>();
 	mGameWorld.AddService<FactoryService>();
 	mGameWorld.Initialize(1000);
 	
@@ -202,7 +176,18 @@ void GameState::Terminate()
 
 void GameState::Update(float deltaTime)
 {
-    mGameWorld.Update( deltaTime);
+	static int fastForwardUpdates = 0;
+
+	if (InputSystem::Get()->IsKeyPressed(KeyCode::ENTER))
+	{
+		fastForwardUpdates = 10000;
+	}
+
+	do
+	{
+		mGameWorld.Update(deltaTime);
+		fastForwardUpdates--;
+	} while (fastForwardUpdates > 0);
 }
 
 void GameState::Render()

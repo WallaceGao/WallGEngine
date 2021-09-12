@@ -10,6 +10,7 @@ namespace WallG
 		Model,
 		Animator,
 		SkyBox,
+		Material,
 		Count
 	};
 

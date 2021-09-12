@@ -11,7 +11,6 @@ namespace WallG::Graphics
 		// for all 
 		static Mesh CreatSphere(uint32_t rings, uint32_t slices, float radius);
 		static Mesh CreatPlane(uint32_t rows, uint32_t columns, float spacing);
-		static Mesh CreatCube();
 		//  color
 		static MeshPC CreatCubePC();
 		// texture

@@ -147,7 +147,6 @@ Vector3 Animation::GetScale(float time) const
 	{
 		return mScaleKeys.back().Key;
 	}
-
 }
 
 float Animation::GetDuration() const

@@ -10,6 +10,8 @@ namespace
     std::mt19937 randomGenerator{randomDevice()};
 }
 
+
+
 // Vector2
 const Vector2 Vector2::Zero{ 0.0f };
 const Vector2 Vector2::One{ 1.0f };
@@ -73,15 +75,10 @@ float WallG::Math::RandomFloat(float min, float max)
     return std::uniform_real_distribution<float>{min, max}(randomGenerator);
 }
 
-//float WallG::Math::RandomInt()
-//{
-//	return std::uniform_real_distribution<int>{0, 10}(randomGenerator);
-//}
-//
-//float WallG::Math::RandomInt(int min, int max)
-//{
-//	return std::uniform_real_distribution<int>{min, max}(randomGenerator);
-//}
+float WallG::Math::RandomInt(int min, int max)
+{
+	return std::uniform_int_distribution<int>{min, max}(randomGenerator);
+}
 
 Matrix4 Matrix4::RotationQuaternion(const Quaternion& q)
 {
