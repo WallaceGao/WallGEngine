@@ -17,14 +17,22 @@ namespace WallG
 		void Initialize() override;
 		void Terminate() override;
 		void Update(float deltaTime) override;
+		void DebugUI() override;
 
 		void SetLoop(bool loop) { mLoop = loop; }
 		Graphics::Animator& GetAnimator() { return mAnimator; }
 		const Graphics::Animator& GetAnimator() const { return mAnimator; }
+
+		bool ShowAnimation() const { return mShowAnimation; }
+		bool ShowSkeleton() const { return mShowSkeleton; }
+
 	private:
 		const ModelComponent* mModelComponent = nullptr;
 		Graphics::Model* mModel;
 		Graphics::Animator mAnimator;
 		bool mLoop;
+
+		bool mShowAnimation = false;
+		bool mShowSkeleton = false;
 	};
 }

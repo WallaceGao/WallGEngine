@@ -26,7 +26,7 @@ struct AppLog
         ImGui::Begin(title, p_opened);
         ImGui::TextUnformatted(textBuffer.begin());
         if (scrollToBottom)
-            ImGui::SetScrollHere(1.0f);
+            ImGui::SetScrollHereX(1.0f);
         scrollToBottom = false;
         ImGui::End();
     }

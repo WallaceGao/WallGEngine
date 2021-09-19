@@ -19,7 +19,7 @@ void CameraService::Update(float deltaTime)
 {
     auto inputSystem = InputSystem::Get();
 
-    const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 10000.0f : 1000.0f;
+    const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 10000.0f : 100.0f;
     const float turnSpeed = 10.0f * Constants::DegToRad;
 
     const GameObject* target = GetWorld().GetGameObject(mTargetHandle);

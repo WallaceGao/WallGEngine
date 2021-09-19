@@ -3,7 +3,7 @@
     "TransformComponent": {
     },
     "PlanetComponent": {
-      "Speed": 0.01,
+      "Speed": 0.00057,
       "SelfSpeed": 0.03,
       "DistanceFromParent": 3500,
       "Scale": [ 100, 100, 100 ],

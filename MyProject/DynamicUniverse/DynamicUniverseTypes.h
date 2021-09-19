@@ -27,7 +27,8 @@ enum class DUComponentId
 {
 	Planet = static_cast<uint32_t>(WallG::ComponentId::Count),
 	Ship,
-	Factory
+	Factory,
+	Resources
 };
 
 enum class DUServiceId

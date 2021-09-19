@@ -4,7 +4,7 @@ ship
 -s 0.001 ../../Assets/Model/DU/Ship/Corvette-F3/Corvette-F3.FBX  ../../Assets/Model/DU/Ship/Corvette-F3/Corvette-F3.model
 
 Sun
--s 0.001 ../../Assets/Model/DU/Planet/Sun/Sun.fbx  ../../Assets/Model/DU/Planet/Sun/Sun.model
+../../Assets/Model/DU/Planet/Sun/Sun.fbx  ../../Assets/Model/DU/Planet/Sun/Sun.model
 
 Moon
 -s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon1.fbx  ../../Assets/Model/DU/Planet/Moon/Moon1.model

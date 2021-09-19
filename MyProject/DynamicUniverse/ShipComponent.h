@@ -77,12 +77,17 @@ protected:
 	ShipType mShipType = ShipType::UnKnow;
 	ItemType mUpGradeType = ItemType::None;
 	float mSpeed = 0.0f;
+	float mMaxSpeed = 0.0f;
 	float mMineSpeed = 0.0f;
+	float mMaxMineSpeed = 0.0f;
+	float mMineTime = 0.0f;
 	float mCargo = 0;
 	float mCargoSize = 0;
+	float mMaxCargoSize = 0;
 	float mMoney = 0;
 	float mWaitTime = 0;
-	float mSellSpeed = 10.0f;
+	float mTimePassed = 0.0f;
+	float mSellSpeed = 2.0f;
 	float mUpGradeSpeed = 10.0f;
 	float mUpSpeedPrice = 1500.0f;
 	float mUpMinePrice = 1500.0f;
@@ -91,8 +96,10 @@ protected:
 	WallG::Math::Vector3 mDockOffset;
 	float mMineTimer = 0.0f;
 
+	WallG::Math::Vector3 mCurrentVelocity = WallG::Math::Vector3::Zero;
 	std::vector<WallG::Math::Vector3> mTailPositions;
 	float mNextTailTime = 0.0f;
+	float mHackHeight = 0.0f;
 
 	std::vector<ItemType> mItemsLevel;
 

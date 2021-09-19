@@ -16,6 +16,8 @@ namespace WallG
 		void DebugUI() override;
 
 		void SetCameraFocus(GameObjectHandle targetHandle, float distance);
+
+		Camera& GetCamera() { return mCamera; };
 		const Camera& GetCamera() const { return mCamera; };
 	
 	private:

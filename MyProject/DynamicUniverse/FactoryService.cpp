@@ -1,5 +1,6 @@
 #include "FactoryService.h"
 
+#include "EconomicService.h"
 #include "FactoryComponent.h"
 
 using namespace WallG;
@@ -9,23 +10,11 @@ using namespace WallG::Math;
 
 const MineralType FactoryService::GetMostDesiredResource() const
 {
-	float totalIronAmount = 0.0f;
-	float totalIronCapacity = 0.0f;
-	float totalCopperAmount = 0.0f;
-	float totalCopperCapacity = 0.0f;
+  	auto economicService = GetWorld().GetService<EconomicService>();
+	float IronInterestRate = economicService->GetInterestPrice(MineralType::Iron);
+	float CopperInterestRate = economicService->GetInterestPrice(MineralType::Copper);
 
-	for (auto factory: mFactoryEntries)
-	{
-		totalIronAmount += factory.factoryComponent->GetIronAmount();
-		totalIronCapacity += factory.factoryComponent->GetIronCapacity();
-		totalCopperAmount += factory.factoryComponent->GetCopperAmount();
-		totalCopperCapacity += factory.factoryComponent->GetCopperCapacity();
-	}
-
-	float totalIronPercent = totalIronAmount / totalIronCapacity;
-	float totalCopperPercent = totalCopperAmount / totalCopperCapacity;
-
-	return  totalIronPercent > totalCopperPercent? MineralType::Copper : MineralType::Iron ;
+ 	return  IronInterestRate > CopperInterestRate ? MineralType::Iron : MineralType::Copper ;
 }
 
 void FactoryService::Register(const FactoryComponent* factoryComponent)

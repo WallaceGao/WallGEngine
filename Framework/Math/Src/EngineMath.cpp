@@ -202,7 +202,8 @@ Quaternion WallG::Math::Slerp(Quaternion q0, Quaternion q1, float t)
 		q1.y = -q1.y;
 		q1.z = -q1.z;
 	}
-	else if (dot > 0.999f)
+
+	if (dot > 0.999f)
 	{
 		return Normalize(Lerp(q0, q1, t));
 	}

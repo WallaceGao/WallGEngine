@@ -1,4 +1,6 @@
 #include "ShipService.h"
+
+#include "PlanetComponent.h"
 #include "ShipComponent.h"
 #include "UniverseService.h"
 
@@ -32,25 +34,23 @@ void ShipService::Update(float deltaTime)
         //%03d is keep the number as 000 
         sprintf_s(shipName, "Ship%03d", ++mNextId);
 
-        const GameObject* earth = mUniverseService->GetPlanet("Perseus");
-        
-        WallG::GameObject* newObject;
-       
-        int ranShip = rand()%2 + 0;
-        Math::RandomFloat();
-        switch (ranShip)
-        {
-        case 0:
-            newObject =  GetWorld().CreatGameObject("../../Assets/DynamicUniverse/SmallShip.json", shipName);
-            newObject->GetComponent<TransformComponent>()->SetPosition(earth->GetComponent<TransformComponent>()->GetPosition());
-            break;
-        case 1:
-            newObject = GetWorld().CreatGameObject("../../Assets/DynamicUniverse/LagerShip.json", shipName);
-            newObject->GetComponent<TransformComponent>()->SetPosition(earth->GetComponent<TransformComponent>()->GetPosition());
-            break;
-        default:
-            break;
-        }
+        const char* shipTemplates[] = {
+            "../../Assets/DynamicUniverse/SmallShip.json",
+            "../../Assets/DynamicUniverse/LagerShip.json"
+        };
+
+        const int index = Math::RandomInt(0, static_cast<int>(std::size(shipTemplates)) - 1);
+        GameObject* newObject = GetWorld().CreatGameObject(shipTemplates[index], shipName);
+
+        const PlanetComponent* homePlanet = mUniverseService->GetRandomHomePlanet();
+
+        float planetSize = homePlanet->GetPlanetScale().x;
+        float shipRotation = RandomFloat(0, Constants::TwoPi);
+        Vector3 planetPosition = homePlanet->GetOwner().GetComponent<TransformComponent>()->GetPosition();
+        Vector3 shipDirection = TransformNormal(Vector3::ZAxis, Matrix4::RotationY(shipRotation));
+        Vector3 shipPosition = planetPosition + (shipDirection * planetSize);
+        newObject->GetComponent<TransformComponent>()->SetPosition(shipPosition);
+        newObject->GetComponent<TransformComponent>()->SetRotation(Quaternion::RotationAxis(Vector3::YAxis, shipRotation));
     }
 }
 

@@ -83,6 +83,20 @@ const WallG::GameObject* UniverseService::GetPlanet(std::string name) const
 	return planet;
 }
 
+const PlanetComponent* UniverseService::GetRandomHomePlanet() const
+{
+	std::vector<const PlanetComponent*> homePlanets;
+	for (auto& entry : mUniverseEntries)
+	{
+		if (entry.planetComponent->IsHome())
+			homePlanets.push_back(entry.planetComponent);
+	}
+	int homeCount = static_cast<int>(homePlanets.size());
+	if (homeCount == 0)
+		return nullptr;
+	return homePlanets[RandomInt(0, homeCount-1)];
+}
+
 
 
 

@@ -4,6 +4,6 @@
 int WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 {
 	WallG::MainApp().AddState<GameState>("GameState");
-	WallG::MainApp().Run({L"Hello Final"});
+	WallG::MainApp().Run({L"Dynamic Universe"});
 	return 0;
 }

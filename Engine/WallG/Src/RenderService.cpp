@@ -104,24 +104,31 @@ void RenderService::Render()
         if (animatorComponent)
         {
             auto& animator = animatorComponent->GetAnimator();
-
-            StandardBoneTransformData boneData;
-            const auto& tolocal = animator.GetToLocalTransforms();
-
-            for (auto& bone : model.skeleton->bones)
+            if (animatorComponent->ShowSkeleton())
             {
-                boneData.boneTransform[bone->index] = Math::Transpose(tolocal[bone->index]);
+                auto boneTransforms = animator.GetSkeletonTransforms();
+                DrawSkeleton(*model.skeleton, boneTransforms);
+                continue;
             }
-            mBoneTransformBuffer.Update(boneData);
-            mBoneTransformBuffer.BindVS(4);
+            else
+            {
+                StandardBoneTransformData boneData;
+                const auto& tolocal = animator.GetToLocalTransforms();
 
-            mSettings.useSkinning = 1;
+                for (auto& bone : model.skeleton->bones)
+                {
+                    boneData.boneTransform[bone->index] = Math::Transpose(tolocal[bone->index]);
+                }
+                mBoneTransformBuffer.Update(boneData);
+                mBoneTransformBuffer.BindVS(4);
+
+                mSettings.useSkinning = 1;
+            }
         }
         else
         {
             mSettings.useSkinning = 0;
         }
-
 
         for (size_t i = 0; i < model.meshData.size(); ++i)
         {

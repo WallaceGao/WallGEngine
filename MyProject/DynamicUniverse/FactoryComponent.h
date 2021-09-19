@@ -3,7 +3,8 @@
 #include "DynamicUniverseTypes.h"
 #include <WallG/Inc/WallG.h>
 
-class FactoryComponent final : public WallG::ModelComponent
+class EconomicService;
+class FactoryComponent final : public WallG::Component
 {
 public:
 	SET_TYPE_ID(DUComponentId::Factory);
@@ -51,7 +52,7 @@ protected:
 	float mCopperAmount = 0.0f;
 	float mMaxCopperCapacity = 0.0f;
 
-
+	EconomicService* economicService;
 	ItemType mCurrentProductionType = ItemType::None;
 	float mProductionTime = 0.0f;
 };

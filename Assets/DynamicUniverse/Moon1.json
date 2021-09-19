@@ -7,7 +7,6 @@
       "SelfSpeed": 0.04,
       "DistanceFromParent": 350,
       "Scale": [ 30, 30, 30 ],
-      "ResourceType": 1,
       "StartRota": 0
     },
     "ModelComponent": {

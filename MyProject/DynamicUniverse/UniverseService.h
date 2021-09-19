@@ -16,7 +16,8 @@ public:
 
 	const WallG::GameObject* GetNearestPlanetWithResourceType(WallG::Math::Vector3 position, MineralType desiredResource) const;
 	const WallG::GameObject* GetNearestPlanetHaveFactory(WallG::Math::Vector3 position) const;
-	const WallG::GameObject* GetPlanet(std::string name) const ;
+	const WallG::GameObject* GetPlanet(std::string name) const;
+	const PlanetComponent* GetRandomHomePlanet() const;
 
 private:
 	struct Entry

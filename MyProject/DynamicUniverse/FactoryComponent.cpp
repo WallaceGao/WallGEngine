@@ -9,6 +9,7 @@ void FactoryComponent::Initialize()
 {
 	auto factoryService = GetOwner().GetWorld().GetService<FactoryService>();
 	factoryService->Register(this);
+	economicService = GetOwner().GetWorld().GetService<EconomicService>();
 }
 
 void FactoryComponent::Terminate()
@@ -25,7 +26,6 @@ void FactoryComponent::Update(float deltaTime)
 	}
 	else
 	{
-		auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
 		mProductionTime -= deltaTime;
 		if (mProductionTime <= 0.0f)
 		{
@@ -100,18 +100,16 @@ void FactoryComponent::DebugUI()
 
 float FactoryComponent::SellItem(ItemType itemType)
 {
-	auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
 	return economicService->ItemPriceChange(itemType, false);
 }
 
 float FactoryComponent::BuyMinral(MineralType minraType, float cargoSize)
 {
-	auto economicService = GetOwner().GetWorld().GetService<EconomicService>();
 	float wage = 0.0f;
 	if (MineralType::Copper == minraType)
 	{
 		mCopperAmount += cargoSize;
-		wage = economicService->ResourcePriceChange(MineralType::Iron, cargoSize, true);
+		wage = economicService->ResourcePriceChange(MineralType::Copper, cargoSize, true);
 	}
 	else if (MineralType::Iron == minraType)
 	{
@@ -128,18 +126,22 @@ void FactoryComponent::SelectBestItemToProduce()
 		mProductionTime = mEngineBuildTime;
 		mIronAmount -= 200;
 		mCopperAmount -= 200;
+		economicService->ResourcePriceChange(MineralType::Iron, 200, false);
+		economicService->ResourcePriceChange(MineralType::Copper, 200, false);
 		mCurrentProductionType = ItemType::Engine;
 	}
 	else if ( mCopperAmount >= 300)
 	{
 		mProductionTime = mCargoBuildTime;
 		mCopperAmount -= 300;
+		economicService->ResourcePriceChange(MineralType::Copper, 300, false);
 		mCurrentProductionType = ItemType::Cargo;
 	}
 	else if ( mIronAmount >= 300)
 	{
 		mProductionTime = mMineToolBuildTime;
-		mIronAmount -= 200;
+		mIronAmount -= 300;
+		economicService->ResourcePriceChange(MineralType::Iron, 300, false);
 		mCurrentProductionType = ItemType::MineTool;
 	}
 }

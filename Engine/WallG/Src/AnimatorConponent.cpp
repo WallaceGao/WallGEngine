@@ -24,5 +24,20 @@ void AnimatorComponent::Terminate()
 void AnimatorComponent::Update(float deltaTime)
 {
      mAnimator.Update(deltaTime);
-}	
+}
 
+void AnimatorComponent::DebugUI()
+{
+	ImGui::Checkbox("Show Skeleton", &mShowSkeleton);
+	if (ImGui::Checkbox("Show Animation", &mShowAnimation))
+	{
+		if (mShowAnimation)
+		{
+			mAnimator.Play();
+		}
+		else
+		{
+			mAnimator.Stop();
+		}
+	}
+}

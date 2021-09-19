@@ -33,6 +33,8 @@ public:
 	const WallG::Math::Vector3 GetPlanetScale() const { return mPlanetScale; }
 	void SetPlanetScale(const WallG::Math::Vector3& planetScale) { mPlanetScale = planetScale; }
 	void SetStartRota(const float rota) { mStartRota = rota; }
+	void SetHome(bool home) { mHome = home; }
+	bool IsHome() const { return mHome; }
 
 protected:
 
@@ -46,6 +48,7 @@ protected:
 	float mSelfSpeed = 0.0f;
 	float mStartRota = 0.0f;
 	float mDistanceFromParent = 0.0f;
+	bool mHome = false;
 
 	MineralType mResourceType = MineralType::None;
 };

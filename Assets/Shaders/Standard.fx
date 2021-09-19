@@ -128,25 +128,22 @@ VS_OUTPUT VS(VS_INPUT input)
 float4 PS(VS_OUTPUT input) : SV_Target
 {
 	float3 dirToView = normalize(input.dirToView);
-
-	// Get normal from texture and convert from [0, 1] to [-1 , 1]
-	float3 sampledNormal= normalMap.Sample(textureSampler, input.texCoord).xyz; // from 0 to 1
-	float3 unpackedNormal = (sampledNormal * 2) - 1;
-
-	// Fix normals from rasterizer and construct the tangent space matrix
-	float3 n = normalize(input.normal);
-	float3 t = normalize(input.tangent);
-	float3 b = normalize(input.binormal);
-	
-	float3x3 tbnw = float3x3(t, b, n);
 	
 	// True normal to use for lighting
-	float3 normal = n;
+	float3 normal = normalize(input.normal);
 	if (normalMapWeight != 0.0f)
 	{
+		// Get normal from texture and convert from [0, 1] to [-1 , 1]
+		float3 sampledNormal = normalMap.Sample(textureSampler, input.texCoord).xyz; // from 0 to 1
+		float3 unpackedNormal = (sampledNormal * 2) - 1;
+
+		float3 n = normal;
+		float3 t = normalize(input.tangent);
+		float3 b = normalize(input.binormal);
+		float3x3 tbnw = float3x3(t, b, n);
+
 		normal = mul(unpackedNormal, tbnw);
 	}
-	
 	
 	float4 ambient = lightAmbient * materialAmbient;
 
@@ -163,18 +160,17 @@ float4 PS(VS_OUTPUT input) : SV_Target
 	float4 diffuseMapColor = textureMap.Sample(textureSampler, input.texCoord);
 	float4 specularMapColor = specularMap.Sample(textureSampler, input.texCoord);
 
-
-	float realDepth = 1.0 - input.position2.z / input.position2.w;
-	float2 shadowUV = input.position2.xy / input.position2.w;
-	shadowUV = (shadowUV + 1.0f) * 0.5f;
-	shadowUV.y = 1.0f - shadowUV.y;
-
-	float recordedDepth = shadowMap.Sample(textureSampler, shadowUV).r;
-
 	float4 finalColor = (ambient + diffuse) * diffuseMapColor + specular * (specularMapWeight != 0.0f ? specularMapColor.r : 1.0f);
 
 	if (useShadow != 0)
 	{
+		float realDepth = 1.0 - input.position2.z / input.position2.w;
+		float2 shadowUV = input.position2.xy / input.position2.w;
+		shadowUV = (shadowUV + 1.0f) * 0.5f;
+		shadowUV.y = 1.0f - shadowUV.y;
+
+		float recordedDepth = shadowMap.Sample(textureSampler, shadowUV).r;
+
 		if (saturate(shadowUV.x) == shadowUV.x &&
 			saturate(shadowUV.y) == shadowUV.y &&
 			realDepth + 0.00001f < recordedDepth)
@@ -182,6 +178,5 @@ float4 PS(VS_OUTPUT input) : SV_Target
 			finalColor = ambient * diffuseMapColor;
 		}
 	}
-
 	return finalColor;
 }

@@ -5,6 +5,8 @@
 #include "FactoryService.h"
 #include "PlanetComponent.h"
 #include "UniverseService.h"
+
+#include "EconomicService.h"
 #include "ShipService.h"
 #include <ImGui/Inc/ImPlot.h>
 
@@ -15,6 +17,11 @@ MEMPOOL_DEFINE(ShipComponent, 1000)
 
 void ShipComponent::Initialize()
 {
+	mMaxMineSpeed = mMineSpeed + 5;
+	mMaxSpeed = mSpeed + 50;
+	mMaxCargoSize = mCargoSize + 25;
+	mHackHeight = RandomFloat(-10.0f, 10.0f);
+
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	//mStateMachine = std::make_unique<AI::StateMachine<ShipAgent>>(mShipAgent);
 	//int mMineSpeedLevel = 1;
@@ -22,6 +29,7 @@ void ShipComponent::Initialize()
 	//int mSpeedLevel = 1;
 	auto shipService = GetOwner().GetWorld().GetService<ShipService>();
 	shipService->Register(this);
+
 }
 
 void ShipComponent::Terminate()
@@ -62,30 +70,39 @@ void ShipComponent::Update(float deltaTime)
 		break;
 	}
 
-	for (size_t i = 0; i + 1 < mTailPositions.size(); ++i)
+	// Apply hack height
 	{
-		if (mShipType == ShipType::SmallShip)
-		{
-			SimpleDraw::AddLine(mTailPositions[i], mTailPositions[i + 1], Colors::Magenta);
-		}
-		else if(mShipType == ShipType::lagerShip)
-		{
-			SimpleDraw::AddLine(mTailPositions[i], mTailPositions[i + 1], Colors::Green);
-		}
+		auto position = mTransformComponent->GetPosition();
+		position.y = mHackHeight;
+		mTransformComponent->SetPosition(position);
+	}
+
+	const Graphics::Color shipColors[] =
+	{
+		Colors::Magenta,
+		Colors::Green
+	};
+	const int colorIndex = static_cast<int>(mShipType) - 1;
+	if (!mTailPositions.empty())
+	{
+		for (size_t i = 0; i + 1 < mTailPositions.size(); ++i)
+			SimpleDraw::AddLine(mTailPositions[i], mTailPositions[i + 1], shipColors[colorIndex]);
+		SimpleDraw::AddLine(mTransformComponent->GetPosition(), mTailPositions.back(), shipColors[colorIndex]);
 	}
 
 	static float waitTime = 0.0f;
 	waitTime -= deltaTime;
+	mTimePassed += deltaTime;
 	if (waitTime <= 0.0f)
 	{
 		waitTime += 0.5f;
-		float time = Core::TimeUtil::GetTime();
-		mMoneyPoints.push_back({ time, mMoney });
-		mCargoPoints.push_back({time, mCargo});
+		mMoneyPoints.push_back({ mTimePassed, mMoney });
+		mCargoPoints.push_back({ mTimePassed, mCargo });
 	}
 	if (mMoneyPoints.size() > 20000)
 	{
 		mMoneyPoints.erase(mMoneyPoints.begin());
+		mCargoPoints.erase(mCargoPoints.begin());
 	}
 }
 
@@ -152,7 +169,7 @@ void ShipComponent::Idle(float deltaTime)
 	// What is the best mineral to mine
 	const auto& world = GetOwner().GetWorld();
 
-	if (mMoney > 2000.0f)
+	if (mMoney > 20000.0f)
 	{
 		int randomUpGrade = rand()%3 + 0;
 		switch (randomUpGrade)
@@ -193,8 +210,12 @@ void ShipComponent::Idle(float deltaTime)
 		const auto universeService = world.GetService<UniverseService>();
 		mTargetPlanet = universeService->GetNearestPlanetHaveFactory(mTransformComponent->GetPosition())->GetHandle();
 		mState = State::Fly;
-		mFState = FlySate::FlyToSell;
+		mFState = FlySate::FlyToSell;	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
+		
 	}
+	Vector3 direction = TransformNormal(Vector3::ZAxis, Matrix4::RotationQuaternion(mTransformComponent->GetRotation()));
+	mCurrentVelocity = direction * mSpeed;
+	ASSERT(!std::isnan(mCurrentVelocity.x), "WTF");
 }
 
 void ShipComponent::Fly(float deltaTime)
@@ -210,7 +231,6 @@ void ShipComponent::Fly(float deltaTime)
 			// fly finish
 			if (mFState == FlySate::FlyToMine)
 			{
-				
 				mState = State::Mine;
 			}
 			else if(mFState == FlySate::FlyToSell)
@@ -227,9 +247,12 @@ void ShipComponent::Fly(float deltaTime)
 		else
 		{
 			// keep flying
-			mTransformComponent->SetPosition(mTransformComponent->GetPosition() + direction * deltaTime * mSpeed);
-			mTransformComponent->SetRotation(Quaternion::RotationFromTo(Math::Vector3::ZAxis, direction));
-			SimpleDraw::AddLine(mTransformComponent->GetPosition(), mTransformComponent->GetPosition() + direction * 10.0f, Colors::Green);
+			Vector3 desiredVelocity = direction * mSpeed;
+			Vector3 seekForce = desiredVelocity - mCurrentVelocity;
+			mCurrentVelocity += seekForce * deltaTime;
+			mTransformComponent->SetPosition(mTransformComponent->GetPosition() + mCurrentVelocity * deltaTime);
+			mTransformComponent->SetRotation(Quaternion::RotationFromTo(Math::Vector3::ZAxis, mCurrentVelocity));
+			SimpleDraw::AddLine(mTransformComponent->GetPosition(), mTransformComponent->GetPosition() + Normalize(mCurrentVelocity) * 10.0f, Colors::Green);
 		}
 	}
 	else
@@ -253,11 +276,26 @@ void ShipComponent::Mine(float deltaTime)
 {
 	GameObject* planet = GetOwner().GetWorld().GetGameObject(mTargetPlanet);
 	ASSERT(planet != nullptr, "planet shouldn't be empty");
-	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
-	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
+	TransformComponent* targetTransform = planet->GetComponent<TransformComponent>();
+	mTransformComponent->SetPosition(targetTransform->GetPosition() + mDockOffset);
+
+	// Slowly face away
+	auto currentRotation = mTransformComponent->GetRotation();
+	auto desiredRotation = Quaternion::RotationLook(Normalize(mDockOffset));
+	auto newRotation = Slerp(currentRotation, desiredRotation, deltaTime);
+	mTransformComponent->SetRotation(newRotation);
+
+	auto* economicService = GetOwner().GetWorld().GetService<EconomicService>();
 
 	// mining
-	mCargo += mMineSpeed * deltaTime;
+
+	if (mMineTime >= economicService->GetMiningTime(mShipCargoType))
+	{
+		mCargo++;
+		mMineTime = 0.0f;
+	}
+	
+	mMineTime += mMineSpeed * deltaTime;
 
 	// Task - Do I have enough yet?
 	if (mCargo >= mCargoSize)
@@ -267,9 +305,7 @@ void ShipComponent::Mine(float deltaTime)
 	}
 
 	mMineTimer += deltaTime * mMineSpeed;
-
 	SimpleDraw::AddRing(mTransformComponent->GetPosition(), 5.0f + sin(mMineTimer), Colors::Magenta);
-
 }
 
 void ShipComponent::Sell(float deltaTime)
@@ -278,6 +314,12 @@ void ShipComponent::Sell(float deltaTime)
 	ASSERT(planet != nullptr, "planet shouldn't be empty");
 	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
 	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
+
+	// Slowly face away
+	auto currentRotation = mTransformComponent->GetRotation();
+	auto desiredRotation = Quaternion::RotationLook(Normalize(mDockOffset));
+	auto newRotation = Slerp(currentRotation, desiredRotation, deltaTime);
+	mTransformComponent->SetRotation(newRotation);
 
 	// Selling
 
@@ -301,13 +343,26 @@ void ShipComponent::Upgrade(float deltaTime)
 	TransformComponent* targetTaransform = planet->GetComponent<TransformComponent>();
 	mTransformComponent->SetPosition(targetTaransform->GetPosition() + mDockOffset);
 
+	// Slowly face away
+	auto currentRotation = mTransformComponent->GetRotation();
+	auto desiredRotation = Quaternion::RotationLook(Normalize(mDockOffset));
+	auto newRotation = Slerp(currentRotation, desiredRotation, 0.5f * deltaTime);
+	mTransformComponent->SetRotation(newRotation);
+
 	//UpGrade
 	// every update make level +1
 	if (mUpGradeType == ItemType::MineTool && mWaitTime > 30.0f)
 	{
 		mUpGradeType = ItemType::None;
 		mState = State::Idle;
-		mMineSpeed += 1;
+		if (mMineSpeed < mMaxMineSpeed)
+		{
+			mMineSpeed += 1;
+		}
+		if (mMineSpeed > mMaxMineSpeed)
+		{
+			mMineSpeed = mMaxMineSpeed;
+		}
 		mWaitTime = 0.0f;
 		//mMineSpeedLevel += 1;
 		mMoney -= planet->GetComponent<FactoryComponent>()->SellItem(mUpGradeType);
@@ -316,7 +371,14 @@ void ShipComponent::Upgrade(float deltaTime)
 	{
 		mUpGradeType = ItemType::None;
 		mState = State::Idle;
-		mSpeed += 50;
+		if (mSpeed < mMaxSpeed)
+		{
+			mSpeed += 10;
+		}
+		if (mSpeed > mMaxSpeed)
+		{
+			mSpeed = mMaxSpeed;
+		}
 		mWaitTime = 0.0f;
 		//mMineSpeedLevel += 1;
 		mMoney -= planet->GetComponent<FactoryComponent>()->SellItem(mUpGradeType);
@@ -325,7 +387,14 @@ void ShipComponent::Upgrade(float deltaTime)
 	{
 		mUpGradeType = ItemType::None;
 		mState = State::Idle;
-		mCargoSize += 10;
+		if (mCargoSize < mMaxCargoSize)
+		{
+			mCargoSize += 5;
+		}
+		if (mCargoSize > mMaxCargoSize)
+		{
+			mCargoSize = mMaxCargoSize;
+		}
 		mWaitTime = 0.0f;
 		//mMineSpeedLevel += 1;
 		mMoney -= planet->GetComponent<FactoryComponent>()->SellItem(mUpGradeType);

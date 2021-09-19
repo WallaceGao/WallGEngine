@@ -3,11 +3,12 @@
     "TransformComponent": {
     },
     "PlanetComponent": {
-      "Speed": 0.01,
+      "Speed": 0.00074,
       "SelfSpeed": 0.02,
       "DistanceFromParent": 2700,
       "Scale": [ 150, 150, 150 ],
-      "StartRota":  180
+      "StartRota": 180,
+      "Home":  true
     },
     "ModelComponent": {
       "Path": "../../Assets/Model/DU/Planet/Planet/Earth1.model"

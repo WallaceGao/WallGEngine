@@ -4,9 +4,9 @@
       "Scale":  [2, 2, 2]
     },
     "ShipComponent": {
-      "Speed": 150, 
+      "Speed": 25, 
       "MineSpeed" : 3,
-      "CarGoSize": 150,
+      "CarGoSize": 50,
       "ShipType": 2,
       "Money": 0
     },

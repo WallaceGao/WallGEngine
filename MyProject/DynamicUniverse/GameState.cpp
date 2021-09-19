@@ -54,6 +54,11 @@ namespace
 				const auto& startRota = member.value["StartRota"].GetFloat();
 				planet->SetStartRota(startRota);
 			}
+			if (member.value.HasMember("Home"))
+			{
+				const bool home = member.value["Home"].GetBool();
+				planet->SetHome(home);
+			}
 			return true;
 		}
 		else if (strcmp(componentName, "FactoryComponent") == 0)
