@@ -14,9 +14,6 @@ private:
 	WallG::Math::Vector3 mRotation;
 	float mFPS = 0.0f;
 
-	bool mShowAnimation = false;
-	bool mShowSkeleton = false;
-
 	WallG::GameWorld  mGameWorld;
 	WallG::GameObjectHandle mGameObjectHandle;
 

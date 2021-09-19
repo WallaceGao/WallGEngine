@@ -10,7 +10,11 @@ void GameState::Initialize()
 {
 
     mGameWorld.AddService<RenderService>();
+    auto cameraService = mGameWorld.AddService<CameraService>();
+
     mGameWorld.Initialize(1000);
+    cameraService->GetCamera().SetPosition({0.0f,0.0f,10.0f});
+
     mGameObjectHandle = mGameWorld.CreatGameObject("../../Assets/Templates/Test.json", "Wallace")->GetHandle();
     //mAnimator.Initialize(&mGreatSwordStrafe);
 }
@@ -72,23 +76,10 @@ void GameState::DebugUI()
     ImGui::Text("fps: %f", mFPS);
     ImGui::DragFloat3("Rotation", (float*)&mRotation, 0.01f);
 
-
-    ImGui::Checkbox("Show Skeleton", &mShowSkeleton);
-	ImGui::Checkbox("Show Animation", &mShowAnimation);
-
     GameObject* GameObject = mGameWorld.GetGameObject(mGameObjectHandle);
     if (GameObject)
     {
         GameObject->DebugUI();
-    }
-    auto& animator = GameObject->GetComponent<AnimatorComponent>()->GetAnimator();
-    if (mShowAnimation)
-    {
-        animator.Play();
-    }
-    else
-    {
-        animator.Stop();
     }
 
     ImGui::End();
