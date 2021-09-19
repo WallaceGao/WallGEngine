@@ -56,7 +56,7 @@ void GameState::DebugUI()
         line.push_back({ endX, endY });
     
         ImPlot::PlotScatter("Dataset", mDataset.x0.data(), mDataset.Y.data(), mDataset.x0.size());
-        ImPlot::PlotLine("Model", line.data(), line.size());
+        ImPlot::PlotLine("Model", &line[0].x, &line[0].y, static_cast<int>(line.size()), 0, sizeof(ImVec2));
         ImPlot::EndPlot();
     }
     mApplog.Draw("Console");

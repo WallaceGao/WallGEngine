@@ -54,7 +54,7 @@ void GameState::DebugUI()
 
         modelLine.push_back({ startX, startY });
         modelLine.push_back({ endX, endY });
-        ImPlot::PlotLine("Model", modelLine.data(), (int)modelLine.size());
+        ImPlot::PlotLine("Model", &modelLine[0].x, &modelLine[0].y, static_cast<int>(modelLine.size()),0, sizeof(ImVec2));
 
         std::vector<float> ax, ay, bx, by;
         for (int i = 0; i < mDataset.x0.size(); ++i)
