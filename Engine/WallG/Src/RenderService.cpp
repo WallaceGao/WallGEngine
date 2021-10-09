@@ -27,9 +27,15 @@ void RenderService::Initialize()
     mDirctionalLight.specular = { 0.5f };
     mDirctionalLight.direction = { 0.0f, 0 , 1 };
 
+    constexpr uint32_t depthMapSize = 4096;
+    mDepthRengerTarget.Initialize(depthMapSize, depthMapSize, Texture::Format::RGBA_F32);
+
     //Set material
     mVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", BoneVertex::Format);
     mPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");
+
+    mDepthMapVertexShader.Initialize(L"../../Assets/Shaders/DepthMap.fx", Vertex::Format);
+    mDepthMapPixelShader.Initialize(L"../../Assets/Shaders/DepthMap.fx");
 
     // Creat constant buffer
     mSampler.Initialize(Sampler::Filter::Anisotropic, Sampler::AddressMode::Wrap);
@@ -38,30 +44,89 @@ void RenderService::Initialize()
     mConstantBuffer.Initialize();
     mBoneTransformBuffer.Initialize();
     mSettingsBuffer.Initialize();
+    mDepthMapTransformBuffer.Initialize();
 }
 
 void RenderService::Terminate()
 {
+    mDepthMapTransformBuffer.Terminate();
     mSettingsBuffer.Terminate();
     mBoneTransformBuffer.Terminate();
     mConstantBuffer.Terminate();
     mMaterialBuffer.Terminate();
     mLightBuffer.Terminate();
+    mDepthMapVertexShader.Terminate();
+    mDepthMapPixelShader.Terminate();
     mVertexShader.Terminate();
     mPixelShader.Terminate();
     mSampler.Terminate();
+    mDepthRengerTarget.Terminate();
 }
 
 void RenderService::Render()
+{
+    if (mHaveShadow)
+    {
+        RenderDepthMap();
+    }
+    RenderScene();
+}
+
+void WallG::RenderService::RenderDepthMap()
+{
+    mDepthRengerTarget.BeginRender(Colors::Black);
+    
+    // Attach buffer to graphics pipeline
+    auto cameraService = GetWorld().GetService<CameraService>();
+
+    Matrix4 matView = cameraService->GetLightCamera().GetViewMatrix();
+    Matrix4 matProj = cameraService->GetLightCamera().GetProjectionMatrix();
+    
+    
+    for (auto& entry : mRenderEntries)
+    {
+        mDepthMapTransformBuffer.BindVS(0);
+        Quaternion localRotation = entry.modelComponent->GetRotation();
+
+        Vector3 position = entry.transformComponent->GetPosition();
+        Quaternion rotation = entry.transformComponent->GetRotation();
+        Vector3 scale = entry.transformComponent->GetScale();
+
+        Matrix4 matWorld = Matrix4::Scaling(scale) *
+            Matrix4::RotationQuaternion(localRotation * rotation) *
+            Matrix4::Translation(position);
+        Matrix4 wvp = Transpose(matWorld * matView * matProj);
+        mDepthMapTransformBuffer.Update(wvp);
+        
+        mDepthMapVertexShader.Bind();
+        mDepthMapPixelShader.Bind();
+        
+        mSampler.BindVS(0);
+    
+        auto modelComponent = entry.modelComponent;
+        auto& model = *modelComponent->GetModel();
+        for (size_t i = 0; i < model.meshData.size(); ++i)
+        {
+            model.meshData[i]->meshBuffer.Render();
+        }
+    }
+    
+    mDepthRengerTarget.EndRender();
+}
+
+void WallG::RenderService::RenderScene()
 {
     // Attach buffer to graphics pipeline
     auto cameraService = GetWorld().GetService<CameraService>();
     Matrix4 matView = cameraService->GetCamera().GetViewMatrix();
     Matrix4 matProj = cameraService->GetCamera().GetProjectionMatrix();
 
+    Matrix4 matViewLight = cameraService->GetLightCamera().GetViewMatrix();
+    Matrix4 matProjLight = cameraService->GetLightCamera().GetProjectionMatrix();
+
     // viewPosition is camera's postion 
     TransformData transformData;
-    transformData.viewPostion = cameraService->GetCamera().GetPosition();
+    transformData.viewPostion = cameraService->GetActiveCamera().GetPosition();
     mConstantBuffer.BindVS(0);
     mConstantBuffer.BindPS(0);
 
@@ -79,6 +144,12 @@ void RenderService::Render()
     mVertexShader.Bind();
     mPixelShader.Bind();
 
+    if (mHaveShadow)
+    {
+        mSettings.useShadow = 1;
+    }
+
+    mSettingsBuffer.Update(mSettings);
     mSettingsBuffer.BindVS(3);
     mSettingsBuffer.BindPS(3);
 
@@ -89,42 +160,52 @@ void RenderService::Render()
         Vector3 position = entry.transformComponent->GetPosition();
         Quaternion rotation = entry.transformComponent->GetRotation();
         Vector3 scale = entry.transformComponent->GetScale();
-
         Matrix4 matWorld =
-            Matrix4::Scaling(scale) *
-            Matrix4::RotationQuaternion(localRotation * rotation) *
-            Matrix4::Translation(position);
-        transformData.wvp = Transpose(matWorld * matView * matProj);
-        mConstantBuffer.Update(transformData);
-
+                Matrix4::Scaling(scale) *
+                Matrix4::RotationQuaternion(localRotation * rotation) *
+                Matrix4::Translation(position);
+        if (entry.modelComponent->GetGound())
+        {
+            transformData.world = Transpose(Matrix4::Indentity);
+            transformData.wvp[0] = Transpose(matView * matProj);
+            transformData.wvp[1] = Transpose(matViewLight * matProjLight);
+            mConstantBuffer.Update(transformData);
+        }
+        else
+        {
+            transformData.world = Transpose(matWorld);
+            transformData.wvp[0] = Transpose(matWorld * matView * matProj);
+            transformData.wvp[1] = Transpose(matWorld * matViewLight * matProjLight);
+            mConstantBuffer.Update(transformData);
+        }
         auto modelComponent = entry.modelComponent;
         auto& model = *modelComponent->GetModel();
 
         auto animatorComponent = entry.animatorComponent;
         if (animatorComponent)
-        {
-            auto& animator = animatorComponent->GetAnimator();
-            if (animatorComponent->ShowSkeleton())
             {
-                auto boneTransforms = animator.GetSkeletonTransforms();
-                DrawSkeleton(*model.skeleton, boneTransforms);
-                continue;
-            }
-            else
-            {
-                StandardBoneTransformData boneData;
-                const auto& tolocal = animator.GetToLocalTransforms();
-
-                for (auto& bone : model.skeleton->bones)
+                auto& animator = animatorComponent->GetAnimator();
+                if (animatorComponent->ShowSkeleton())
                 {
-                    boneData.boneTransform[bone->index] = Math::Transpose(tolocal[bone->index]);
+                    auto boneTransforms = animator.GetSkeletonTransforms();
+                    DrawSkeleton(*model.skeleton, boneTransforms, position, scale.x);
+                    continue;
                 }
-                mBoneTransformBuffer.Update(boneData);
-                mBoneTransformBuffer.BindVS(4);
+                else
+                {
+                    StandardBoneTransformData boneData;
+                    const auto& tolocal = animator.GetToLocalTransforms();
 
-                mSettings.useSkinning = 1;
+                    for (auto& bone : model.skeleton->bones)
+                    {
+                        boneData.boneTransform[bone->index] = Math::Transpose(tolocal[bone->index]);
+                    }
+                    mBoneTransformBuffer.Update(boneData);
+                    mBoneTransformBuffer.BindVS(4);
+
+                    mSettings.useSkinning = 1;
+                }
             }
-        }
         else
         {
             mSettings.useSkinning = 0;
@@ -139,6 +220,7 @@ void RenderService::Render()
                 material.specularMap->BindPS(1);
             if (material.normalMap)
                 material.normalMap->BindPS(3);
+            mDepthRengerTarget.BindPS(4);
 
             mSettings.specularMapWeight = material.specularMap ? (float)1 : (float)0;
             mSettings.normalMapWeight = material.normalMap ? (float)1 : (float)0;
@@ -147,7 +229,6 @@ void RenderService::Render()
             model.meshData[i]->meshBuffer.Render();
         }
     }
-
     SimpleDraw::Render(cameraService->GetCamera());
 }
 
@@ -169,4 +250,5 @@ void RenderService::Unregister(const ModelComponent* modelComponent)
         mRenderEntries.erase(iter);
     }
 }
+
 

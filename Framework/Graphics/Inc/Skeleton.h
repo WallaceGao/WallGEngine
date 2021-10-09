@@ -9,7 +9,7 @@ namespace WallG::Graphics
 		std::vector<std::unique_ptr<Bone>> bones;
 	};
 
-	void DrawSkeleton(const Skeleton& skeleton, const std::vector<Math::Matrix4>& boneMatrices);
+	void DrawSkeleton(const Skeleton& skeleton, const std::vector<Math::Matrix4>& boneMatrices, const Math::Vector3 position, const float scale);
 	void GetRootTransform(const Skeleton& skeleton, std::vector<Math::Matrix4>& toRootTransfrom);
 	//[a b c 0]  right vector(x axis)
 	//[d e f 0]  up vector (y axis)

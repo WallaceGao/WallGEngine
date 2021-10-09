@@ -98,6 +98,23 @@ void SimpleDraw::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const
 	sInstance->AddLine(v0, v1, color);
 }
 
+void SimpleDraw::AddBone(const Math::Vector3& postion, const Math::Vector3& childPosition, const Color& color, const float scale, uint32_t numberOfLine)
+{
+	AddSphere(postion, scale, color, 16,16);
+
+	const uint32_t kSlices = Math::Max(3u, numberOfLine);
+	const float kPhi = Math::Constants::TwoPi / (float)kSlices;
+	
+	for (size_t i = 0; i < numberOfLine; ++i)
+	{
+		const float theta = i * kPhi;
+		const float x0 = postion.x + (scale * sin(theta));
+		const float y0 = postion.y;
+		const float z0 = postion.z + (scale * cos(theta));
+		AddLine({ x0,y0,z0 }, childPosition, color);
+	}
+}
+
 void WallG::Graphics::SimpleDraw::AddAABB(const Math::Vector3& center, const Math::Vector3& extend, const Color& color)
 {
 	// Call sInstance->AddLine 8 times here ...

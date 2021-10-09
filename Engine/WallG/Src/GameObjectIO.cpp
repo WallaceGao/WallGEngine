@@ -101,6 +101,11 @@ void WallG::GameObjectIO::Read(FILE* file, GameObject& gameObject)
 				float z = eulerAngles[2].GetFloat();
 				Model->SetRotation(Math::Quaternion::RotationEuler({ x, y, z }));
 			}
+			if (component.value.HasMember("Ground"))
+			{
+				const auto& isGround = component.value["Ground"].GetBool();
+				Model->SetGround(isGround);
+			}
 		}
 		else if (strcmp(componentName, "AnimatorComponent") == 0)
 		{

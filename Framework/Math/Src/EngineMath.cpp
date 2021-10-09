@@ -75,7 +75,7 @@ float WallG::Math::RandomFloat(float min, float max)
     return std::uniform_real_distribution<float>{min, max}(randomGenerator);
 }
 
-float WallG::Math::RandomInt(int min, int max)
+int WallG::Math::RandomInt(int min, int max)
 {
 	return std::uniform_int_distribution<int>{min, max}(randomGenerator);
 }

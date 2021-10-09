@@ -24,8 +24,11 @@ namespace WallG
 
 		void SetRotation(const Math::Quaternion rotation) { mRotation = rotation; }
 		const Math::Quaternion& GetRotation() const { return mRotation; }
-		
+		void SetGround(const bool isGround) { mIsGround = isGround; }
+		const bool GetGound() const { return mIsGround; }
+
 	protected:
+		bool mIsGround = false;
 		std::string mFileName;
 		Graphics::ModelId mModelId = 0;
 		Math::Quaternion mRotation;

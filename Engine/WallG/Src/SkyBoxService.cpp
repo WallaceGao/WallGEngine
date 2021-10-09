@@ -13,8 +13,8 @@ void SkyBoxService::Initialize()
 {
     mSkyboxMesh = MeshBuilder::CreatSkyboxPX(500.0f);
     mSkyboxMeshBuffer.Initialize(mSkyboxMesh);
-    mSkyboxTexture.Initialize("../../Assets/Images/cubemap.png");
-
+    //mSkyboxTexture.Initialize("../../Assets/Images/cubemap.png");
+    mSkyboxTexture.Initialize("../../Assets/Images/Skybox2.png");
     mVertexShader.Initialize(L"../../Assets/Shaders/DoTexturing.fx", VertexPX::Format);
     mPixelShader.Initialize(L"../../Assets/Shaders/DoTexturing.fx");
     mConstantBuffer. Initialize();

@@ -9,13 +9,19 @@ using namespace WallG::Math;
 void GameState::Initialize()
 {
 
-    mGameWorld.AddService<RenderService>();
+    mGameWorld.AddService<SkyBoxService>();
     auto cameraService = mGameWorld.AddService<CameraService>();
+    auto renderService = mGameWorld.AddService<RenderService>();
 
     mGameWorld.Initialize(1000);
-    cameraService->GetCamera().SetPosition({0.0f,0.0f,10.0f});
+    cameraService->GetCamera().SetPosition({0.0f,0.0f,-10.0f});
+    renderService->SetShadow(true);
 
-    mGameObjectHandle = mGameWorld.CreatGameObject("../../Assets/Templates/Test.json", "Wallace")->GetHandle();
+
+    //Jannedaarc
+    mGameObjectHandle = mGameWorld.CreatGameObject("../../Assets/Environment/Stage.json", "Stage")->GetHandle();
+    mGameObjectHandle = mGameWorld.CreatGameObject("../../Assets/Characters/YYZ.json", "Youyouzi")->GetHandle();
+    //mGameObjectHandle = mGameWorld.CreatGameObject("../../Assets/Characters/Keli.json", "Kili")->GetHandle();
     //mAnimator.Initialize(&mGreatSwordStrafe);
 }
 
@@ -75,6 +81,8 @@ void GameState::DebugUI()
     ImGui::Begin("Debug Info", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("fps: %f", mFPS);
     ImGui::DragFloat3("Rotation", (float*)&mRotation, 0.01f);
+
+    
 
     GameObject* GameObject = mGameWorld.GetGameObject(mGameObjectHandle);
     if (GameObject)

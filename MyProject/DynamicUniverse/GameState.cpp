@@ -126,8 +126,8 @@ namespace
 void GameState::Initialize()
 {
 	auto cameraService = mGameWorld.AddService<CameraService>();
-	mGameWorld.AddService<UniverseService>();
 	mGameWorld.AddService<SkyBoxService>();
+	mGameWorld.AddService<UniverseService>();
 	mGameWorld.AddService<RenderService>();
 	mGameWorld.AddService<ShipService>();
 	mGameWorld.AddService<EconomicService>();
@@ -138,7 +138,6 @@ void GameState::Initialize()
 	// we can guarantee that planets will update their transforms first
 	// so the moon and transform around them.
 	GameObjectIO::SetReadOverride(ReadOverride);
-	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Skybox.json", "Skybox");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Sun.json", "Sun");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Hot.json", "Lepus");
 	mGameWorld.CreatGameObject("../../Assets/DynamicUniverse/Ice.json", "Hydrus");

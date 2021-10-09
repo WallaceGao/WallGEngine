@@ -28,6 +28,14 @@ void AnimatorComponent::Update(float deltaTime)
 
 void AnimatorComponent::DebugUI()
 {
+	ImGui::Text(GetOwner().GetName().c_str());
+	if (ImGui::CollapsingHeader("Show Skeleton Name", ImGuiTreeNodeFlags_DefaultOpen),false)
+	{
+		for (auto& bone : mModelComponent->GetModel()->skeleton->bones)
+		{
+			ImGui::Text(bone->name.c_str());
+		}
+	}
 	ImGui::Checkbox("Show Skeleton", &mShowSkeleton);
 	if (ImGui::Checkbox("Show Animation", &mShowAnimation))
 	{

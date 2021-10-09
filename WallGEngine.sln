@@ -128,7 +128,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGame", "VGP336\TestGame
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{9E18F4FE-3964-42E5-8595-BEBE20FA9987}"
 	ProjectSection(SolutionItems) = preProject
+		Assets\Characters\Jannedaarc.json = Assets\Characters\Jannedaarc.json
+		Assets\Characters\Keli.json = Assets\Characters\Keli.json
 		Assets\Templates\Test.json = Assets\Templates\Test.json
+		Assets\Characters\YYZ.json = Assets\Characters\YYZ.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicUniverse", "DynamicUniverse", "{1CF45B0B-BE6F-4BE6-ADA1-7DD7F5F1A4FC}"
@@ -148,6 +151,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicUniverse", "DynamicU
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "Framework\Physics\Physics.vcxproj", "{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Character", "Character", "{6BB45571-59A7-4237-8D9D-8D2E6FACF23B}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Characters\Jannedaarc.json = Assets\Characters\Jannedaarc.json
+		Assets\Characters\Keli.json = Assets\Characters\Keli.json
+		Assets\Characters\YYZ.json = Assets\Characters\YYZ.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json", "Json", "{BBE63442-91A2-423D-AB7E-768F07CB29C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{8CCB7A83-EEB7-4D04-ACDB-719341A66684}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Environment\Stage.json = Assets\Environment\Stage.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -522,9 +539,12 @@ Global
 		{32267C94-7082-408D-A448-64005BD48563} = {FC4672D9-E21E-491E-ACD6-1849146C966A}
 		{B1902169-C3A6-4246-8B4F-5635FED154BA} = {71A95C89-325E-4DAF-BE8E-538BAD20F9DA}
 		{A76C9261-EF6D-4206-83D7-9B9F4037FC5D} = {F41E7FB9-D649-4B10-97F9-8BDC8BB8B90B}
-		{9E18F4FE-3964-42E5-8595-BEBE20FA9987} = {711663E9-F6E4-43D7-B637-49674B9108ED}
-		{1CF45B0B-BE6F-4BE6-ADA1-7DD7F5F1A4FC} = {711663E9-F6E4-43D7-B637-49674B9108ED}
+		{9E18F4FE-3964-42E5-8595-BEBE20FA9987} = {BBE63442-91A2-423D-AB7E-768F07CB29C6}
+		{1CF45B0B-BE6F-4BE6-ADA1-7DD7F5F1A4FC} = {BBE63442-91A2-423D-AB7E-768F07CB29C6}
 		{6A46FE58-9317-4CEC-8C78-61EBCEA1E1B3} = {15072573-F0D8-4DA8-860F-FAA44FCC4618}
+		{6BB45571-59A7-4237-8D9D-8D2E6FACF23B} = {BBE63442-91A2-423D-AB7E-768F07CB29C6}
+		{BBE63442-91A2-423D-AB7E-768F07CB29C6} = {711663E9-F6E4-43D7-B637-49674B9108ED}
+		{8CCB7A83-EEB7-4D04-ACDB-719341A66684} = {BBE63442-91A2-423D-AB7E-768F07CB29C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C487D4D-9DCE-497A-8E20-8C19BA0297C4}

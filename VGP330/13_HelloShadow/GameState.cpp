@@ -13,7 +13,7 @@ void GameState::Initialize()
 	mDefaultCamera.SetNearPlane(0.001f);
 
 	mLightCamera.SetNearPlane(1.0f);
-	mLightCamera.SetFarPlane(200.0f);
+	mLightCamera.SetFarPlane(20000.0f);
 	mLightCamera.SetAspectRatio(1.0f);
 
 	mActiveCamera = &mDefaultCamera;
@@ -31,7 +31,7 @@ void GameState::Initialize()
 	mDepthMapVertexShader.Initialize(L"../../Assets/Shaders/DepthMap.fx", Vertex::Format);
 	mDepthMapPixelShader.Initialize(L"../../Assets/Shaders/DepthMap.fx");
 
-	mStandardVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", Vertex::Format);
+	mStandardVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", BoneVertex::Format);
 	mStandardPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");
 
 
@@ -101,9 +101,6 @@ void GameState::Terminate()
 	mDepthMapVertexShader.Terminate();
 	mPlaneMeshBuffer.Terminate();
 	mEarthMeshBuffer.Terminate();
-	mBlurRenderTarget.Terminate();
-	mBloomRenderTarget.Terminate();
-	mBaseRenderTarget.Terminate();
 	mDepthRengerTarget.Terminate();
 }
 
@@ -286,12 +283,12 @@ void GameState::RenderScene()
 
 	mPlaneMeshBuffer.Render();
 
-	Texture::UnbindPS(4);
-	
-	SimpleDraw::AddLine({ 0,0,0 }, { 5,0,0 }, Colors::Red);
-	SimpleDraw::AddLine({ 0,0,0 }, { 0,5,0 }, Colors::Green);
-	SimpleDraw::AddLine({ 0,0,0 }, { 0,0,5 }, Colors::Blue);
-	SimpleDraw::Render(*mActiveCamera);
+	//Texture::UnbindPS(4);
+	//
+	//SimpleDraw::AddLine({ 0,0,0 }, { 5,0,0 }, Colors::Red);
+	//SimpleDraw::AddLine({ 0,0,0 }, { 0,5,0 }, Colors::Green);
+	//SimpleDraw::AddLine({ 0,0,0 }, { 0,0,5 }, Colors::Blue);
+	//SimpleDraw::Render(*mActiveCamera);
 
 }
 

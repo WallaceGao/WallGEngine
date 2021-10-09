@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Position": [ 0, 0, 0 ],
+      "Scale": [ 7, 7, 7 ]
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/Youyouzi/YouyouziWalk.model"
+    },
+    "AnimatorComponent": {
+      "IsLoop": true 
+    }
+  }
+}

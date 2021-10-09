@@ -15,6 +15,15 @@ using namespace WallG::Math;
 
 MEMPOOL_DEFINE(ShipComponent, 1000)
 
+namespace
+{
+	const Graphics::Color shipColors[] =
+	{
+		Colors::Magenta,
+		Colors::Green
+	};
+}
+
 void ShipComponent::Initialize()
 {
 	mMaxMineSpeed = mMineSpeed + 5;
@@ -77,11 +86,7 @@ void ShipComponent::Update(float deltaTime)
 		mTransformComponent->SetPosition(position);
 	}
 
-	const Graphics::Color shipColors[] =
-	{
-		Colors::Magenta,
-		Colors::Green
-	};
+
 	const int colorIndex = static_cast<int>(mShipType) - 1;
 	if (!mTailPositions.empty())
 	{
@@ -252,7 +257,7 @@ void ShipComponent::Fly(float deltaTime)
 			mCurrentVelocity += seekForce * deltaTime;
 			mTransformComponent->SetPosition(mTransformComponent->GetPosition() + mCurrentVelocity * deltaTime);
 			mTransformComponent->SetRotation(Quaternion::RotationFromTo(Math::Vector3::ZAxis, mCurrentVelocity));
-			SimpleDraw::AddLine(mTransformComponent->GetPosition(), mTransformComponent->GetPosition() + Normalize(mCurrentVelocity) * 10.0f, Colors::Green);
+			//SimpleDraw::AddLine(mTransformComponent->GetPosition(), mTransformComponent->GetPosition() + Normalize(mCurrentVelocity) * 10.0f, Colors::Green);
 		}
 	}
 	else
@@ -304,8 +309,12 @@ void ShipComponent::Mine(float deltaTime)
 		mState = State::Idle;
 	}
 
+
+
 	mMineTimer += deltaTime * mMineSpeed;
-	SimpleDraw::AddRing(mTransformComponent->GetPosition(), 5.0f + sin(mMineTimer), Colors::Magenta);
+	const int colorIndex = static_cast<int>(mShipType) - 1;
+
+	SimpleDraw::AddRing(mTransformComponent->GetPosition(), 5.0f + sin(mMineTimer), shipColors[colorIndex]);
 }
 
 void ShipComponent::Sell(float deltaTime)

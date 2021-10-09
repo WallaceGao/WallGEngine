@@ -1,3 +1,11 @@
+character
+../../Assets/Model/new/wifu.fbx ../../Assets/Model/new/wifu.model
+../../Assets/Model/Youyouzi/YouyouziStand.fbx ../../Assets/Model/Youyouzi/YouyouziStand.model
+../../Assets/Model/Youyouzi/YouyouziWalk.fbx ../../Assets/Model/Youyouzi/YouyouziWalk.model
+../../Assets/Model/Keli/Keli.fbx  ../../Assets/Model/Keli/Keli.model
+
+Environment
+../../Assets/Model/Environment/jiehun/stage.fbx  ../../Assets/Model/Environment/jiehun/stage.model
 
 ship
 -s 0.001 ../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.FBX  ../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model
@@ -7,16 +15,16 @@ Sun
 ../../Assets/Model/DU/Planet/Sun/Sun.fbx  ../../Assets/Model/DU/Planet/Sun/Sun.model
 
 Moon
--s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon1.fbx  ../../Assets/Model/DU/Planet/Moon/Moon1.model
--s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon2.fbx  ../../Assets/Model/DU/Planet/Moon/Moon2.model
--s 0.001 ../../Assets/Model/DU/Planet/Moon/Moon3.fbx  ../../Assets/Model/DU/Planet/Moon/Moon3.model
+../../Assets/Model/DU/Planet/Moon/Moon1.fbx  ../../Assets/Model/DU/Planet/Moon/Moon1.model
+../../Assets/Model/DU/Planet/Moon/Moon2.fbx  ../../Assets/Model/DU/Planet/Moon/Moon2.model
+../../Assets/Model/DU/Planet/Moon/Moon3.fbx  ../../Assets/Model/DU/Planet/Moon/Moon3.model
 
 Planets
--s 0.001 ../../Assets/Model/DU/Planet/Planet/Earth1.fbx  ../../Assets/Model/DU/Planet/Planet/Earth1.model
--s 0.001 ../../Assets/Model/DU/Planet/Planet/Earth2.fbx  ../../Assets/Model/DU/Planet/Planet/Earth2.model
--s 0.001 ../../Assets/Model/DU/Planet/Planet/Hot.fbx  ../../Assets/Model/DU/Planet/Planet/Hot.model
--s 0.001 ../../Assets/Model/DU/Planet/Planet/Ice.fbx  ../../Assets/Model/DU/Planet/Planet/Ice.model
--s 0.001 ../../Assets/Model/DU/Planet/Planet/Lava.fbx  ../../Assets/Model/DU/Planet/Planet/Lava.model
--s 0.001 ../../Assets/Model/DU/Planet/Planet/Metal.fbx  ../../Assets/Model/DU/Planet/Planet/Metal.model
+../../Assets/Model/DU/Planet/Planet/Earth1.fbx  ../../Assets/Model/DU/Planet/Planet/Earth1.model
+../../Assets/Model/DU/Planet/Planet/Earth2.fbx  ../../Assets/Model/DU/Planet/Planet/Earth2.model
+../../Assets/Model/DU/Planet/Planet/Hot.fbx  ../../Assets/Model/DU/Planet/Planet/Hot.model
+../../Assets/Model/DU/Planet/Planet/Ice.fbx  ../../Assets/Model/DU/Planet/Planet/Ice.model
+../../Assets/Model/DU/Planet/Planet/Lava.fbx  ../../Assets/Model/DU/Planet/Planet/Lava.model
+../../Assets/Model/DU/Planet/Planet/Metal.fbx  ../../Assets/Model/DU/Planet/Planet/Metal.model
 
 

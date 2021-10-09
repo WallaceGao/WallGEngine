@@ -1,0 +1,211 @@
+# Blender MTL File: 'ModelRenderLighting2.blend'
+# Material Count: 15
+
+newmtl 25_+belt.JannedaarcMI2(8)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.475618 0.656190 0.463978
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+belt_armor.JannedaarcMI2(7)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.511158 0.609881 0.598151
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+coat.JannedaarcMI2(9)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.516571 0.730850 0.771425
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+elbow_pads.JannedaarcMI2(13)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.701694 0.765737 0.663193
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+front_armor.JannedaarcMI2(12)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.721085 0.724441 0.696706
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+knee_pads.JannedaarcMI2(6)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.568150 0.577968 0.778458
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+lower_armor.JannedaarcMI2(5)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.754137 0.493801 0.742684
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+pupils.pupils_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.779852 0.651930 0.647856
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+shoulder_armor_1.shoulder_pads_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.780683 0.797629 0.735626
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+shoulder_armor_2.JannedaarcMI2(11)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.426405 0.787975 0.643567
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_+skirt.JannedaarcMI2(4)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.758564 0.473410 0.628214
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_-weapon.weapon_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.664037 0.762322 0.722082
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_JannedaarcMI2(1)_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.405438 0.708724 0.569087
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 25_JannedaarcMI2_0.2_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.512288 0.622335 0.468498
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\Jannedaarc_D.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_N.tga
+map_Ks D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_s.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\Jannedaarc_D.tga
+
+newmtl 6_JannedaarcHairMI3_0.05_0_0
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.742841 0.687071 0.595526
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd D:\Dropbox (Personal)\Shared Files\XPS\Jeanne dArc,OverHit\DiffuseTexture.tga
+map_Bump D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\BaseNormal.tga
+map_d D:\\Dropbox (Personal)\\Shared Files\\XPS\\Jeanne dArc,OverHit\\DiffuseTexture.tga

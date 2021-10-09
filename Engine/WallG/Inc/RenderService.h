@@ -22,7 +22,14 @@ namespace WallG
 		void Register(const ModelComponent* modelComponent);
 		void Unregister(const ModelComponent* modelComponent);
 
+		void SetShadow(const bool haveShadow) { mHaveShadow = haveShadow; }
+		
+		const WallG::Graphics::DirectionalLight GetDirectionalLight() const { return mDirctionalLight; }
+
 	private:
+		void RenderDepthMap();
+		void RenderScene();
+
 		struct Entry
 		{
 			const AnimatorComponent* animatorComponent = nullptr;
@@ -33,7 +40,7 @@ namespace WallG
 		struct TransformData
 		{
 			WallG::Math::Matrix4 world;
-			WallG::Math::Matrix4 wvp;
+			WallG::Math::Matrix4 wvp[2];
 			WallG::Math::Vector3 viewPostion;
 			float padding;
 		};
@@ -55,6 +62,9 @@ namespace WallG
 
 		std::vector<Entry> mRenderEntries;
 
+		WallG::Graphics::RenderTarget mDepthRengerTarget;
+
+		WallG::Graphics::TypedConstantBuffer<WallG::Math::Matrix4> mDepthMapTransformBuffer;
 		WallG::Graphics::TypedConstantBuffer<TransformData> mConstantBuffer;
 		WallG::Graphics::TypedConstantBuffer<StandardBoneTransformData> mBoneTransformBuffer;
 		WallG::Graphics::TypedConstantBuffer<Settings> mSettingsBuffer;
@@ -67,7 +77,11 @@ namespace WallG
 		WallG::Graphics::VertexShader mVertexShader;
 		WallG::Graphics::PixelShader mPixelShader;
 
+		WallG::Graphics::VertexShader mDepthMapVertexShader;
+		WallG::Graphics::PixelShader mDepthMapPixelShader;
+
 		WallG::Graphics::Sampler mSampler;
 		Settings mSettings;
+		bool mHaveShadow = false;	
 	};
 }

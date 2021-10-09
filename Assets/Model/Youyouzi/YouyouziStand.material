@@ -41,12 +41,12 @@ NormalMapName: <none>
 SpecularMapName: <none>
 Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000
 MaterialPower: 100.000000
-DiffuseMapName: YouyouziStand_diffuse_8.tga
+DiffuseMapName: YouyouziStand_diffuse_8.png
 NormalMapName: <none>
 SpecularMapName: <none>
 Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000
 MaterialPower: 100.000000
-DiffuseMapName: YouyouziStand_diffuse_9.tga
+DiffuseMapName: YouyouziStand_diffuse_9.png
 NormalMapName: <none>
 SpecularMapName: <none>
 Material: 0.000000 0.000000 0.000000 1.000000 0.800000 0.800000 0.800000 1.000000 0.800000 0.800000 0.800000 1.000000

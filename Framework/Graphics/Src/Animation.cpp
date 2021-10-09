@@ -139,7 +139,6 @@ Vector3 Animation::GetScale(float time) const
 			{
 				percentTime = GetPercentTime(tempTime, mScaleKeys[i - 1].time, mScaleKeys[i].time);
 				temp = Lerp(mScaleKeys[i - 1].Key, mScaleKeys[i].Key, percentTime);
-				return temp;
 			}
 		}
 	}
@@ -147,6 +146,7 @@ Vector3 Animation::GetScale(float time) const
 	{
 		return mScaleKeys.back().Key;
 	}
+	return temp;
 }
 
 float Animation::GetDuration() const

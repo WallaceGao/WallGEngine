@@ -8,16 +8,15 @@ using namespace WallG::Math;
 
 namespace
 {
-    void DrawBone(Bone* bone, const std::vector<Math::Matrix4>& boneMatrices)
+    void DrawBone(Bone* bone, const std::vector<Math::Matrix4>& boneMatrices, const Vector3 positon, const float scale)
     {
-        Math::Vector3 bonePosition = GetTranslation(boneMatrices[bone->index]);
+        Math::Vector3 bonePosition = GetTranslation(boneMatrices[bone->index]) * scale + positon;
         for (size_t i = 0; i < bone->children.size(); i++)
         {
-            Math::Vector3 childPosition = GetTranslation(boneMatrices[bone->children[i]->index]);
-            //auto direction = childPosition - bonePosition;
-            //SimpleDraw::AddBone(bonePosition, direction, Colors::AliceBlue, scale * 0.01f, true);
+            Math::Vector3 childPosition = GetTranslation(boneMatrices[bone->children[i]->index]) * scale + positon;
             SimpleDraw::AddLine(bonePosition, childPosition, Colors::Blue);
-            DrawBone(bone->children[i], boneMatrices);
+            //SimpleDraw::AddBone(bonePosition, childPosition, Colors::Azure, 0.02f * scale, 4);
+            DrawBone(bone->children[i], boneMatrices, positon, scale);
         }
     }
 
@@ -58,10 +57,10 @@ namespace
     }
 }
 
-void Graphics::DrawSkeleton(const Skeleton& skeleton, const std::vector<Math::Matrix4>& boneMatrices)
+void Graphics::DrawSkeleton(const Skeleton& skeleton, const std::vector<Math::Matrix4>& boneMatrices, const Math::Vector3 position, const float scale)
 {
     // go each of boneMatrices 
-    DrawBone(skeleton.root, boneMatrices);
+    DrawBone(skeleton.root, boneMatrices, position, scale);
 }
 
 void Graphics::GetRootTransform(const Skeleton& skeleton, std::vector<Math::Matrix4>& toRootTransfrom)

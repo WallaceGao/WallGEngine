@@ -25,7 +25,8 @@ void GameState::Initialize()
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Keli/Keli.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Youyouzi/YouyouziStand.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model");
-    mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Planet/Sun/Sun.model");
+    //mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Planet/Sun/Sun.model");
+    mGreatSwordStrafe.Initialize("../../Assets/Model/new/wifu.model");
     //Set material
     mVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", BoneVertex::Format);
     mPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");

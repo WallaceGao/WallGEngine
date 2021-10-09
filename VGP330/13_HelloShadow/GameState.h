@@ -30,7 +30,7 @@ private:
 		float specularMapWeight = 1.0f;
 		float bumpMapWeight = 0.2f;
 		float normalMapWeight = 1.0f;
-		float padding;
+		int useShadow = 1;
 	};
 
 	WallG::Graphics::Camera mDefaultCamera;
@@ -39,8 +39,6 @@ private:
 
 	WallG::Graphics::RenderTarget mDepthRengerTarget;
 	WallG::Graphics::RenderTarget mBaseRenderTarget;
-	WallG::Graphics::RenderTarget mBloomRenderTarget;
-	WallG::Graphics::RenderTarget mBlurRenderTarget;
 
 	WallG::Graphics::TypedConstantBuffer<WallG::Math::Matrix4> mDepthMapTransformBuffer;
 	WallG::Graphics::TypedConstantBuffer<Settings> mSettingsBuffer;

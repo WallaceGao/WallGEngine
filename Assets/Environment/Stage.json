@@ -1,0 +1,10 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Position": [ 0, 0, 0 ]
+    },
+    "ModelComponent": {
+      "Path": "../../Assets/Model/Environment/jiehun/stage.model"
+    }
+  }
+}

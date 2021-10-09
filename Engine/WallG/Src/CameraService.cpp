@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 #include "TransformComponent.h"
+#include "RenderService.h"
 
 using namespace WallG;
 using namespace WallG::Graphics;
@@ -13,13 +14,19 @@ using namespace WallG::Math;
 void CameraService::Initialize()
 {
 	mCamera.SetPosition({ 0.0f, 0.0f, -300.0f });
+
+    mLightCamera.SetNearPlane(mNearPlane);
+    mLightCamera.SetFarPlane(mFarPlane);
+    mLightCamera.SetAspectRatio(mAspectRatio);
+
+    mActiveCamera = &mCamera;
 }
 
 void CameraService::Update(float deltaTime)
 {
     auto inputSystem = InputSystem::Get();
 
-    const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? 10000.0f : 100.0f;
+    const float moveSpeed = inputSystem->IsKeyDown(KeyCode::LSHIFT) ? mCameraMoveSpeedFast : mCameraMoveSpeed;
     const float turnSpeed = 10.0f * Constants::DegToRad;
 
     const GameObject* target = GetWorld().GetGameObject(mTargetHandle);
@@ -64,13 +71,24 @@ void CameraService::Render()
         auto targetTransform = target->GetComponent<TransformComponent>();
         auto targetPosition = targetTransform->GetPosition() - (mCamera.GetDirection() * mTargetDistance);
         auto cameraPosition = Math::Lerp(mCamera.GetPosition(), targetPosition, mFocusSpeed);
+        
         mCamera.SetPosition(cameraPosition);
+        mLightCamera.SetDirection(GetWorld().GetService<RenderService>()->GetDirectionalLight().direction);
+        mLightCamera.SetPosition(-mLightCamera.GetDirection() * mLightCameraDistance);
     }
 }
 
 void CameraService::DebugUI()
 {
-
+    if (ImGui::CollapsingHeader("CamaraService", ImGuiTreeNodeFlags_DefaultOpen), false)
+    {
+        bool useLightCamera = (mActiveCamera == &mLightCamera);
+        if (ImGui::Checkbox("Use Light Camera", &useLightCamera))
+        {
+            mActiveCamera = useLightCamera ? &mLightCamera : &mCamera;
+        }
+        ImGui::DragFloat("Light Camera Distance", &mLightCameraDistance, 1.0f, 100.0f, 10000.0f);
+    }
 }
 
 void CameraService::SetCameraFocus(GameObjectHandle targetHandle, float distance)

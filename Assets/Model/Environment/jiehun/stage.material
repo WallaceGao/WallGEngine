@@ -1,0 +1,41 @@
+MaterialCount:8
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: main.png
+NormalMapName: main_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: block.png
+NormalMapName: block_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: gate.png
+NormalMapName: gate_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: brick.png
+NormalMapName: brick_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: brick.png
+NormalMapName: brick_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: main.png
+NormalMapName: main_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: main.png
+NormalMapName: main_NORM.png
+SpecularMapName: <none>
+Material: 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 1.000000
+MaterialPower: 1.000000
+DiffuseMapName: ti.png
+NormalMapName: ti_NORM.png
+SpecularMapName: <none>
