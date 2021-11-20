@@ -54,6 +54,24 @@ namespace WallG::Math
         return v / Magnitude(v);
     }
 
+    inline Vector2 TransformCoord(const Vector2& v, const Matrix3& m)
+    {
+        return Vector2
+        (
+            v.x * m._11 + v.y * m._21 + m._31,
+            v.x * m._12 + v.y * m._22 + m._32
+        );
+    }
+
+    inline Vector2 TransformNormal(const Vector2& v, const Matrix3& m)
+    {
+        return Vector2
+        (
+            v.x * m._11 + v.y * m._21,
+            v.x * m._12 + v.y * m._22
+        );
+    }
+
     //Vector3 Math
     constexpr float Dot(const Vector3& a, const Vector3& b)
     {
@@ -97,23 +115,38 @@ namespace WallG::Math
         return Vector3((a.y * b.z) - (b.y * a.z), (a.z * b.x) - (b.z * a.x), (a.x * b.y) - (b.x * a.y));
     }
 
-    inline Vector3 TransformNormal(Vector3 v, Matrix4 m) // assume w = 0 
+    inline float Determinant(const Matrix3& m)
     {
-        return Vector3(v.x * m._11 + v.y * m._21 + v.z * m._31,
-            v.x * m._12 + v.y * m._22 + v.z * m._32,
-            v.x * m._13 + v.y * m._23 + v.z * m._33);
+        float det = 0.0f;
+        det = (m._11 * (m._22 * m._33 - m._23 * m._32));
+        det -= (m._12 * (m._21 * m._33 - m._23 * m._31));
+        det += (m._13 * (m._21 * m._32 - m._22 * m._31));
+        return det;
     }
 
-    inline Vector3 TransformCoord(Vector3 v, Matrix4 m) // assume w = 1 
+    inline Matrix3 Adjoint(const Matrix3& m)
     {
-        //w needs to be 1 after transforming
-        const float invW = 1.0f / ((v.x * m._14) + (v.y * m._24) + (v.z * m._34) + (1.0f * m._44));
-        return Vector3
+        return Matrix3
         (
-            (v.x * m._11 + v.y * m._21 + v.z * m._31 + (1.0f * m._41)) * invW, //+ m._41,
-            (v.x * m._12 + v.y * m._22 + v.z * m._32 + (1.0f * m._42)) * invW, //+ m._42,
-            (v.x * m._13 + v.y * m._23 + v.z * m._33 + (1.0f * m._43)) * invW  //+ m._43
+            (m._22 * m._33 - m._23 * m._32),
+            -(m._12 * m._33 - m._13 * m._32),
+            (m._12 * m._23 - m._13 * m._22),
+
+            -(m._21 * m._33 - m._23 * m._31),
+            (m._11 * m._33 - m._13 * m._31),
+            -(m._11 * m._23 - m._13 * m._21),
+
+            (m._21 * m._32 - m._22 * m._31),
+            -(m._11 * m._32 - m._12 * m._31),
+            (m._11 * m._22 - m._12 * m._21)
         );
+    }
+
+    inline Matrix3 Inverse(const Matrix3& m)
+    {
+        const float determinant = Determinant(m);
+        const float invDet = 1.0f / determinant;
+        return Adjoint(m) * invDet;
     }
 
     inline float Determinant(Matrix4 m)
@@ -157,6 +190,25 @@ namespace WallG::Math
             m._12, m._22, m._32, m._42,
             m._13, m._23, m._33, m._43,
             m._14, m._24, m._34, m._44);
+    }
+
+    inline Vector3 TransformNormal(Vector3 v, Matrix4 m) // assume w = 0 
+    {
+        return Vector3(v.x * m._11 + v.y * m._21 + v.z * m._31,
+            v.x * m._12 + v.y * m._22 + v.z * m._32,
+            v.x * m._13 + v.y * m._23 + v.z * m._33);
+    }
+
+    inline Vector3 TransformCoord(Vector3 v, Matrix4 m) // assume w = 1 
+    {
+        //w needs to be 1 after transforming
+        const float invW = 1.0f / ((v.x * m._14) + (v.y * m._24) + (v.z * m._34) + (1.0f * m._44));
+        return Vector3
+        (
+            (v.x * m._11 + v.y * m._21 + v.z * m._31 + (1.0f * m._41)) * invW, //+ m._41,
+            (v.x * m._12 + v.y * m._22 + v.z * m._32 + (1.0f * m._42)) * invW, //+ m._42,
+            (v.x * m._13 + v.y * m._23 + v.z * m._33 + (1.0f * m._43)) * invW  //+ m._43
+        );
     }
 
     inline Matrix4 Inverse(Matrix4 m)

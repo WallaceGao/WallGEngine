@@ -161,32 +161,51 @@
     <ClInclude Include="Inc\Agent.h" />
     <ClInclude Include="Inc\AI.h" />
     <ClInclude Include="Inc\AIWorld.h" />
+    <ClInclude Include="Inc\Alignment.h" />
     <ClInclude Include="Inc\AStar.h" />
     <ClInclude Include="Inc\BFS.h" />
+    <ClInclude Include="Inc\Cohesion.h" />
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\DFS.h" />
     <ClInclude Include="Inc\Dijkstras.h" />
     <ClInclude Include="Inc\Entity.h" />
     <ClInclude Include="Inc\GridBasedGraph.h" />
+    <ClInclude Include="Inc\MemoryRecord.h" />
+    <ClInclude Include="Inc\ObstacleAvoidance.h" />
     <ClInclude Include="Inc\PartitionGrid.h" />
+    <ClInclude Include="Inc\PreceptionModule.h" />
+    <ClInclude Include="Inc\SeekBehavior.h" />
+    <ClInclude Include="Inc\Sensor.h" />
+    <ClInclude Include="Inc\SeparationBehavior.h" />
     <ClInclude Include="Inc\State.h" />
     <ClInclude Include="Inc\StateMachine.h" />
+    <ClInclude Include="Inc\SteeringBehavior.h" />
+    <ClInclude Include="Inc\SteeringModule.h" />
+    <ClInclude Include="Inc\WanderBehavior.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\AIWorld.cpp" />
+    <ClCompile Include="Src\Alignment.cpp" />
     <ClCompile Include="Src\AStar.cpp" />
     <ClCompile Include="Src\BFS.cpp" />
+    <ClCompile Include="Src\Cohesion.cpp" />
     <ClCompile Include="Src\DFS.cpp" />
     <ClCompile Include="Src\Dijkstras.cpp" />
     <ClCompile Include="Src\Entity.cpp" />
     <ClCompile Include="Src\GridBasedGraph.cpp" />
+    <ClCompile Include="Src\ObstacleAvoidance.cpp" />
+    <ClCompile Include="Src\PreceptionModule.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Src\SeekBehavior.cpp" />
+    <ClCompile Include="Src\SeparationBehavior.cpp" />
+    <ClCompile Include="Src\SteeringModule.cpp" />
+    <ClCompile Include="Src\WanderBehavior.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,7 +15,6 @@ BlockAllocator::BlockAllocator(std::size_t blockSize, std::size_t capacity)
 	{
 		mFreeSlots.push_back(i);
 	}
-
 	mData = malloc(blockSize * capacity);
 }
 
@@ -52,3 +51,4 @@ void BlockAllocator::Free(void* ptr)
 	auto slot = (static_cast<char*>(ptr) - mData) / mBlockSize;
 	mFreeSlots.push_back(slot);
 }
+

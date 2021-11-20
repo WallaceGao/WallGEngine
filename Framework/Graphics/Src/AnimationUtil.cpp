@@ -2,6 +2,8 @@
 #include "AnimationUtil.h"
 #include "SimpleDraw.h"
 
+
+
 using namespace WallG;
 using namespace WallG::Graphics;
 using namespace WallG::Math;
@@ -11,6 +13,7 @@ namespace
     void DrawBone(Bone* bone, const std::vector<Math::Matrix4>& boneMatrices, const Vector3 positon, const float scale)
     {
         Math::Vector3 bonePosition = GetTranslation(boneMatrices[bone->index]) * scale + positon;
+        SimpleDraw::AddSphere(bonePosition, 0.005f * scale, Colors::Red, 16, 16);
         for (size_t i = 0; i < bone->children.size(); i++)
         {
             Math::Vector3 childPosition = GetTranslation(boneMatrices[bone->children[i]->index]) * scale + positon;
@@ -74,3 +77,4 @@ void Graphics::GetAnimationTransForm(const Skeleton& skeleton, const AnimationCl
     toRootTransfrom.resize(skeleton.bones.size());
     GetAnimationTransformRecursive(skeleton.root, clip, time, toRootTransfrom);
 }
+
