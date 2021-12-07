@@ -5,6 +5,7 @@
 
 using namespace WallG;
 using namespace WallG::Graphics;
+using namespace WallG::Math;
 
 void Camera::SetPosition(const Math::Vector3& position)
 {
@@ -76,6 +77,21 @@ void Camera::Zoom(float amount)
     constexpr float minZoom = 170.0f * Math::Constants::DegToRad;
     constexpr float maxZoom = 10.0f * Math::Constants::DegToRad;
     mFov = Math::Clamp(mFov - amount, maxZoom, minZoom);
+}
+
+Vector2 Camera::ConvertTo2DSpace(const Math::Vector3& worldPos)
+{
+    const auto width = GraphicsSystem::Get()->GetBackBufferWidth();
+    const auto height = GraphicsSystem::Get()->GetBackBufferHeight();
+
+    Vector3 pos = worldPos;
+    pos = TransformCoord(pos, GetViewMatrix());
+    pos = TransformCoord(pos, GetProjectionMatrix());
+
+    pos.x = width * (pos.x + 1.0f) / 2.0f;
+    pos.y = height * (1.0f - ((pos.y + 1.0f) / 2.0f));
+
+    return Vector2(pos.x, pos.y);
 }
 
 const Math::Vector3& Camera::GetPosition() const

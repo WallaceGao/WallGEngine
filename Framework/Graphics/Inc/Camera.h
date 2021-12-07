@@ -27,6 +27,9 @@ namespace WallG::Graphics
         // 1 degree of freedom for field of view
         void Zoom(float amount);
 
+        // 2D 
+        Math::Vector2 ConvertTo2DSpace(const Math::Vector3& worldPos);
+
         const Math::Vector3& GetPosition() const;
         const Math::Vector3& GetDirection() const;
 

@@ -2,6 +2,7 @@
 #include "AIWorld.h"
 
 using namespace WallG::AI;
+using namespace WallG::Graphics;
 
 namespace
 {
@@ -56,7 +57,7 @@ void AIWorld::DebugDraw()
 {
 	for (auto& obstacle: mObstacles )
 	{
-		//WallG::DrawScreenCircle(obstacle.center, obstacle.radius, WallG::Colors::Blue);
+		SimpleDraw::AddCircle2D(obstacle.center, obstacle.radius, Colors::Blue);
 	}
 }
 

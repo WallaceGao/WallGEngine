@@ -3,16 +3,26 @@
 
 #include "Camera.h"
 #include "ConstantBuffer.h"
+#include "GraphicsSystem.h"
 #include "MeshBuffer.h"
 #include "PixelShader.h"
 #include "VertexShader.h"
 #include "VertexTypes.h"
+#include "Texture.h"
+#include "TextureManager.h"
+#include "TextureType.h"
 
 using namespace WallG;
 using namespace WallG::Graphics;
 
 namespace
 {
+	struct CBSimpleDraw
+	{
+		Math::Matrix4 transform;
+	};
+
+
 	class SimpleDrawImpl
 	{
 	public:
@@ -20,6 +30,9 @@ namespace
 		void Terminate();
 
 		void AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color& color);
+		void AddLine2D(const Math::Vector3& v0, const Math::Vector3& v1, const Color& color);
+		void AddCircle2D(const Math::Circle& circle, const Color& color);
+
 		void Render(const Camera& camera);
 
 	private:
@@ -28,8 +41,13 @@ namespace
 		ConstantBuffer mConstantBuffer;
 		MeshBuffer mMeshBuffer;
 		std::unique_ptr<VertexPC[]> mLineVertices;
+		std::unique_ptr<VertexPC[]> mLineVertices2D;
 		uint32_t mLineVertexCount = 0;
+		uint32_t mLineVertexCount2D = 0;
 		uint32_t mMaxVertexCount = 0;
+		uint32_t mScreenWidth = 0;
+		uint32_t mScreenHeight = 0;
+		Math::Matrix4 mTransform = Math::Matrix4::Indentity;
 	};
 
 	void SimpleDrawImpl::Initialize(uint32_t maxVertexCount)
@@ -39,7 +57,9 @@ namespace
 		mConstantBuffer.Initialize(sizeof(Math::Matrix4));
 		mMeshBuffer.Initialize(nullptr, sizeof(VertexPC), maxVertexCount, true);
 		mLineVertices = std::make_unique<VertexPC[]>(maxVertexCount);
+		mLineVertices2D = std::make_unique<VertexPC[]>(maxVertexCount);
 		mLineVertexCount = 0;
+		mLineVertexCount2D = 0;
 		mMaxVertexCount = maxVertexCount;
 	}
 
@@ -60,21 +80,85 @@ namespace
 		}
 	}
 
+	// 2D don't use VertexPC
+	void SimpleDrawImpl::AddLine2D(const Math::Vector3& v0, const Math::Vector3& v1, const Color& color)
+	{
+		if (mLineVertexCount2D + 2 <= mMaxVertexCount)
+		{
+			mLineVertices2D[mLineVertexCount2D++] = { v0, color };
+			mLineVertices2D[mLineVertexCount2D++] = { v1, color };
+		}
+	}
+
+
+	void SimpleDrawImpl::AddCircle2D(const Math::Circle& circle, const Color& color)
+	{
+		// Check if we have enough space
+		if (mLineVertexCount2D + 32 <= mMaxVertexCount)
+		{
+			float x = circle.center.x;
+			float y = circle.center.y;
+			float r = circle.radius;
+
+			// Add line
+			const float kAngle = Math::Constants::Pi / 8.0f;
+			for (uint32_t i = 0; i < 16; ++i)
+			{
+				const float alpha = i * kAngle;
+				const float beta = alpha + kAngle;
+				const float x0 = x + (r * sin(alpha));
+				const float y0 = y + (r * cos(alpha));
+				const float x1 = x + (r * sin(beta));
+				const float y1 = y + (r * cos(beta));
+				mLineVertices2D[mLineVertexCount2D++] = { Math::Vector3(x0, y0, 0.0f), color };
+				mLineVertices2D[mLineVertexCount2D++] = { Math::Vector3(x1, y1, 0.0f), color };
+			}
+		}
+	}
+
 	void SimpleDrawImpl::Render(const Camera& camera)
 	{
 		auto matView = camera.GetViewMatrix();
 		auto matProj = camera.GetProjectionMatrix();
 		auto transform = Math::Transpose(matView * matProj);
-		mConstantBuffer.Update(&transform);
-		mConstantBuffer.BindVS(0);
 
 		mVertexShader.Bind();
 		mPixelShader.Bind();
 
-		mMeshBuffer.Update(mLineVertices.get(), mLineVertexCount);
-		mMeshBuffer.SetTopology(MeshBuffer::Topology::Lines);
-		mMeshBuffer.Render();
+		if (mLineVertexCount > 0)
+		{
+			mConstantBuffer.Update(&transform);
+			mConstantBuffer.BindVS(0);
+			mMeshBuffer.Update(mLineVertices.get(), mLineVertexCount);
+			mMeshBuffer.SetTopology(MeshBuffer::Topology::Lines);
+			mMeshBuffer.Render();
+		}
 
+		auto gs = GraphicsSystem::Get();
+		auto context = gs->GetContext();
+
+		if (mLineVertexCount2D > 0)
+		{
+			const uint32_t w = (mScreenWidth == 0) ? gs->GetBackBufferWidth() : mScreenWidth;
+			const uint32_t h = (mScreenHeight == 0) ? gs->GetBackBufferHeight() : mScreenHeight;
+			Math::Matrix4 matInvScreen
+			(
+				2.0f / w, 0.0f, 0.0f, 0.0f,
+				0.0f, -2.0f / h, 0.0f, 0.0f,
+				0.0f, 0.0f, 1.0f, 0.0f,
+				-1.0f, 1.0f, 0.0f, 1.0f
+			);
+
+			auto transform = Math::Transpose(matInvScreen);
+			mConstantBuffer.Update(&transform);
+			mConstantBuffer.BindVS(0);
+			mMeshBuffer.Update(mLineVertices2D.get(), mLineVertexCount2D);
+			mMeshBuffer.SetTopology(MeshBuffer::Topology::Lines);
+			mMeshBuffer.Render();
+		}
+
+
+		mLineVertexCount2D = 0;
 		mLineVertexCount = 0;
 	}
 
@@ -96,6 +180,26 @@ void SimpleDraw::StaticTerminate()
 void SimpleDraw::AddLine(const Math::Vector3& v0, const Math::Vector3& v1, const Color& color)
 {
 	sInstance->AddLine(v0, v1, color);
+}
+
+void SimpleDraw::AddLine2D(const Math::Vector2& v0, const Math::Vector2& v1, const Color& color)
+{
+	sInstance->AddLine2D(Math::Vector3{ v0.x,v0.y, 0.0f }, Math::Vector3{ v1.x,v1.y, 0.0f }, color);
+}
+
+void SimpleDraw::AddLine2D(float x0, float y0, float x1, float y1, const Color& color)
+{
+	sInstance->AddLine2D(Math::Vector3(x0, y0, 0.0f), Math::Vector3(x1, y1,0.0f), color);
+}
+
+void SimpleDraw::AddCircle2D(const Math::Circle& circle, const Color& color)
+{
+	sInstance->AddCircle2D(circle, color);
+}
+
+void SimpleDraw::AddCircle2D(const Math::Vector2& center, float r, const Color& color)
+{
+	sInstance->AddCircle2D(Math::Circle(center, r), color);
 }
 
 void SimpleDraw::AddBone(const Math::Vector3& postion, const Math::Vector3& childPosition, const Color& color, const float scale, uint32_t numberOfLine)

@@ -23,7 +23,8 @@ namespace WallG
 		const Camera& GetLightCamera() const { return mLightCamera; };
 		Camera& GetActiveCamera() { return *mActiveCamera; };
 		const Camera& GetActiveCamera() const { return *mActiveCamera; };
-	
+		
+		void SetCameraTo3D(const bool is3D) { mIs3DCamara = is3D; }
 		void SetCameraMoveSpeed(const float speed) { mCameraMoveSpeed = speed; }
 		void SetCameraMoveSpeedFast(const float speed) { mCameraMoveSpeedFast = speed; }
 	private:
@@ -40,9 +41,10 @@ namespace WallG
 		float mCameraMoveSpeedFast = 100.0f;
 		float mTargetDistance = 0.0f;
 		float mFocusSpeed = 0.15f; // between 0 to 1
-		float mNearPlane = 1.0f;
-		float mFarPlane = 200.0f;
+		float mNearPlane = 0.01f;
+		float mFarPlane = 10000.0f;
 		float mAspectRatio = 1.0f;
 		bool mLockedOn = false;
+		bool mIs3DCamara = true;
 	};
 }

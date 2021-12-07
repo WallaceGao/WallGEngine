@@ -12,7 +12,7 @@
 #include "Quaternion.h"
 #include "Geometry.h"
 #include "Ray.h"
-
+#include "Rect.h"
 #include "AABB.h"
 #include "Sphere.h"
 
@@ -71,6 +71,8 @@ namespace WallG::Math
             v.x * m._12 + v.y * m._22
         );
     }
+
+    inline bool IsEmpty(const Rect& rect) { return rect.right <= rect.left || rect.bottom <= rect.top; }
 
     //Vector3 Math
     constexpr float Dot(const Vector3& a, const Vector3& b)

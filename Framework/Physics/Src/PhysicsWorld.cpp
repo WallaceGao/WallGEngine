@@ -4,15 +4,21 @@
 using namespace WallG;
 using namespace WallG::Physics;
 
-void PhysicsWorld::Initialize()
+void PhysicsWorld::Initialize(Settings settings)
 {
+	mSettings = std::move(settings);
 }
 
 void PhysicsWorld::Update(float deltaTime)
 {
-	AccumulateForce();
-	Integrate();
-	SatisfyConstraints();
+	mTimer += deltaTime;
+	while (mTimer >= mSettings.timeStep)
+	{
+		mTimer -= mSettings.timeStep;
+		AccumulateForce();
+		Integrate();
+		SatisfyConstraints();
+	}
 }
 
 void PhysicsWorld::DebugDraw() const
@@ -28,11 +34,13 @@ Particle* PhysicsWorld::AddParticle()
 
 void PhysicsWorld::AccumulateForce()
 {
-
+	for (auto& p : mParticles)
+		SimpleDraw::AddSphere(p->position, p->radius, Colors::Orange, 3, 4);
 }
 
-void WallG::Physics::PhysicsWorld::Integrate()
+void PhysicsWorld::Integrate()
 {
+	// Math::Sqr should be deltatime
 	const float timeStepSqr = Math::Sqr(1 / 60.0f);
 	for (auto& p : mParticles)
 	{

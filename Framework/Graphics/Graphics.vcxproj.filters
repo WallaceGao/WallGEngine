@@ -61,6 +61,12 @@
     <Filter Include="Src\Model">
       <UniqueIdentifier>{cd9c60c9-c8ac-4908-b06a-d2fa3d29bd98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\Text">
+      <UniqueIdentifier>{c402f11c-edf4-4635-ac4f-a0bfdb167b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Text">
+      <UniqueIdentifier>{7b5c574d-b509-452f-a7dc-382a3a7f23f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h">
@@ -174,6 +180,21 @@
     <ClInclude Include="Inc\DepthStencilState.h">
       <Filter>Inc\RenderState</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\TextureManager.h">
+      <Filter>Inc\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TextureType.h">
+      <Filter>Inc\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SpriteRenderer.h">
+      <Filter>Inc\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Font.h">
+      <Filter>Inc\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GraphicsUtil.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -256,6 +277,15 @@
     </ClCompile>
     <ClCompile Include="Src\DepthStencilState.cpp">
       <Filter>Src\RenderState</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TextureManager.cpp">
+      <Filter>Src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SpriteRenderer.cpp">
+      <Filter>Src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Font.cpp">
+      <Filter>Src\Text</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,15 +11,19 @@
 #include "BFS.h"
 #include "DFS.h"
 #include "Dijkstras.h"
-//// State Machine
+// State Machine
 #include "State.h"
 #include "StateMachine.h"
-//// Object Behavior
-//#include "SteeringBehavior.h"
-//#include "SteeringModule.h"
-//#include "SeekBehavior.h"
-//#include "SeparationBehavior.h"
-//#include "WanderBehavior.h"
-//#include "ObstacleAvoidance.h"
-//#include "Cohesion.h"
-//#include "Alignment.h"
+// Object Behavior
+#include "SteeringBehavior.h"
+#include "SteeringModule.h"
+#include "SeekBehavior.h"
+#include "SeparationBehavior.h"
+#include "WanderBehavior.h"
+#include "ObstacleAvoidance.h"
+#include "Cohesion.h"
+#include "Alignment.h"
+// Perception
+#include "MemoryRecord.h"
+#include "PreceptionModule.h"
+#include "Sensor.h"

@@ -17,7 +17,7 @@ Math::Vector2 ObstacleAvoidance::Calculate(Agent& agent)
 	for (auto wo : worldObstcles)
 	{
 		if (Math::Distance(agent.position, wo.center) - wo.radius > avoidanceDistance)
-		//if (X::Math::DistanceSqr(agent.position, wo.center) - wo.radius * wo.radius > avoidanceDistance * avoidanceDistance)
+		if (Math::DistanceSquared(agent.position, wo.center) - wo.radius * wo.radius > avoidanceDistance * avoidanceDistance)
 			continue;
 		Math::Vector2 localCenter = Math::TransformCoord(wo.center, toLocal);
 		if (localCenter.y < 0)
@@ -32,10 +32,10 @@ Math::Vector2 ObstacleAvoidance::Calculate(Agent& agent)
 	Math::Vector2 boxExtendTRWorld = Math::TransformCoord({ agent.radius , avoidanceDistance }, localToWorld);
 	Math::Vector2 boxExtendBLWorld = Math::TransformCoord({ -agent.radius,0.0f }, localToWorld);
 	Math::Vector2 boxExtendBRWorld = Math::TransformCoord({ -agent.radius , avoidanceDistance }, localToWorld);
-	//DrawScreenLine({ boxExtendTLWorld }, { boxExtendTRWorld }, Colors::AliceBlue);
-	//DrawScreenLine({ boxExtendBLWorld }, { boxExtendBRWorld }, Colors::AliceBlue);
-	//DrawScreenLine({ boxExtendTLWorld }, { boxExtendBLWorld }, Colors::AliceBlue);
-	//DrawScreenLine({ boxExtendTRWorld }, { boxExtendBRWorld }, Colors::AliceBlue);
+	SimpleDraw::AddLine2D({ boxExtendTLWorld }, { boxExtendTRWorld }, Colors::AliceBlue);
+	SimpleDraw::AddLine2D({ boxExtendBLWorld }, { boxExtendBRWorld }, Colors::AliceBlue);
+	SimpleDraw::AddLine2D({ boxExtendTLWorld }, { boxExtendBLWorld }, Colors::AliceBlue);
+	SimpleDraw::AddLine2D({ boxExtendTRWorld }, { boxExtendBRWorld }, Colors::AliceBlue);
 
 	//bigest float number
 	float closestY  = FLT_MAX;

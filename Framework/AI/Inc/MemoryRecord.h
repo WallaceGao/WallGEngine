@@ -2,8 +2,6 @@
 
 namespace WallG::AI
 {
-
-
 	using property = std::variant<int, float, Math::Vector2>;
 
 	struct MemoryRecord

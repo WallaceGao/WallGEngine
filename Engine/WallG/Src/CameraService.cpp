@@ -13,13 +13,22 @@ using namespace WallG::Math;
 
 void CameraService::Initialize()
 {
-	mCamera.SetPosition({ 0.0f, 0.0f, -300.0f });
+    if (mIs3DCamara)
+    {
+	    mCamera.SetPosition({ 0.0f, 0.0f, -300.0f });
 
-    mLightCamera.SetNearPlane(mNearPlane);
-    mLightCamera.SetFarPlane(mFarPlane);
-    mLightCamera.SetAspectRatio(mAspectRatio);
+        mLightCamera.SetNearPlane(mNearPlane);
+        mLightCamera.SetFarPlane(mFarPlane);
+        mLightCamera.SetAspectRatio(mAspectRatio);
 
-    mActiveCamera = &mCamera;
+        mActiveCamera = &mCamera;
+    }
+    else
+    {
+        mCamera.SetFov(60.0f * Math::Constants::DegToRad);
+        mCamera.SetNearPlane(mNearPlane);
+        mCamera.SetFarPlane(mFarPlane);
+    }
 }
 
 void CameraService::Update(float deltaTime)

@@ -35,6 +35,8 @@ void WallG::App::Run(const AppConfig& appConfig)
 	InputSystem::StaticInitialize(handle);
 	GraphicsSystem::StaticInitialize(handle, false);
 	ModelManager::StaticInitialize();
+	TextureManager::StaticInitialize("../../Assets/Images");
+	SpriteRenderer::StaticInitialize();
 	SimpleDraw::StaticInitialize();
 	DebugUI::StaticInitialize(handle, false, true);
 
@@ -74,6 +76,7 @@ void WallG::App::Run(const AppConfig& appConfig)
 		graphicsSystem->BeginRender();
 
 		//Draw staff here
+		SpriteRenderer::Get()->Render();
 		mCurrentState->Render();
 		DebugUI::BeginRender();
 		mCurrentState->DebugUI();
@@ -93,6 +96,8 @@ void WallG::App::Run(const AppConfig& appConfig)
 	ModelManager::StaticTerminate();
 	GraphicsSystem::StaticTerminate();
 	InputSystem::StaticTerminate();
+	TextureManager::StaticTerminate();
+	SpriteRenderer::StaticTerminate();
 
 	window.Terminate();
 }

@@ -3,6 +3,7 @@
 
 namespace WallG
 {
+
 	enum class ComponentId
 	{
 		Collider,
