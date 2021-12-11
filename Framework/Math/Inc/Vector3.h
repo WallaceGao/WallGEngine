@@ -21,10 +21,8 @@ namespace WallG::Math
 
 		// Const operators, they return a new vector without changing itself
 		constexpr Vector3 operator+() const { return { +x, +y, +z }; }
-		constexpr Vector3 operator+(const float rhs) const { return { x+rhs, y+rhs, z+rhs }; }
 		constexpr Vector3 operator+(const Vector3& rhs) const { return { x + rhs.x, y + rhs.y, z + rhs.z}; }
 		constexpr Vector3 operator-() const { return { -x, -y, -z }; }
-		constexpr Vector3 operator-(const float rhs) const { return { x+rhs, y+rhs, z+rhs }; }
 		constexpr Vector3 operator-(const Vector3& rhs) const { return { x - rhs.x, y - rhs.y, z - rhs.z }; }
 		constexpr Vector3 operator*(const float rhs) const { return { x* rhs, y* rhs, z* rhs }; }
 		constexpr Vector3 operator/(const float rhs) const { return { x/ rhs, y/ rhs, z/ rhs }; }

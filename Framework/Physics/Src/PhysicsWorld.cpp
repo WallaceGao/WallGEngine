@@ -24,7 +24,10 @@ void PhysicsWorld::Update(float deltaTime)
 void PhysicsWorld::DebugDraw() const
 {
 	for (auto& p : mParticles)
-		Graphics::SimpleDraw::AddSphere(p->position, p->radius, Colors::Cyan, 3, 4);
+	{
+		auto color = Math::Lerp(Colors::Red, Colors::Blue, Math::Clamp(p->radius / 0.25f, 0.0f, 1.0f));
+		Graphics::SimpleDraw::AddSphere(p->position, p->radius, color, 3, 4);
+	}
 }
 
 Particle* PhysicsWorld::AddParticle()
@@ -32,19 +35,24 @@ Particle* PhysicsWorld::AddParticle()
 	return mParticles.emplace_back(std::make_unique<Particle>()).get();
 }
 
+void PhysicsWorld::Clear()
+{
+	mParticles.clear();
+}
+
 void PhysicsWorld::AccumulateForce()
 {
 	for (auto& p : mParticles)
-		SimpleDraw::AddSphere(p->position, p->radius, Colors::Orange, 3, 4);
+		p->acceleration = mSettings.gravity;
 }
 
 void PhysicsWorld::Integrate()
 {
 	// Math::Sqr should be deltatime
-	const float timeStepSqr = Math::Sqr(1 / 60.0f);
+	const float timeStepSqr = Math::Sqr(mSettings.timeStep);
 	for (auto& p : mParticles)
 	{
-		const auto newPosition = (p->position * 2) - p->lastPosition + (p->acceleration * timeStepSqr);
+		const auto newPosition = (p->position * 2.0f) - p->lastPosition + (p->acceleration * timeStepSqr);
 		p->lastPosition = p->position;
 		p->position = newPosition;
 	}

@@ -10,8 +10,6 @@ namespace
     std::mt19937 randomGenerator{randomDevice()};
 }
 
-
-
 // Vector2
 const Vector2 Vector2::Zero{ 0.0f };
 const Vector2 Vector2::One{ 1.0f };

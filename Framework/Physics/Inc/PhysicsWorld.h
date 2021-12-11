@@ -12,11 +12,14 @@ namespace WallG::Physics
 			float timeStep = 1.0f / 60.0f;
 		};
 
-		void Initialize(Settings settings);
+		void Initialize(Settings settings = {});
 		void Update(float deltaTime);
 		void DebugDraw() const;
 		//For simulation
 		Particle* AddParticle();
+
+		void Clear();
+
 	private:
 		void AccumulateForce();
 		void Integrate();
