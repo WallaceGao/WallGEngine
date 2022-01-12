@@ -7,7 +7,6 @@
 
 
 using namespace WallG;
-
 MEMPOOL_DEFINE(ModelComponent, 1000);
 
 void ModelComponent::Initialize()

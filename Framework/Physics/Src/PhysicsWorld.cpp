@@ -11,6 +11,10 @@ void PhysicsWorld::Initialize(Settings settings)
 
 void PhysicsWorld::Update(float deltaTime)
 {
+	if (mPause)
+	{
+		return;
+	}
 	mTimer += deltaTime;
 	while (mTimer >= mSettings.timeStep)
 	{
@@ -23,20 +27,33 @@ void PhysicsWorld::Update(float deltaTime)
 
 void PhysicsWorld::DebugDraw() const
 {
+	for (auto& c: mConstraints)
+	{
+		c->DebugDraw();
+	}
 	for (auto& p : mParticles)
 	{
-		auto color = Math::Lerp(Colors::Red, Colors::Blue, Math::Clamp(p->radius / 0.25f, 0.0f, 1.0f));
-		Graphics::SimpleDraw::AddSphere(p->position, p->radius, color, 3, 4);
+		Graphics::SimpleDraw::AddSphere(p->position, p->radius,Colors::Orange, 3, 4);
 	}
 }
 
-Particle* PhysicsWorld::AddParticle()
+void PhysicsWorld::DebugUI()
+{
+	ImGui::CollapsingHeader("Physics", ImGuiTreeNodeFlags_DefaultOpen);
+	{
+		ImGui::DragFloat3("Gravity", &mSettings.gravity.x, 0.1f, 0.0f, 10.0f);
+		ImGui::Checkbox("Time Step", &mPause);
+	}
+}
+
+WallG::Physics::Particle* PhysicsWorld::AddParticle()
 {
 	return mParticles.emplace_back(std::make_unique<Particle>()).get();
 }
 
 void PhysicsWorld::Clear()
 {
+	mConstraints.clear();
 	mParticles.clear();
 }
 
@@ -60,4 +77,9 @@ void PhysicsWorld::Integrate()
 
 void WallG::Physics::PhysicsWorld::SatisfyConstraints()
 {
+	for (int n = 0; n < mSettings.iterations; ++n)
+	{
+		for (auto& c : mConstraints)
+			c->Apply();
+	}
 }

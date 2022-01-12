@@ -63,21 +63,6 @@ Matrix4 Matrix4::RotationAxis(const Vector3& axis, float rad)
     };
 }
 
-float WallG::Math::RandomFloat()
-{
-    return std::uniform_real_distribution<float>{0, 1.0f}(randomGenerator);
-}
-
-float WallG::Math::RandomFloat(float min, float max)
-{
-    return std::uniform_real_distribution<float>{min, max}(randomGenerator);
-}
-
-int WallG::Math::RandomInt(int min, int max)
-{
-	return std::uniform_int_distribution<int>{min, max}(randomGenerator);
-}
-
 Matrix4 Matrix4::RotationQuaternion(const Quaternion& q)
 {
 	return Matrix4

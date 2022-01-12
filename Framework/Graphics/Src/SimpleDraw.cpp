@@ -322,6 +322,11 @@ void WallG::Graphics::SimpleDraw::AddRing(const Math::Vector3& center, float rad
 	}
 }
 
+void WallG::Graphics::SimpleDraw::AddGround(const Math::Vector3& center, const Math::Vector2& extend, float height)
+{
+
+}
+
 void SimpleDraw::Render(const Camera& camera)
 {
 	sInstance->Render(camera);

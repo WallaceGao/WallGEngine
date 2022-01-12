@@ -94,7 +94,7 @@ const PlanetComponent* UniverseService::GetRandomHomePlanet() const
 	int homeCount = static_cast<int>(homePlanets.size());
 	if (homeCount == 0)
 		return nullptr;
-	return homePlanets[RandomInt(0, homeCount-1)];
+	return homePlanets[Random::UniformInt(0, homeCount-1)];
 }
 
 

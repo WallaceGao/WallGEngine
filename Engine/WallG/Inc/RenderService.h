@@ -13,7 +13,6 @@ namespace WallG
 	public:
 		SET_TYPE_ID(ServiceId::Render)
 
-
 		virtual void Initialize() override;
 		virtual void Terminate()override;
 		virtual void Render() override;

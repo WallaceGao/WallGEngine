@@ -54,12 +54,18 @@
     <ClInclude Include="Inc\Rect.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Random.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\EngineMath.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Random.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

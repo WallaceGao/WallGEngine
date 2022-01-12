@@ -4,7 +4,7 @@
       "Position": [ 0, 0, 0 ]
     },
     "ModelComponent": {
-      "Path": "../../Assets/Model/Jannedaarc_D/wifu.model"
+      "Path": "../../Assets/Model/Jannedaarc_D/Jannedaarc.model"
     },
     "AnimatorComponent": {
       "IsLoop": true 

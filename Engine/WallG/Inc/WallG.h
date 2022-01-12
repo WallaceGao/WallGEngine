@@ -8,8 +8,9 @@
 // Component headers
 #include "AnimatorComponent.h"
 #include "ColliderComponent.h"
-#include "ModelComponent.h"
 #include "TransformComponent.h"
+#include "ModelComponent.h"
+#include "ParticleComponent.h"
 
 // Service headers
 #include "CameraService.h"

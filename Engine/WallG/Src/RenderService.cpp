@@ -211,6 +211,8 @@ void WallG::RenderService::RenderScene()
             mSettings.useSkinning = 0;
         }
 
+        
+        
         for (size_t i = 0; i < model.meshData.size(); ++i)
         {
             const Model::MaterialData& material = model.materialData[model.meshData[i]->materiaIndex];
@@ -229,6 +231,8 @@ void WallG::RenderService::RenderScene()
             model.meshData[i]->meshBuffer.Render();
         }
     }
+    
+
     SimpleDraw::Render(cameraService->GetCamera());
 }
 

@@ -22,6 +22,7 @@ namespace WallG::Graphics::SimpleDraw
 	void AddAABB(const Math::Vector3& center, const Math::Vector3& extend, const Color& color);
 	void AddSphere(const Math::Vector3& center, float radius, const Color& color, uint32_t slices, uint32_t rings);
 	void AddRing(const Math::Vector3& center, float radius, const Color& color, uint32_t slices = 32);
+	void AddGround(const Math::Vector3& center, const Math::Vector2& extend, float height);
 
 	void AddBone(const Math::Vector3& postion, const Math::Vector3& childPosition, const Color& color, const float scale, uint32_t numberOfLine);
 

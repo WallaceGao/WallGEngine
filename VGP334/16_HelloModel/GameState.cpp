@@ -24,9 +24,9 @@ void GameState::Initialize()
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Monster/MutantPunch.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Keli/Keli.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/Youyouzi/YouyouziStand.model");
-    //mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model");
+    mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Ship/SpaceShip/SciFi_Fighter_AK5.model");
     //mGreatSwordStrafe.Initialize("../../Assets/Model/DU/Planet/Sun/Sun.model");
-    mGreatSwordStrafe.Initialize("../../Assets/Model/new/wifu.model");
+    //mGreatSwordStrafe.Initialize("../../Assets/Model/new/wifu.model");
     //Set material
     mVertexShader.Initialize(L"../../Assets/Shaders/Standard.fx", BoneVertex::Format);
     mPixelShader.Initialize(L"../../Assets/Shaders/Standard.fx");
@@ -144,7 +144,7 @@ void GameState::Render()
     {
         //mAnimator.Re(mShowAnimation,mShowSkelton);
         auto toLocal = mAnimator.GetToLocalTransforms();
-        DrawSkeleton(*(mGreatSwordStrafe.skeleton), toLocal);
+        DrawSkeleton(*(mGreatSwordStrafe.skeleton), toLocal, mPosition, 0.4f);
     }
     else if (mShowAnimation)
     {

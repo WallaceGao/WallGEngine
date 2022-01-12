@@ -39,13 +39,13 @@ void ShipService::Update(float deltaTime)
             "../../Assets/DynamicUniverse/LagerShip.json"
         };
 
-        const int index = Math::RandomInt(0, static_cast<int>(std::size(shipTemplates)) - 1);
+        const int index = Random::UniformInt(0, static_cast<int>(std::size(shipTemplates)) - 1);
         GameObject* newObject = GetWorld().CreatGameObject(shipTemplates[index], shipName);
 
         const PlanetComponent* homePlanet = mUniverseService->GetRandomHomePlanet();
 
         float planetSize = homePlanet->GetPlanetScale().x;
-        float shipRotation = RandomFloat(0, Constants::TwoPi);
+        float shipRotation = Random::RandomFloat(0, Constants::TwoPi);
         Vector3 planetPosition = homePlanet->GetOwner().GetComponent<TransformComponent>()->GetPosition();
         Vector3 shipDirection = TransformNormal(Vector3::ZAxis, Matrix4::RotationY(shipRotation));
         Vector3 shipPosition = planetPosition + (shipDirection * planetSize);

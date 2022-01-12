@@ -8,7 +8,7 @@ using namespace WallG::Graphics;
 
 Math::Vector2 WanderBehavior::Calculate(Agent& agent)
 {
-	wanderTarget += {Math::RandomFloat(-1.0f, 1.0f)* wanderJitter, Math::RandomFloat(-1.0f, 1.0f)* wanderJitter};
+	wanderTarget += {Math::Random::RandomFloat(-1.0f, 1.0f)* wanderJitter, Math::Random::RandomFloat(-1.0f, 1.0f)* wanderJitter};
 	wanderTarget = Math::Normalize(wanderTarget);
 	wanderTarget *= wanderRadius;
 	

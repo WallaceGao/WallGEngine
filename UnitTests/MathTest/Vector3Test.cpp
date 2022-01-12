@@ -54,17 +54,6 @@ namespace MathTest
 			Assert::AreEqual(v.z, 1.0f, 1.0001f);
 		}
 		// + - * /
-		TEST_METHOD(TestMethodOperatorPuls1)
-		{
-			Vector3 v1;
-			float rhs = 5;
-			Vector3 sum;
-			v1.One;
-			sum = v1 + rhs;
-			Assert::AreEqual(sum.x, 6.0f, 6.0001f);
-			Assert::AreEqual(sum.y, 6.0f, 6.0001f);
-			Assert::AreEqual(sum.z, 6.0f, 6.0001f);
-		}
 
 		TEST_METHOD(TestMethodOperatorPuls2)
 		{
@@ -76,18 +65,6 @@ namespace MathTest
 			Assert::AreEqual(sum.x, 1100.0f, 1100.0001f);
 			Assert::AreEqual(sum.y, 600.0f, 600.0001f);
 			Assert::AreEqual(sum.z, 100.0f, 1000.0001f);
-		}
-
-		TEST_METHOD(TestMethodOperatorMinus1)
-		{
-			Vector3 v1 = { 10, -10, 10 };
-			float rhs = 5;
-			Vector3 sum;
-
-			sum = v1 + rhs;
-			Assert::AreEqual(sum.x, 15.0f, 15.0001f);
-			Assert::AreEqual(sum.y, -5.0f, -5.0001f);
-			Assert::AreEqual(sum.z, 15.0f, 15.0001f);
 		}
 
 		TEST_METHOD(TestMethodOperatorMinus2)
@@ -127,16 +104,6 @@ namespace MathTest
 		}
 
 		// += -= *= /=
-		TEST_METHOD(TestMethodPulsEqual1)
-		{
-			Vector3 v1;
-			float rhs = 5;
-			v1.One;
-			v1 += rhs;
-			Assert::AreEqual(v1.x, 6.0f, 6.0001f);
-			Assert::AreEqual(v1.y, 6.0f, 6.0001f);
-			Assert::AreEqual(v1.z, 6.0f, 6.0001f);
-		}
 
 		TEST_METHOD(TestMethodPulsEqual2)
 		{
@@ -147,17 +114,6 @@ namespace MathTest
 			Assert::AreEqual(v1.x, 1100.0f, 1100.0001f);
 			Assert::AreEqual(v1.y, 600.0f, 600.0001f);
 			Assert::AreEqual(v1.z, 100.0f, 1000.0001f);
-		}
-
-		TEST_METHOD(TestMethodMinusEqual1)
-		{
-			Vector3 v1 = { 10, -10, 10 };
-			float rhs = 5;
-
-			v1 -= rhs;
-			Assert::AreEqual(v1.x, 5.0f, 5.0001f);
-			Assert::AreEqual(v1.y, -15.0f, -15.0001f);
-			Assert::AreEqual(v1.z, 5.0f, 5.0001f);
 		}
 
 		TEST_METHOD(TestMethodMinusEqual2)

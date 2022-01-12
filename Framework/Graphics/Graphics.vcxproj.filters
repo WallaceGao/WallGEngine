@@ -67,6 +67,12 @@
     <Filter Include="Src\Text">
       <UniqueIdentifier>{7b5c574d-b509-452f-a7dc-382a3a7f23f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\Particle">
+      <UniqueIdentifier>{b822994a-ef18-4852-915c-180c419188cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Particle">
+      <UniqueIdentifier>{5a3aa673-cf8e-4e56-8060-2857978cd70a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h">
@@ -195,6 +201,9 @@
     <ClInclude Include="Inc\GraphicsUtil.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\ParticleEmitter.h">
+      <Filter>Inc\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -286,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="Src\Font.cpp">
       <Filter>Src\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ParticleEmitter.cpp">
+      <Filter>Src\Particle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

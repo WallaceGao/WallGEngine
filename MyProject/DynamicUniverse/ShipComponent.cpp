@@ -29,7 +29,7 @@ void ShipComponent::Initialize()
 	mMaxMineSpeed = mMineSpeed + 5;
 	mMaxSpeed = mSpeed + 50;
 	mMaxCargoSize = mCargoSize + 25;
-	mHackHeight = RandomFloat(-10.0f, 10.0f);
+	mHackHeight = Math::Random::RandomFloat(-10.0f, 10.0f);
 
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	//mStateMachine = std::make_unique<AI::StateMachine<ShipAgent>>(mShipAgent);

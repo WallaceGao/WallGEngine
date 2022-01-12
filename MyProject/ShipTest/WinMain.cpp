@@ -4,7 +4,7 @@
 int WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 {
 	WallG::MainApp().AddState<GameState>("GameState");
-	WallG::MainApp().Run({L"Hello Physics"});
+	WallG::MainApp().Run({L"Ship Test"});
 	return 0;
 }
 

@@ -28,6 +28,7 @@
 #include "Model.h"
 #include "ModelLoader.h"
 #include "ModelManager.h"
+#include "ParticleEmitter.h"
 #include "PixelShader.h"
 #include "RenderTarget.h"
 #include "Sampler.h"

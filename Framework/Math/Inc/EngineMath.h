@@ -10,18 +10,16 @@
 #include "Matrix3.h"
 #include "Matrix4.h"
 #include "Quaternion.h"
-#include "Geometry.h"
-#include "Ray.h"
-#include "Rect.h"
+
 #include "AABB.h"
+#include "Geometry.h"
+#include "Rect.h"
+#include "Random.h"
+#include "Ray.h"
 #include "Sphere.h"
 
 namespace WallG::Math
 {
-    //Float
-    float RandomFloat();
-    float RandomFloat(float min, float max);
-    int RandomInt(int min, int max);
 
     //Vector2 Math
     constexpr float Dot(const Vector2& a, const Vector2& b)

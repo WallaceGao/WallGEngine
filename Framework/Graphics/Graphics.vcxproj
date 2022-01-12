@@ -190,6 +190,7 @@
     <ClInclude Include="Inc\Model.h" />
     <ClInclude Include="Inc\ModelLoader.h" />
     <ClInclude Include="Inc\ModelManager.h" />
+    <ClInclude Include="Inc\ParticleEmitter.h" />
     <ClInclude Include="Inc\PixelShader.h" />
     <ClInclude Include="Inc\RenderTarget.h" />
     <ClInclude Include="Inc\Sampler.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="Src\Model.cpp" />
     <ClCompile Include="Src\ModelLoader.cpp" />
     <ClCompile Include="Src\ModelManager.cpp" />
+    <ClCompile Include="Src\ParticleEmitter.cpp" />
     <ClCompile Include="Src\PixelShader.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

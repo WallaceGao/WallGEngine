@@ -148,12 +148,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h" />
+    <ClInclude Include="Inc\Constraints.h" />
     <ClInclude Include="Inc\Particle.h" />
     <ClInclude Include="Inc\Physics.h" />
     <ClInclude Include="Inc\PhysicsWorld.h" />
     <ClInclude Include="Src\Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Constraints.cpp" />
     <ClCompile Include="Src\PhysicsWorld.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

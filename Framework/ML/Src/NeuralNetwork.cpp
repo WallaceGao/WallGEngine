@@ -21,7 +21,7 @@ Neuron::Neuron(size_t numOutputs, size_t myIndex)
 	: mMyIndex(myIndex)
 {
 	for (size_t i = 0; i < numOutputs; ++i)
-		mOutputWeights.push_back({ RandomFloat() });
+		mOutputWeights.push_back({ Random::RandomFloat() });
 }
 
 void Neuron::FeedForward(const Layer& previousLayer)

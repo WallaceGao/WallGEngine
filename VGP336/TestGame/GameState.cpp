@@ -78,17 +78,5 @@ void GameState::Render()
 
 void GameState::DebugUI()
 {
-    ImGui::Begin("Debug Info", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("fps: %f", mFPS);
-    ImGui::DragFloat3("Rotation", (float*)&mRotation, 0.01f);
-
-    
-
-    GameObject* GameObject = mGameWorld.GetGameObject(mGameObjectHandle);
-    if (GameObject)
-    {
-        GameObject->DebugUI();
-    }
-
-    ImGui::End();
+    mGameWorld.DebugUI();
 }

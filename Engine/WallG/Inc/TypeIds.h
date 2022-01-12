@@ -12,6 +12,7 @@ namespace WallG
 		Animator,
 		SkyBox,
 		Material,
+		Particle,
 		Count
 	};
 
