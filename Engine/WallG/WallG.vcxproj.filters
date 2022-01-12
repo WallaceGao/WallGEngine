@@ -39,9 +39,6 @@
     <ClInclude Include="Inc\Common.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\WallG.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\App.h">
       <Filter>Inc\App</Filter>
     </ClInclude>
@@ -95,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="Inc\MaterialComponent.h">
       <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\WallG.h">
+      <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
