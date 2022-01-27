@@ -7,8 +7,8 @@
 ##Frameworks of the engine
 
 - **Core**
-  - Implemented the window initialization using Win 32 API
-  - Implemented Block Allocator to manage a pool of preallocated blocks for fast allocation/deallocation and to prevent memory fragmentation
+  - Impented the window initialization using Win 32 API
+  - Impented Block Allocator to manage a pool of preallocated blocks for fast allocation/deallocation and to prevent memory fragmentation
 
 - **Math**
   - Impented data structure for 3D and 2D graphic calculation include:
