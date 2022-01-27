@@ -1,8 +1,7 @@
-
 # WallG Engine
 
 ## Installation
- - WallG Engine is a 3D game engine that I built using DirectX 11 and C++ 19. It was an important learning experience over several semesters at LaSalle College Vancouver. In each course, I completed the construction of a low-level game engine system. The graphics system uses DirectX 11 and custom HLSL shaders to render models with animations. These are imported with a self-built tool using assimp 5.0. This tool reads .fbx files and extracts all of the meshes, animations, and material textures, and converts them into a format that's used within the WallG Engine. The WallG Engine uses an object component system similar to Unity as the basis for creating projects and experiments, such as my Dynamic Universe project. 
+ - WallG Engine is a 3D game engine that I built using DirectX 11 and C++ 19. It was an important learning experience over several semesters at LaSalle College Vancouver. In each course, I completed the construction of a low-level game engine system. The graphics system uses DirectX 11 and custom HLSL shaders to render models with animations. These are imported with a self-built tool using assimp 5.0. This tool reads .fbx files extracts all of the meshes, animations, and material textures, and converts them into a format that's used within the WallG Engine. The WallG Engine uses an object component system similar to Unity as the basis for creating projects and experiments, such as my Dynamic Universe project. 
 
 
 ##Frameworks of the engine
@@ -12,44 +11,44 @@
   - Implemented Block Allocator to manage a pool of preallocated blocks for fast allocation/deallocation and to prevent memory fragmentation
 
 - **Math**
-  - Implemented data structure for 3D and 2D graphic calculation include:
+  - Impented data structure for 3D and 2D graphic calculation include:
     * Vector 2,3,4
     * Matric 3,4
     * Quaternion
     
-  - Implemented help struct for engine to use include:
+  - Impented help struct for the engine to use include:
     * Circle, AABB, OBB, Ray, Random
 
 - **Graphics**
   - Camera: impented 2d and 3d camera in this engine
   - Material: impented "Colors", "LightTypes", "Material", "Sampler", "texture", "textureType" for material to use 
-  - Mesh: impented meshbuffer which allow engine can load different mash. also it can creat some mesh by default include: Sphere, cube, plane, Cylinder, and Skybox.
+  - Mash: impented mash buffer which allows engine can load different mash. also, it can create some mesh by default including Sphere, cube, plane, Cylinder, and Skybox.
   - Model: impented model loader using assimp 5.0  
-  - Animation: impented animtion loader and skeleton for model.
-  - Render: impented different render system include: sprite render, texture render and simple draw with 2D and 3D 
-  - Shader: impented vertext shader and pixel shader to draw staff on the screen
+  - Animation: impented animation loader and skeleton for model.
+  - Render: impented different render systems include: sprite render, texture render and simple draw with 2D and 3D 
+  - Shader: impented vertex shader and pixel shader to draw staff on the screen
   - Particle: impented particle emitter to draw particle at this engine 
 
 - **AI**
-  - Implemented different pathfinding searches include A-Star Search, Dijkstra Search, Depth First Search, Breadth First Search
-  - Implemented Finite State Machine for AI 
-  - Implemented different AI behaviour include Steering Behavior, Wander Behavior, and Separation Behavior
+  - Impented different pathfinding searches include A-Star Search, Dijkstra-Search, Depth-First Search, Breadth-First Search
+  - Impented Finite State Machine for AI 
+  - Impented different AI behaviour include Steering Behavior, Wander Behavior, and Separation Behavior
  
 - **Physics**
-  - Implemented physics world using Physics::Paticle to calculated
-  - Implemented Constreains to simulate different physics work
+  - Impented physics world using Physics::Paticle to calculated
+  - Impented Constreains to simulate different physics work
 
 
 
 ##Project
 - **Post Processing**
-  - This engine allow loading different shader by using different .fx file 
+  - This engine allows the loading of different shaders by using different.fx file 
 
 - **Character Animation**
-  - This engine allow different models load different animations
+  - This engine allows different models to load different animations
 
 - **Physics**
-  - This engine suport physics 
+  - This engine support physics 
 
 - **Dynamic Universe** 
 
