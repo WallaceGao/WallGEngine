@@ -7,36 +7,36 @@
 ##Frameworks of the engine
 
 - **Core**
-  - Impented the window initialization using Win 32 API
-  - Impented Block Allocator to manage a pool of preallocated blocks for fast allocation/deallocation and to prevent memory fragmentation
+  - Implemented the window initialization using Win 32 API
+  - Implemented Block Allocator to manage a pool of preallocated blocks for fast allocation/deallocation and to prevent memory fragmentation
 
 - **Math**
-  - Impented data structure for 3D and 2D graphic calculation include:
+  - Implemented data structure for 3D and 2D graphic calculation include:
     * Vector 2,3,4
     * Matric 3,4
     * Quaternion
     
-  - Impented help struct for the engine to use include:
+  - Implemented help struct for the engine to use include:
     * Circle, AABB, OBB, Ray, Random
 
 - **Graphics**
-  - Camera: impented 2d and 3d camera in this engine
-  - Material: impented "Colors", "LightTypes", "Material", "Sampler", "texture", "textureType" for material to use 
-  - Mash: impented mash buffer which allows engine can load different mash. also, it can create some mesh by default including Sphere, cube, plane, Cylinder, and Skybox.
-  - Model: impented model loader using assimp 5.0  
-  - Animation: impented animation loader and skeleton for model.
-  - Render: impented different render systems include: sprite render, texture render and simple draw with 2D and 3D 
-  - Shader: impented vertex shader and pixel shader to draw staff on the screen
-  - Particle: impented particle emitter to draw particle at this engine 
+  - Camera: implemented 2d and 3d camera in this engine
+  - Material: implemented "Colors", "LightTypes", "Material", "Sampler", "texture", "textureType" for material to use 
+  - Mash: implemented mash buffer which allows engine can load different mash. also, it can create some mesh by default including Sphere, cube, plane, Cylinder, and Skybox.
+  - Model: implemented model loader using assimp 5.0  
+  - Animation: implemented animation loader and skeleton for model.
+  - Render: implemented different render systems include: sprite render, texture render and simple draw with 2D and 3D 
+  - Shader: implemented vertex shader and pixel shader to draw staff on the screen
+  - Particle: implemented particle emitter to draw particle at this engine 
 
 - **AI**
-  - Impented different pathfinding searches include A-Star Search, Dijkstra-Search, Depth-First Search, Breadth-First Search
-  - Impented Finite State Machine for AI 
-  - Impented different AI behaviour include Steering Behavior, Wander Behavior, and Separation Behavior
+  - Implemented different pathfinding searches include A-Star Search, Dijkstra-Search, Depth-First Search, Breadth-First Search
+  - Implemented Finite State Machine for AI 
+  - Implemented different AI behaviour include Steering Behavior, Wander Behavior, and Separation Behavior
  
 - **Physics**
-  - Impented physics world using Physics::Paticle to calculated
-  - Impented Constreains to simulate different physics work
+  - Implemented physics world using Physics::Paticle to calculated
+  - Implemented Constreains to simulate different physics work
 
 
 
